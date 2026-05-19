@@ -1,0 +1,568 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		F9304F112FBCC5DE00719A0B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F9304EEF2FBCC5DC00719A0B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F9304EF62FBCC5DC00719A0B;
+			remoteInfo = FotMoc;
+		};
+		F9304F1B2FBCC5DE00719A0B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F9304EEF2FBCC5DC00719A0B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F9304EF62FBCC5DC00719A0B;
+			remoteInfo = FotMoc;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F9304EF72FBCC5DC00719A0B /* FotMoc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FotMoc.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F9304F102FBCC5DE00719A0B /* FotMocTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FotMocTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F9304F1A2FBCC5DE00719A0B /* FotMocUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FotMocUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		F9304F222FBCC5DE00719A0B /* Exceptions for "FotMoc" folder in "FotMoc" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = F9304EF62FBCC5DC00719A0B /* FotMoc */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		F9304EF92FBCC5DC00719A0B /* FotMoc */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				F9304F222FBCC5DE00719A0B /* Exceptions for "FotMoc" folder in "FotMoc" target */,
+			);
+			path = FotMoc;
+			sourceTree = "<group>";
+		};
+		F9304F132FBCC5DE00719A0B /* FotMocTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = FotMocTests;
+			sourceTree = "<group>";
+		};
+		F9304F1D2FBCC5DE00719A0B /* FotMocUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = FotMocUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F9304EF42FBCC5DC00719A0B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F9304F0D2FBCC5DE00719A0B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F9304F172FBCC5DE00719A0B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F9304EEE2FBCC5DC00719A0B = {
+			isa = PBXGroup;
+			children = (
+				F9304EF92FBCC5DC00719A0B /* FotMoc */,
+				F9304F132FBCC5DE00719A0B /* FotMocTests */,
+				F9304F1D2FBCC5DE00719A0B /* FotMocUITests */,
+				F9304EF82FBCC5DC00719A0B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F9304EF82FBCC5DC00719A0B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F9304EF72FBCC5DC00719A0B /* FotMoc.app */,
+				F9304F102FBCC5DE00719A0B /* FotMocTests.xctest */,
+				F9304F1A2FBCC5DE00719A0B /* FotMocUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F9304EF62FBCC5DC00719A0B /* FotMoc */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F9304F232FBCC5DE00719A0B /* Build configuration list for PBXNativeTarget "FotMoc" */;
+			buildPhases = (
+				F9304EF32FBCC5DC00719A0B /* Sources */,
+				F9304EF42FBCC5DC00719A0B /* Frameworks */,
+				F9304EF52FBCC5DC00719A0B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				F9304EF92FBCC5DC00719A0B /* FotMoc */,
+			);
+			name = FotMoc;
+			packageProductDependencies = (
+			);
+			productName = FotMoc;
+			productReference = F9304EF72FBCC5DC00719A0B /* FotMoc.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F9304F0F2FBCC5DE00719A0B /* FotMocTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F9304F282FBCC5DE00719A0B /* Build configuration list for PBXNativeTarget "FotMocTests" */;
+			buildPhases = (
+				F9304F0C2FBCC5DE00719A0B /* Sources */,
+				F9304F0D2FBCC5DE00719A0B /* Frameworks */,
+				F9304F0E2FBCC5DE00719A0B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F9304F122FBCC5DE00719A0B /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				F9304F132FBCC5DE00719A0B /* FotMocTests */,
+			);
+			name = FotMocTests;
+			packageProductDependencies = (
+			);
+			productName = FotMocTests;
+			productReference = F9304F102FBCC5DE00719A0B /* FotMocTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		F9304F192FBCC5DE00719A0B /* FotMocUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F9304F2B2FBCC5DE00719A0B /* Build configuration list for PBXNativeTarget "FotMocUITests" */;
+			buildPhases = (
+				F9304F162FBCC5DE00719A0B /* Sources */,
+				F9304F172FBCC5DE00719A0B /* Frameworks */,
+				F9304F182FBCC5DE00719A0B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F9304F1C2FBCC5DE00719A0B /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				F9304F1D2FBCC5DE00719A0B /* FotMocUITests */,
+			);
+			name = FotMocUITests;
+			packageProductDependencies = (
+			);
+			productName = FotMocUITests;
+			productReference = F9304F1A2FBCC5DE00719A0B /* FotMocUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F9304EEF2FBCC5DC00719A0B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1640;
+				LastUpgradeCheck = 1640;
+				TargetAttributes = {
+					F9304EF62FBCC5DC00719A0B = {
+						CreatedOnToolsVersion = 16.4;
+					};
+					F9304F0F2FBCC5DE00719A0B = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = F9304EF62FBCC5DC00719A0B;
+					};
+					F9304F192FBCC5DE00719A0B = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = F9304EF62FBCC5DC00719A0B;
+					};
+				};
+			};
+			buildConfigurationList = F9304EF22FBCC5DC00719A0B /* Build configuration list for PBXProject "FotMoc" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F9304EEE2FBCC5DC00719A0B;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = F9304EF82FBCC5DC00719A0B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F9304EF62FBCC5DC00719A0B /* FotMoc */,
+				F9304F0F2FBCC5DE00719A0B /* FotMocTests */,
+				F9304F192FBCC5DE00719A0B /* FotMocUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F9304EF52FBCC5DC00719A0B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F9304F0E2FBCC5DE00719A0B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F9304F182FBCC5DE00719A0B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F9304EF32FBCC5DC00719A0B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F9304F0C2FBCC5DE00719A0B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F9304F162FBCC5DE00719A0B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F9304F122FBCC5DE00719A0B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F9304EF62FBCC5DC00719A0B /* FotMoc */;
+			targetProxy = F9304F112FBCC5DE00719A0B /* PBXContainerItemProxy */;
+		};
+		F9304F1C2FBCC5DE00719A0B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F9304EF62FBCC5DC00719A0B /* FotMoc */;
+			targetProxy = F9304F1B2FBCC5DE00719A0B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		F9304F242FBCC5DE00719A0B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FotMoc/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = me.FotMoc;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F9304F252FBCC5DE00719A0B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FotMoc/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = me.FotMoc;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		F9304F262FBCC5DE00719A0B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F9304F272FBCC5DE00719A0B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F9304F292FBCC5DE00719A0B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = me.FotMocTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FotMoc.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FotMoc";
+			};
+			name = Debug;
+		};
+		F9304F2A2FBCC5DE00719A0B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = me.FotMocTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FotMoc.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FotMoc";
+			};
+			name = Release;
+		};
+		F9304F2C2FBCC5DE00719A0B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = me.FotMocUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = FotMoc;
+			};
+			name = Debug;
+		};
+		F9304F2D2FBCC5DE00719A0B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = me.FotMocUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = FotMoc;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F9304EF22FBCC5DC00719A0B /* Build configuration list for PBXProject "FotMoc" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F9304F262FBCC5DE00719A0B /* Debug */,
+				F9304F272FBCC5DE00719A0B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F9304F232FBCC5DE00719A0B /* Build configuration list for PBXNativeTarget "FotMoc" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F9304F242FBCC5DE00719A0B /* Debug */,
+				F9304F252FBCC5DE00719A0B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F9304F282FBCC5DE00719A0B /* Build configuration list for PBXNativeTarget "FotMocTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F9304F292FBCC5DE00719A0B /* Debug */,
+				F9304F2A2FBCC5DE00719A0B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F9304F2B2FBCC5DE00719A0B /* Build configuration list for PBXNativeTarget "FotMocUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F9304F2C2FBCC5DE00719A0B /* Debug */,
+				F9304F2D2FBCC5DE00719A0B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F9304EEF2FBCC5DC00719A0B /* Project object */;
+}
