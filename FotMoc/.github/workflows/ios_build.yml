@@ -1,0 +1,39 @@
+#
+//  ios_build.yml
+//  FotMoc
+//
+//  Created by abdelrahman karim on 20/05/2026.
+//
+
+
+name: iOS Build Check
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+    branches: [ "main", "develop" ]
+
+jobs:
+  build:
+    name: Build iOS App
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install CocoaPods Dependencies
+        run: pod install
+        # Note: If your Podfile isn't in the root directory, add:
+        # working-directory: path/to/your/ios/folder
+
+      - name: Build Workspace
+        run: |
+          xcodebuild clean build \
+            -workspace "YourWorkspaceName.xcworkspace" \
+            -scheme "YourSchemeName" \
+            -destination "platform=iOS Simulator,name=iPhone 15" \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO
