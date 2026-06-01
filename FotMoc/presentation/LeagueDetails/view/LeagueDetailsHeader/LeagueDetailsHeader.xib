@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="leagueDetailsHeader" id="XvZ-c9-Fry" customClass="LeagueDetailsHeader" customModule="FotMoc" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="440" height="106"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UQN-gn-Dvs">
+                    <rect key="frame" x="0.0" y="0.0" width="440" height="106"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Vwu-FW-X9Z">
+                            <rect key="frame" x="16" y="16" width="408" height="74"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="h1q-ZE-6Dv">
+                                    <rect key="frame" x="0.0" y="0.0" width="408" height="37"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MsC-Mb-Bro">
+                                            <rect key="frame" x="0.0" y="1.6666666666666679" width="34" height="34"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="34" id="MH5-Yz-Bcd"/>
+                                                <constraint firstAttribute="width" constant="34" id="rcE-ay-olN"/>
+                                            </constraints>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="gray" image="arrow.backward" catalog="system" title=""/>
+                                        </button>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="gGg-lk-lGh">
+                                            <rect key="frame" x="46" y="1.3333333333333286" width="362" height="34.333333333333343"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Egypt" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="grh-9w-Xaf">
+                                                    <rect key="frame" x="0.0" y="0.0" width="362" height="12"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Egypt Premier League" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jb5-ar-l3i">
+                                                    <rect key="frame" x="0.0" y="13.999999999999998" width="362" height="20.333333333333329"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                </stackView>
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="Pp6-4m-8Ah">
+                                    <rect key="frame" x="0.0" y="37" width="408" height="37"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xSX-Hl-Jsl">
+                                            <rect key="frame" x="0.0" y="17" width="136" height="20"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="20" id="sag-e7-hvX"/>
+                                            </constraints>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain" title="Overview"/>
+                                            <connections>
+                                                <action selector="tabButtonTapped:" destination="XvZ-c9-Fry" eventType="touchUpInside" id="eYt-k8-Kfj"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rgo-Xz-SEa">
+                                            <rect key="frame" x="136" y="17" width="136" height="20"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="20" id="Rn0-No-qi6"/>
+                                            </constraints>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain" title="Table"/>
+                                            <connections>
+                                                <action selector="tabButtonTapped:" destination="XvZ-c9-Fry" eventType="touchUpInside" id="d0Q-Wv-QiB"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Shd-Nh-SwF">
+                                            <rect key="frame" x="272" y="17" width="136" height="20"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="20" id="OD8-os-R0L"/>
+                                            </constraints>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain" title="Top"/>
+                                            <connections>
+                                                <action selector="tabButtonTapped:" destination="XvZ-c9-Fry" eventType="touchUpInside" id="Y7H-0M-O6I"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </stackView>
+                            </subviews>
+                        </stackView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hFX-Ri-hwo">
+                            <rect key="frame" x="0.0" y="104" width="146.66666666666666" height="2"/>
+                            <color key="backgroundColor" systemColor="systemGreenColor"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="2" id="Tgw-0i-kYp"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="Vwu-FW-X9Z" firstAttribute="top" secondItem="UQN-gn-Dvs" secondAttribute="top" constant="16" id="2Dv-1L-hpB"/>
+                        <constraint firstItem="Vwu-FW-X9Z" firstAttribute="leading" secondItem="UQN-gn-Dvs" secondAttribute="leading" constant="16" id="5w9-G2-UgB"/>
+                        <constraint firstAttribute="trailing" secondItem="Vwu-FW-X9Z" secondAttribute="trailing" constant="16" id="Eh2-fo-kpb"/>
+                        <constraint firstItem="hFX-Ri-hwo" firstAttribute="width" secondItem="UQN-gn-Dvs" secondAttribute="width" multiplier="1/3" id="FYv-JA-3WO"/>
+                        <constraint firstAttribute="bottom" secondItem="hFX-Ri-hwo" secondAttribute="bottom" id="FeS-c1-wnW"/>
+                        <constraint firstItem="hFX-Ri-hwo" firstAttribute="leading" secondItem="UQN-gn-Dvs" secondAttribute="leading" id="VHR-qV-Zso"/>
+                        <constraint firstAttribute="bottom" secondItem="Vwu-FW-X9Z" secondAttribute="bottom" constant="16" id="lS7-ah-eYh"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="5a9-gD-VBq"/>
+            <constraints>
+                <constraint firstItem="UQN-gn-Dvs" firstAttribute="trailing" secondItem="5a9-gD-VBq" secondAttribute="trailing" id="67D-pf-nD3"/>
+                <constraint firstItem="UQN-gn-Dvs" firstAttribute="top" secondItem="XvZ-c9-Fry" secondAttribute="top" id="FGQ-ZL-xSP"/>
+                <constraint firstAttribute="bottom" secondItem="UQN-gn-Dvs" secondAttribute="bottom" id="SlY-s7-d0m"/>
+                <constraint firstItem="UQN-gn-Dvs" firstAttribute="leading" secondItem="5a9-gD-VBq" secondAttribute="leading" id="fsp-7x-dia"/>
+            </constraints>
+            <connections>
+                <outlet property="backBtn" destination="MsC-Mb-Bro" id="DvK-NT-SNr"/>
+                <outlet property="contentUiView" destination="UQN-gn-Dvs" id="8Up-X2-Flu"/>
+                <outlet property="headerStackView" destination="h1q-ZE-6Dv" id="37s-y6-dt6"/>
+                <outlet property="indicatorLeadingConstraint" destination="VHR-qV-Zso" id="dcd-KP-8je"/>
+                <outlet property="indicatorView" destination="hFX-Ri-hwo" id="AqC-nO-pec"/>
+                <outlet property="leagueCountry" destination="grh-9w-Xaf" id="MIQ-Qk-saE"/>
+                <outlet property="leagueTitle" destination="Jb5-ar-l3i" id="Buf-wR-KxU"/>
+                <outlet property="tabsStackView" destination="Pp6-4m-8Ah" id="Ycy-r9-kTz"/>
+                <outletCollection property="tabButtons" destination="xSX-Hl-Jsl" collectionClass="NSMutableArray" id="dIG-i6-yhf"/>
+                <outletCollection property="tabButtons" destination="rgo-Xz-SEa" collectionClass="NSMutableArray" id="58x-eb-LpW"/>
+                <outletCollection property="tabButtons" destination="Shd-Nh-SwF" collectionClass="NSMutableArray" id="Lf1-bk-rta"/>
+            </connections>
+            <point key="canvasLocation" x="250.38167938931298" y="100"/>
+        </collectionReusableView>
+    </objects>
+    <resources>
+        <image name="arrow.backward" catalog="system" width="128" height="95"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
