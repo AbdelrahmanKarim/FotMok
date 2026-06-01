@@ -8,7 +8,7 @@
 import UIKit
 
 public enum AppColor {
-    public static let accentPrimary = UIColor(hex: "#FBFBFC")
+    public static let accentPrimary = UIColor(hex: "##049C63")
     public static let accentDark = UIColor(hex: "#E8E9EA")
     public static let accentLight = UIColor(hex: "#FFFFFF")
     public static let accentGlow = UIColor(hex: "#FBFBFC").withAlphaComponent(0.12)

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "6A7B5348-07D4-4ADF-B874-2BB1DD42C826"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A3C3D521-3D5E-4FB0-98E4-4AEEE3594D12"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FotMoc/presentation/LeagueDetails/view/OverviewTab/LatestEvents/LatestEventsFooter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "10"
+            endingLineNumber = "10"
+            landmarkName = "LatestEventsFooter"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "A3C3D521-3D5E-4FB0-98E4-4AEEE3594D12 - 6d76b6669cc12b99"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FotMoc.LatestEventsFooter.showMoreAction.getter : Swift.Optional&lt;() -&gt; ()&gt;"
+                  moduleName = "FotMoc.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alaaayman/Desktop/FotMok/FotMoc/presentation/LeagueDetails/view/OverviewTab/LatestEvents/LatestEventsFooter.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0">
+               </Location>
+               <Location
+                  uuid = "A3C3D521-3D5E-4FB0-98E4-4AEEE3594D12 - d6a47f153e035b8d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FotMoc.LatestEventsFooter.showMoreAction.setter : Swift.Optional&lt;() -&gt; ()&gt;"
+                  moduleName = "FotMoc.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alaaayman/Desktop/FotMok/FotMoc/presentation/LeagueDetails/view/OverviewTab/LatestEvents/LatestEventsFooter.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0">
+               </Location>
+               <Location
+                  uuid = "A3C3D521-3D5E-4FB0-98E4-4AEEE3594D12 - a4580d2862c45437"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FotMoc.LatestEventsFooter.showMoreAction.modify : Swift.Optional&lt;() -&gt; ()&gt;"
+                  moduleName = "FotMoc.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alaaayman/Desktop/FotMok/FotMoc/presentation/LeagueDetails/view/OverviewTab/LatestEvents/LatestEventsFooter.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "11"
+                  endingLineNumber = "11">
+               </Location>
+               <Location
+                  uuid = "A3C3D521-3D5E-4FB0-98E4-4AEEE3594D12 - 5c96f6e572a36ae7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FotMoc.LatestEventsFooter.showMoreAction.modify : Swift.Optional&lt;() -&gt; ()&gt; with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "FotMoc.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///%3Ccompiler-generated%3E"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FA563E21-DE79-4DD1-B5F5-B1377FE7CE5E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FotMoc/presentation/LeagueDetails/view/OverviewTab/LatestEvents/LatestEventsFooter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "5"
+            endingLineNumber = "5"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "67691032-41A8-4060-9B7E-D1D4600D281C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FotMoc/presentation/LeagueDetails/view/OverviewTab/LatestEvents/LatestEventsFooter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "4"
+            endingLineNumber = "4"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
