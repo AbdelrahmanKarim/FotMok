@@ -16,14 +16,10 @@ struct Match {
     let status: MatchStatus
     let leagueId: String
     let sport: SportType
-    
     let homeCompetitor: Competitor
     let awayCompetitor: Competitor
-    
-    let genericFinalScore: String
-    
-  
-    let sportDetails: SportMatchDetails
+    let score: String?
+    let sportDetails: SportMatchDetails?
 }
 
 enum SportMatchDetails {

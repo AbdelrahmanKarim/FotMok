@@ -13,12 +13,11 @@ struct StandingRow {
     let wins: Int
     let losses: Int
     let points: Int?
-
     let sportMetrics: StandingMetrics
 }
 
 enum StandingMetrics {
-    case football(draws: Int, goalDifference: Int)
+    case football(draws: Int, goalDifference: Int, goalsFor:Int, goalsAgainst: Int)
     case basketball(winPercentage: Double)
     case cricket(noResults: Int, netRunRate: Double)
     case tennis(movement: String) 
