@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PlayerDetailsViewController: UIViewController {
+class PlayerDetailsViewController: UIViewController , PlayerDetailsView{
     
     var collectionView: UICollectionView!
     

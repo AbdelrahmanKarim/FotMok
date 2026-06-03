@@ -9,7 +9,7 @@ import UIKit
 
 
 
-class LiveMatchesViewController: UIViewController {
+class LiveMatchesViewController: UIViewController , LiveMatchesView {
 
     @IBOutlet weak var collectionView: UICollectionView!
     override func viewDidLoad() {

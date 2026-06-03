@@ -9,7 +9,7 @@ import UIKit
 
 
 
-class LatestEventsViewController: UIViewController {
+class LatestEventsViewController: UIViewController , LatestView{
 
     @IBOutlet weak var collectionView: UICollectionView!
     override func viewDidLoad() {
