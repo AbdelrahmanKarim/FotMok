@@ -5,11 +5,29 @@
 
 import Foundation
 import Factory
-
+import CoreData
+import UIKit
 extension Container {
     
+    var activeLeagueId: Factory<String> {
+            self { "0" } 
+        }
+    var activeSport: Factory<SportType> {
+        self { .football }
+    }
+    var managedObjectContext: Factory<NSManagedObjectContext> {
+        self {
+        MainActor.assumeIsolated {
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                return appDelegate.persistentContainer.viewContext
+            }
+        }.singleton
+    }
+    var favouriteDAO: Factory<FavoritesDAOProtocol> {
+            self { FavouriteDAO(context: self.managedObjectContext()) }
+    }
     var leagueLocalDataSource: Factory<LeagueLocalDataSource> {
-        self { LeagueLocalDataSourceImpl() }
+        self { LeagueLocalDataSourceImpl(dao: self.favouriteDAO() , context: self.managedObjectContext()) }
     }
     
     var leagueRemoteDataSource: Factory<LeagueRemoteDataSource> {
@@ -25,6 +43,6 @@ extension Container {
     }
     
     var teamRemoteDataSource: Factory<TeamRemoteDataSource> {
-        self { TeamRemoteDataSourceImpl(service: self.teamService()) }
+        self { TeamRemoteDataSourceImpl(service: self.teamService() , leagueService: self.leagueService()) }
     }
 }
