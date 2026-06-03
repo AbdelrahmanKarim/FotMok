@@ -5,10 +5,10 @@
 //  Created by Alaa Ayman on 01/06/2026.
 //
 enum SportType: String {
-    case football = "Soccer"
-    case basketball = "Basketball"
-    case cricket = "Cricket"
-    case tennis = "Tennis"
+    case football = "football"
+    case basketball = "basketball"
+    case cricket = "cricket"
+    case tennis = "tennis"
     
    
     var iconAssetName: String {
