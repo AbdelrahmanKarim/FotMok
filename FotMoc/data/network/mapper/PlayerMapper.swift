@@ -11,10 +11,14 @@ import Foundation
 
 extension PlayerDTO {
     func toEntity() -> Player {
+        var validImageUrl: URL? = nil
+                if let imageString = playerImage, !imageString.isEmpty {
+                    validImageUrl = URL(string: imageString)
+                }
         return Player(
             id: String(playerKey),
             name: playerName,
-            imageUrl: URL(string: playerImage),
+            imageUrl: validImageUrl,
             nationality: playerCountry,
             age: Int(playerAge),
             sportDetails: .teamSport(teamId: String(teamKey), position: playerType)
