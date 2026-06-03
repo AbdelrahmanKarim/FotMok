@@ -4,7 +4,7 @@
 //
 //  Created by abdelrahman karim on 02/06/2026.
 //
-
+import RxSwift
 class SearchLeaguesUseCase {
     private let repository: LeagueRepository
     
@@ -12,7 +12,7 @@ class SearchLeaguesUseCase {
         self.repository = repository
     }
     
-    func execute(query: String) async throws -> [League] {
-        return try await repository.searchLeagues(query: query)
-    }
+    func execute(query: String) -> Observable<[League]> {
+            return repository.searchLeagues(query: query)
+        }
 }
