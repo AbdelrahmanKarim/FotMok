@@ -14,7 +14,7 @@
 
 import UIKit
 
-class LeaguesViewController: UIViewController {
+class LeaguesViewController: UIViewController , LeaguesView{
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!

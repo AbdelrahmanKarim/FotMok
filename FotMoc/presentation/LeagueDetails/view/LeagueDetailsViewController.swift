@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LeagueDetailsViewController: UIViewController {
+class LeagueDetailsViewController: UIViewController , LeagueDetailsView{
     @IBOutlet weak var collectionView: UICollectionView!
     var currentTab: LeagueTab = .overview
     let overviewTab = OverviewTab()

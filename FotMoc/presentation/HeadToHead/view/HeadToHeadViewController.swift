@@ -8,7 +8,7 @@
 import UIKit
 
 
-class HeadToHeadViewController: UIViewController {
+class HeadToHeadViewController: UIViewController , HeadToHeadView {
 
     
     @IBOutlet weak var collectionView: UICollectionView!
