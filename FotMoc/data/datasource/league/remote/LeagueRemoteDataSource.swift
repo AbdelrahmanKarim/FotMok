@@ -7,7 +7,8 @@
 
 
 import Foundation
-
+import RxSwift
 protocol LeagueRemoteDataSource {
-    
+    func getLeagues(sport: SportType) async throws -> [LeagueDTO]
+    func searchLeagues(sport: SportType, query: String) -> Observable<[LeagueDTO]>
 }
