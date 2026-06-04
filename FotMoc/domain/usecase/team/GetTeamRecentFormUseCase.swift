@@ -12,7 +12,7 @@ class GetTeamRecentFormUseCase {
         self.repository = repository
     }
     
-    func execute(teamId: String) async throws -> TeamRecentForm {
-        return try await repository.getTeamRecentForm(teamId: teamId)
+    func execute(teamId: String,leagueId:String) async throws -> TeamRecentForm {
+        return try await repository.getTeamRecentForm(teamId: teamId,leagueId: leagueId)
     }
 }
