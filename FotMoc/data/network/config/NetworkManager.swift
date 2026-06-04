@@ -18,26 +18,25 @@ class NetworkManager {
         var finalParameters = parameters
         finalParameters["APIkey"] = apiKey
         
-       
-        return try await AF.request(url, method: .get, parameters: finalParameters)
-            .validate()
-            .serializingDecodable(ResultDTO<T>.self)
-            .value
+        let request = AF.request(url, method: .get, parameters: finalParameters)
+        print("🌐 SENT URL: \(request.request?.url?.absoluteString ?? "Failed to construct URL")")
+        let response = try await request.serializingDecodable(ResultDTO<T>.self).value
+        return response
     }
-}
-enum Secrets {
-    
-    static var apiKey: String {
-        guard let apiKey = Bundle.main.object(forInfoDictionaryKey: "API_KEY") as? String else {
-            fatalError("API_KEY not found in Info.plist")
+    enum Secrets {
+        
+        static var apiKey: String {
+            guard let apiKey = Bundle.main.object(forInfoDictionaryKey: "API_KEY") as? String else {
+                fatalError("API_KEY not found in Info.plist")
+            }
+            return apiKey
         }
-        return apiKey
-    }
-    
-    static var baseURL: String {
-        guard let baseURL = Bundle.main.object(forInfoDictionaryKey: "BASE_URL") as? String else {
-            fatalError("BASE_URL not found in Info.plist")
+        
+        static var baseURL: String {
+            guard let host = Bundle.main.object(forInfoDictionaryKey: "BASE_URL") as? String else {
+                fatalError("BASE_URL not found in Info.plist")
+            }
+            return "https://\(host)/"
         }
-        return baseURL
     }
 }

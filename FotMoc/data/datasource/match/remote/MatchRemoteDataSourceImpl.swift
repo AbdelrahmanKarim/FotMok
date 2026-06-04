@@ -11,7 +11,31 @@ import Foundation
 class MatchRemoteDataSourceImpl: MatchRemoteDataSource {
     private let service: MatchService
         
-        init(service: MatchService) {
-            self.service = service
-        }
+    init(service: MatchService) {
+        self.service = service
+    }
+    
+    func getFixtures(sport: String, from: String, to: String, leagueId: String?) async throws -> [MatchDTO] {
+        do {
+            let res = try await service.fetchFixtures(sport: sport, from: from, to: to, leagueId: leagueId)
+            guard res.success == 1, let result = res.result else { throw AppException.noData }
+            return result
+        } catch { throw AppException.map(error) }
+    }
+        
+    func getLiveScores(sport: String) async throws -> [MatchDTO] {
+        do {
+            let res = try await service.fetchLiveScores(sport: sport)
+            guard res.success == 1, let result = res.result else { throw AppException.noData }
+            return result
+        } catch { throw AppException.map(error) }
+    }
+        
+    func getH2H(sport: String, firstTeamId: String, secondTeamId: String) async throws -> H2HResponseDTO {
+        do {
+            let res = try await service.fetchH2H(sport: sport, firstTeamId: firstTeamId, secondTeamId: secondTeamId)
+            guard res.success == 1, let result = res.result else { throw AppException.noData }
+            return result
+        } catch { throw AppException.map(error) }
+    }
 }

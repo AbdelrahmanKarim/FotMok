@@ -9,5 +9,5 @@
 import Foundation
 
 protocol LeagueRemoteDataSource {
-    
+    func getLeagueTableStandings(sport: String, leagueId: String) async throws -> [Total]
 }

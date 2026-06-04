@@ -10,19 +10,16 @@ import Foundation
 extension TopScorerDTO {
     func toEntity() -> TopScorer {
         let player = Player(
-            id: String(playerKey),
-            name: playerName,
-            imageUrl: nil,
-            nationality: nil,
-            age: nil,
-            sportDetails: .teamSport(teamId: String(teamKey), position: "Attacker")
+            id: String(playerKey ?? 0),
+            name: playerName ?? "Unknown",
+            imageUrl: nil, nationality: nil, age: nil,
+            sportDetails: .teamSport(teamId: String(teamKey ?? 0), position: "Attacker")
         )
-        
         return TopScorer(
-            rank: playerPlace,
+            rank: playerPlace ?? 0,
             player: player,
-            goals: goals,
-            assists: Int(assists ?? "0")
+            goals: goals ?? 0,
+            assists: assists ?? 0
         )
     }
 }
