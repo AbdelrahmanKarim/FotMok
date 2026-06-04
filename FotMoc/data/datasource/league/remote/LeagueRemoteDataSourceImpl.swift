@@ -17,9 +17,9 @@ class LeagueRemoteDataSourceImpl: LeagueRemoteDataSource {
     
     func getLeagues(sport: SportType) async throws -> [LeagueDTO] {
             
-            let dtoResult = try await service.fetchLeagues(sport: sport.rawValue)
+            let response = try await service.fetchLeagues(sport: sport.rawValue)
         
-            guard let leagueDTOs = dtoResult.result else {
+            guard let leagueDTOs = response.result else {
                 return []
             }
             return leagueDTOs
