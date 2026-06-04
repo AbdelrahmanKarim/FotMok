@@ -26,7 +26,7 @@ extension Container {
     }
     
     var playerRepository: Factory<PlayerRepository> {
-        self { PlayerRepositoryImpl(remoteDataSource: self.playerRemoteDataSource(), sportProvider: self.currentSportProvider()) }
+        self { PlayerRepositoryImpl(remoteDataSource: self.playerRemoteDataSource() , teamRemoteDataSource: self.teamRemoteDataSource(),sportProvider: self.currentSportProvider()) }
     }
     
     var teamRepository: Factory<TeamRepository> {

@@ -18,6 +18,31 @@ class TeamRemoteDataSourceImpl: TeamRemoteDataSource {
         self.leagueService = leagueService
         self.teamService = teamService
     }
+    func getTeamsInLeague(sport: SportType, leagueId: String) async throws -> [TeamDTO] {
+            let response = try await teamService.fetchTeamsInLeague(sport: sport.rawValue, leagueId: leagueId)
+        
+        guard let teamDTOs = response.result else {
+            return []
+        }
+        return teamDTOs
+    }
+    
+    func getTeamDetails(sport: SportType, teamId: String) async throws -> TeamDTO? {
+            let response = try await teamService.fetchTeamDetails(sport: sport.rawValue, teamId: teamId)
+           guard let detailedTeam = response.result?.first else {
+                    return nil
+                }
+                return detailedTeam
+        
+        }
+    func getTeamSeasonStats(sport: SportType, leagueId: String) async throws -> StandingDTO? {
+        let response = try await leagueService.fetchStandings(sport: sport.rawValue, leagueId: leagueId)
+        guard let teamSeasonStats = response.result else {
+                 return nil
+             }
+
+        return teamSeasonStats
+   
     
     func getH2H(sport: String, firstTeamId: String, secondTeamId: String) async throws -> H2HResponseDTO {
         do {
@@ -57,4 +82,5 @@ class TeamRemoteDataSourceImpl: TeamRemoteDataSource {
                 return result
             } catch { throw AppException.map(error) }
         }
+    
 }

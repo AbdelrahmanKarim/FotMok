@@ -9,5 +9,7 @@
 import Foundation
 
 protocol LeagueLocalDataSource {
-    
+    func getFavouriteLeagues() throws -> [League]
+    func saveFavouriteLeague(league: League) throws
+    func removeFavouriteLeague(id: String) throws
 }

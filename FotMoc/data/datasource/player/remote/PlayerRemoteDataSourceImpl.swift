@@ -11,9 +11,24 @@ import Foundation
 class PlayerRemoteDataSourceImpl: PlayerRemoteDataSource {
     private let service: PlayerService
         
-    init(service: PlayerService) {
-        self.service = service
+        init(service: PlayerService) {
+            self.service = service
+        }
+    func getPlayerDetails(sport: SportType, playerId: String) async throws -> PlayerDTO? {
+            let response = try await service.fetchPlayerDetails(sport: sport.rawValue, playerId: playerId)
+            
+            guard let players = response.result, !players.isEmpty else {
+                return nil
+            }
+            
+
+            let activeProfile = players.first(where: { $0.teamName != nil && !$0.teamName!.isEmpty }) ?? players.first
+            
+            return activeProfile
+        }
     }
+
+   
     
     func getTopScorers(sport: String, leagueId: String) async throws -> [TopScorerDTO] {
         do {

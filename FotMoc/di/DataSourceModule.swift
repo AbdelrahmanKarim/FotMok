@@ -6,10 +6,25 @@
 
 import Foundation
 import Factory
-
+import CoreData
+import UIKit
 extension Container {
+    
+    
+ 
+    var managedObjectContext: Factory<NSManagedObjectContext> {
+        self {
+        MainActor.assumeIsolated {
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                return appDelegate.persistentContainer.viewContext
+            }
+        }.singleton
+    }
+    var favouriteDAO: Factory<FavoritesDAOProtocol> {
+            self { FavouriteDAO(context: self.managedObjectContext()) }
+    }
     var leagueLocalDataSource: Factory<LeagueLocalDataSource> {
-        self { LeagueLocalDataSourceImpl() }
+        self { LeagueLocalDataSourceImpl(dao: self.favouriteDAO() , context: self.managedObjectContext()) }
     }
     
     var leagueRemoteDataSource: Factory<LeagueRemoteDataSource> {

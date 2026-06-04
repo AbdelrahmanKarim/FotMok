@@ -16,6 +16,10 @@ class PlayerService {
             return try await network.fetch(sport: sport, parameters: ["met": "Topscorers", "leagueId": leagueId])
         }
     func fetchPlayerDetails(sport: String, playerId: String) async throws -> ResultDTO<[PlayerDTO]> {
-        fatalError()
+        let parameters: [String: Any] = [
+                    "met": "Players",
+                    "playerId": playerId]
+                
+                return try await network.fetch(sport: sport, parameters: parameters)
     }
 }

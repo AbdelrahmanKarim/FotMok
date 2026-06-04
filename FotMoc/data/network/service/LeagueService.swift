@@ -13,8 +13,10 @@ class LeagueService {
     }
     
     func fetchLeagues(sport: String) async throws -> ResultDTO<[LeagueDTO]> {
-        fatalError()
+        let parameters: [String: Any] = ["met": "Leagues"]
+        return try await network.fetch(sport: sport, parameters: parameters)
     }
+    
         
         func fetchStandings(sport: String, leagueId: String) async throws -> ResultDTO<StandingDTO> {
             return try await network.fetch(sport: sport, parameters: ["met": "Standings", "leagueId": leagueId])

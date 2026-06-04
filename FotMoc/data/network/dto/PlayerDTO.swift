@@ -49,7 +49,7 @@ struct PlayerDTO: Codable {
     let playerRating: String
     let teamName: String?
     let teamKey: Int
-    let playerImage: String
+    let playerImage: String?
 
     enum CodingKeys: String, CodingKey {
         case playerKey = "player_key"
