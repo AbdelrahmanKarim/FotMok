@@ -4,7 +4,8 @@
 //
 //  Created by abdelrahman karim on 02/06/2026.
 //
-
+import Foundation
+import Factory
 class MatchRepositoryImpl: MatchRepository {
     private let remoteDataSource: MatchRemoteDataSource
         
@@ -33,6 +34,17 @@ class MatchRepositoryImpl: MatchRepository {
     }
     
     func getMatchDetails(matchId: String) async throws -> Match {
-        fatalError()
+        let currentSport = Container.shared.activeSport()
+                
+        guard let matchDTO = try await remoteDataSource.getMatchDetails(sport: currentSport, matchId: matchId) else {
+                    throw NSError(
+                        domain: "MatchRepositoryError",
+                        code: 404,
+                        userInfo: [NSLocalizedDescriptionKey: "Match details could not be found or processed."]
+                    )
+                }
+                
+                
+                return matchDTO.toEntity(sport: currentSport)
     }
 }
