@@ -14,4 +14,17 @@ class PlayerRemoteDataSourceImpl: PlayerRemoteDataSource {
         init(service: PlayerService) {
             self.service = service
         }
-}
+    func getPlayerDetails(sport: SportType, playerId: String) async throws -> PlayerDTO? {
+            let response = try await service.fetchPlayerDetails(sport: sport.rawValue, playerId: playerId)
+            
+            guard let players = response.result, !players.isEmpty else {
+                return nil
+            }
+            
+
+            let activeProfile = players.first(where: { $0.teamName != nil && !$0.teamName!.isEmpty }) ?? players.first
+            
+            return activeProfile
+        }
+    }
+

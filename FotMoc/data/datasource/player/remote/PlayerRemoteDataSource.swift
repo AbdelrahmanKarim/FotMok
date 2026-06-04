@@ -9,5 +9,5 @@
 import Foundation
 
 protocol PlayerRemoteDataSource {
-    
+    func getPlayerDetails(sport: SportType, playerId: String) async throws -> PlayerDTO?
 }
