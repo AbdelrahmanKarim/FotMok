@@ -12,19 +12,22 @@ class MatchService {
         self.network = network
     }
     
-    func fetchFixtures(sport: String, from: String, to: String, leagueId: String?) async throws -> ResultDTO<[MatchDTO]> {
-        fatalError()
-    }
     
     func fetchMatchDetails(sport: String, matchId: String) async throws -> ResultDTO<[MatchDTO]> {
         fatalError()
     }
     
+    func fetchFixtures(sport: String, from: String, to: String, leagueId: String?) async throws -> ResultDTO<[MatchDTO]> {
+            var params: [String: Any] = ["met": "Fixtures", "from": from, "to": to]
+            if let leagueId = leagueId { params["leagueId"] = leagueId }
+            return try await network.fetch(sport: sport, parameters: params)
+        }
+        
     func fetchLiveScores(sport: String) async throws -> ResultDTO<[MatchDTO]> {
-        fatalError()
-    }
-    
+            return try await network.fetch(sport: sport, parameters: ["met": "Livescore"])
+        }
+        
     func fetchH2H(sport: String, firstTeamId: String, secondTeamId: String) async throws -> ResultDTO<H2HResponseDTO> {
-        fatalError()
-    }
+            return try await network.fetch(sport: sport, parameters: ["met": "H2H", "firstTeamId": firstTeamId, "secondTeamId": secondTeamId])
+        }
 }
