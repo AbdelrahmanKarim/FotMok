@@ -2,53 +2,51 @@
 //  TeamDTO.swift
 //  FotMoc
 //
-//  Created by abdelrahman karim on 02/06/2026.
-//
 
 import Foundation
 
 struct Players: Codable {
-    let playerKey: Int
-    let playerImage: String
-    let playerName: String
-    let playerNumber: String
+    let playerKey: Int?
+    let playerImage: String?
+    let playerName: String?
+    let playerNumber: String?
     let playerCountry: String?
-    let playerType: String
-    let playerAge: String
-    let playerMatchPlayed: String
-    let playerGoals: String
-    let playerYellowCards: String
-    let playerRedCards: String
-    let playerInjured: String
-    let playerSubstituteOut: String
-    let playerSubstitutesOnBench: String
-    let playerAssists: String
-    let playerBirthdate: String
-    let playerIsCaptain: String
-    let playerShotsTotal: String
-    let playerGoalsConceded: String
-    let playerFoulsCommitted: String
-    let playerTackles: String
-    let playerBlocks: String
-    let playerCrossesTotal: String
-    let playerInterceptions: String
-    let playerClearances: String
-    let playerDispossesed: String
-    let playerSaves: String
-    let playerInsideBoxSaves: String
-    let playerDuelsTotal: String
-    let playerDuelsWon: String
-    let playerDribbleAttempts: String
-    let playerDribbleSucc: String
-    let playerPenComm: String
-    let playerPenWon: String
-    let playerPenScored: String
-    let playerPenMissed: String
-    let playerPasses: String
-    let playerPassesAccuracy: String
-    let playerKeyPasses: String
-    let playerWoordworks: String
-    let playerRating: String
+    let playerType: String?
+    let playerAge: String?
+    let playerMatchPlayed: String?
+    let playerGoals: String?
+    let playerYellowCards: String?
+    let playerRedCards: String?
+    let playerInjured: String?
+    let playerSubstituteOut: String?
+    let playerSubstitutesOnBench: String?
+    let playerAssists: String?
+    let playerBirthdate: String?
+    let playerIsCaptain: String?
+    let playerShotsTotal: String?
+    let playerGoalsConceded: String?
+    let playerFoulsCommitted: String?
+    let playerTackles: String?
+    let playerBlocks: String?
+    let playerCrossesTotal: String?
+    let playerInterceptions: String?
+    let playerClearances: String?
+    let playerDispossesed: String?
+    let playerSaves: String?
+    let playerInsideBoxSaves: String?
+    let playerDuelsTotal: String?
+    let playerDuelsWon: String?
+    let playerDribbleAttempts: String?
+    let playerDribbleSucc: String?
+    let playerPenComm: String?
+    let playerPenWon: String?
+    let playerPenScored: String?
+    let playerPenMissed: String?
+    let playerPasses: String?
+    let playerPassesAccuracy: String?
+    let playerKeyPasses: String?
+    let playerWoordworks: String?
+    let playerRating: String?
 
     enum CodingKeys: String, CodingKey {
         case playerKey = "player_key"
@@ -96,7 +94,7 @@ struct Players: Codable {
 }
 
 struct Coache: Codable {
-    let coachName: String
+    let coachName: String?
     let coachCountry: String?
     let coachAge: String?
 
@@ -108,11 +106,11 @@ struct Coache: Codable {
 }
 
 struct TeamDTO: Codable {
-    let teamKey: Int
-    let teamName: String
-    let teamLogo: String
-    let players: [Players]
-    let coaches: [Coache]
+    let teamKey: Int?
+    let teamName: String?
+    let teamLogo: String?
+    let players: [Players]?
+    let coaches: [Coache]?
 
     enum CodingKeys: String, CodingKey {
         case teamKey = "team_key"
@@ -122,4 +120,3 @@ struct TeamDTO: Codable {
         case coaches
     }
 }
-

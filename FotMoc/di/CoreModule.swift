@@ -12,7 +12,9 @@ import Foundation
 
 class CurrentSportProvider {
     var selectedSport: SportType = .football
+    var selectedLeague: String = "152"
 }
+
 
 extension Container {
     var currentSportProvider: Factory<CurrentSportProvider> {
