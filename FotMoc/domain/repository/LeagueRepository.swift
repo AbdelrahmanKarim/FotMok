@@ -7,7 +7,6 @@
 import RxSwift
 protocol LeagueRepository {
     func getFavouriteLeagues() async throws -> [League]
-    func getLeagueDetails(leagueId: String) async throws -> League
     func getLeagues(sport: SportType) async throws -> [League]
     func getLeagueTableStandings(leagueId: String) async throws -> [StandingRow]
     func saveFavouriteLeague(league: League) async throws

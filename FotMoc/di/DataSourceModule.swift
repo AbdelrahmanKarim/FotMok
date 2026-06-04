@@ -2,6 +2,7 @@
 //  DataSourceModule.swift
 //  FotMoc
 //
+//
 
 import Foundation
 import Factory
@@ -9,12 +10,8 @@ import CoreData
 import UIKit
 extension Container {
     
-    var activeLeagueId: Factory<String> {
-            self { "0" } 
-        }
-    var activeSport: Factory<SportType> {
-        self { .football }
-    }
+    
+ 
     var managedObjectContext: Factory<NSManagedObjectContext> {
         self {
         MainActor.assumeIsolated {
@@ -31,7 +28,7 @@ extension Container {
     }
     
     var leagueRemoteDataSource: Factory<LeagueRemoteDataSource> {
-        self { LeagueRemoteDataSourceImpl(service: self.leagueService()) }
+        self { LeagueRemoteDataSourceImpl(service: self.leagueService())}
     }
     
     var matchRemoteDataSource: Factory<MatchRemoteDataSource> {
@@ -43,6 +40,6 @@ extension Container {
     }
     
     var teamRemoteDataSource: Factory<TeamRemoteDataSource> {
-        self { TeamRemoteDataSourceImpl(service: self.teamService() , leagueService: self.leagueService()) }
+        self { TeamRemoteDataSourceImpl(matchService: self.matchService(), leagueService: self.leagueService(),teamService: self.teamService()) } 
     }
 }

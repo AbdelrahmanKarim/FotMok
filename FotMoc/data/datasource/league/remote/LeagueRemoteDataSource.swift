@@ -11,4 +11,5 @@ import RxSwift
 protocol LeagueRemoteDataSource {
     func getLeagues(sport: SportType) async throws -> [LeagueDTO]
     func searchLeagues(sport: SportType, query: String) -> Observable<[LeagueDTO]>
+    func getLeagueTableStandings(sport: String, leagueId: String) async throws -> [Total]
 }

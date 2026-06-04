@@ -10,4 +10,7 @@ import Foundation
 
 protocol MatchRemoteDataSource {
     func getMatchDetails(sport: SportType, matchId: String) async throws -> MatchDTO?
+    func getFixtures(sport: String, from: String, to: String, leagueId: String?) async throws -> [MatchDTO]
+    func getLiveScores(sport: String) async throws -> [MatchDTO]
+    func getH2H(sport: String, firstTeamId: String, secondTeamId: String) async throws -> H2HResponseDTO
 }

@@ -8,15 +8,14 @@
 import Foundation
 
 struct TopScorerDTO: Codable {
-    let playerPlace: Int
-    let playerName: String
-    let playerKey: Int
-    let teamName: String
-    let teamKey: Int
-    let goals: Int
-    let assists: String?
-    let penaltyGoals: String?
-
+    let playerPlace: Int?
+    let playerName: String?
+    let playerKey: Int?
+    let teamName: String?
+    let teamKey: Int?
+    let goals: Int?
+    let assists: Int?
+    
     enum CodingKeys: String, CodingKey {
         case playerPlace = "player_place"
         case playerName = "player_name"
@@ -25,7 +24,7 @@ struct TopScorerDTO: Codable {
         case teamKey = "team_key"
         case goals
         case assists
-        case penaltyGoals = "penalty_goals"
     }
 }
+
 
