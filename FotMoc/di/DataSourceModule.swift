@@ -2,18 +2,18 @@
 //  DataSourceModule.swift
 //  FotMoc
 //
+//
 
 import Foundation
 import Factory
 
 extension Container {
-    
     var leagueLocalDataSource: Factory<LeagueLocalDataSource> {
         self { LeagueLocalDataSourceImpl() }
     }
     
     var leagueRemoteDataSource: Factory<LeagueRemoteDataSource> {
-        self { LeagueRemoteDataSourceImpl(service: self.leagueService()) }
+        self { LeagueRemoteDataSourceImpl(service: self.leagueService())}
     }
     
     var matchRemoteDataSource: Factory<MatchRemoteDataSource> {
@@ -25,6 +25,6 @@ extension Container {
     }
     
     var teamRemoteDataSource: Factory<TeamRemoteDataSource> {
-        self { TeamRemoteDataSourceImpl(service: self.teamService()) }
+        self { TeamRemoteDataSourceImpl(matchService: self.matchService(), leagueService: self.leagueService(),teamService: self.teamService()) } 
     }
 }
