@@ -2,36 +2,36 @@
 //  MatchRemoteDataSourceImpl.swift
 //  FotMoc
 //
-//  Created by abdelrahman karim on 03/06/2026.
-//
-
 
 import Foundation
 
 class MatchRemoteDataSourceImpl: MatchRemoteDataSource {
     private let service: MatchService
         
-        init(service: MatchService) {
-            self.service = service
-        }
-    func getMatchDetails(sport: SportType, matchId: String) async throws -> MatchDTO? {
-         
+    init(service: MatchService) {
+        self.service = service
+    }
+
+    func getMatchDetails(sport: SportType, matchId: String) async throws -> MatchDTO {
+        do {
             let response = try await service.fetchMatchDetails(sport: sport.rawValue, matchId: matchId)
-        
-            guard let matches = response.result, !matches.isEmpty else {
-                return nil
+            guard let matches = response.result, !matches.isEmpty, let match = matches.first else {
+                throw AppException.notFound
             }
-            return matches.first
+            return match
+        } catch {
+            throw AppException.map(error)
         }
-    
-   
+    }
     
     func getFixtures(sport: String, from: String, to: String, leagueId: String?) async throws -> [MatchDTO] {
         do {
             let res = try await service.fetchFixtures(sport: sport, from: from, to: to, leagueId: leagueId)
             guard res.success == 1, let result = res.result else { throw AppException.noData }
             return result
-        } catch { throw AppException.map(error) }
+        } catch {
+            throw AppException.map(error)
+        }
     }
         
     func getLiveScores(sport: String) async throws -> [MatchDTO] {
@@ -39,7 +39,9 @@ class MatchRemoteDataSourceImpl: MatchRemoteDataSource {
             let res = try await service.fetchLiveScores(sport: sport)
             guard res.success == 1, let result = res.result else { throw AppException.noData }
             return result
-        } catch { throw AppException.map(error) }
+        } catch {
+            throw AppException.map(error)
+        }
     }
         
     func getH2H(sport: String, firstTeamId: String, secondTeamId: String) async throws -> H2HResponseDTO {
@@ -47,6 +49,8 @@ class MatchRemoteDataSourceImpl: MatchRemoteDataSource {
             let res = try await service.fetchH2H(sport: sport, firstTeamId: firstTeamId, secondTeamId: secondTeamId)
             guard res.success == 1, let result = res.result else { throw AppException.noData }
             return result
-        } catch { throw AppException.map(error) }
+        } catch {
+            throw AppException.map(error)
+        }
     }
 }

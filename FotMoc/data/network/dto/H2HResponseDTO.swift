@@ -2,31 +2,29 @@
 //  H2HResponseDTO.swift
 //  FotMoc
 //
-//  Created by abdelrahman karim on 02/06/2026.
-//
 
 import Foundation
 
 struct H2H: Codable {
-    let eventKey: Int
-    let eventDate: String
-    let eventTime: String
-    let eventHomeTeam: String
-    let homeTeamKey: Int
-    let eventAwayTeam: String
-    let awayTeamKey: Int
-    let homeTeamLogo: String
-    let awayTeamLogo: String
-    let eventHalftimeResult: String
-    let eventFinalResult: String
-    let eventStatus: String
-    let countryName: String
-    let leagueName: String
-    let leagueKey: Int
-    let leagueRound: String
-    let leagueSeason: String
-    let eventLive: String
-    let eventCountryKey: Int
+    let eventKey: Int?
+    let eventDate: String?
+    let eventTime: String?
+    let eventHomeTeam: String?
+    let homeTeamKey: Int?
+    let eventAwayTeam: String?
+    let awayTeamKey: Int?
+    let homeTeamLogo: String?
+    let awayTeamLogo: String?
+    let eventHalftimeResult: String?
+    let eventFinalResult: String?
+    let eventStatus: String?
+    let countryName: String?
+    let leagueName: String?
+    let leagueKey: Int?
+    let leagueRound: String?
+    let leagueSeason: String?
+    let eventLive: String?
+    let eventCountryKey: Int?
 
     enum CodingKeys: String, CodingKey {
         case eventKey = "event_key"
@@ -52,25 +50,25 @@ struct H2H: Codable {
 }
 
 struct FirstTeamResults: Codable {
-    let eventKey: Int
-    let eventDate: String
-    let eventTime: String
-    let eventHomeTeam: String
-    let homeTeamKey: Int
-    let eventAwayTeam: String
-    let awayTeamKey: Int
-    let homeTeamLogo: String
-    let awayTeamLogo: String
-    let eventHalftimeResult: String
-    let eventFinalResult: String
-    let eventStatus: String
-    let countryName: String
-    let leagueName: String
-    let leagueKey: Int
-    let leagueRound: String
-    let leagueSeason: String
-    let eventLive: String
-    let eventCountryKey: Int
+    let eventKey: Int?
+    let eventDate: String?
+    let eventTime: String?
+    let eventHomeTeam: String?
+    let homeTeamKey: Int?
+    let eventAwayTeam: String?
+    let awayTeamKey: Int?
+    let homeTeamLogo: String?
+    let awayTeamLogo: String?
+    let eventHalftimeResult: String?
+    let eventFinalResult: String?
+    let eventStatus: String?
+    let countryName: String?
+    let leagueName: String?
+    let leagueKey: Int?
+    let leagueRound: String?
+    let leagueSeason: String?
+    let eventLive: String?
+    let eventCountryKey: Int?
 
     enum CodingKeys: String, CodingKey {
         case eventKey = "event_key"
@@ -96,25 +94,25 @@ struct FirstTeamResults: Codable {
 }
 
 struct SecondTeamResults: Codable {
-    let eventKey: Int
-    let eventDate: String
-    let eventTime: String
-    let eventHomeTeam: String
-    let homeTeamKey: Int
-    let eventAwayTeam: String
-    let awayTeamKey: Int
-    let homeTeamLogo: String
-    let awayTeamLogo: String
-    let eventHalftimeResult: String
-    let eventFinalResult: String
-    let eventStatus: String
-    let countryName: String
-    let leagueName: String
-    let leagueKey: Int
-    let leagueRound: String
-    let leagueSeason: String
-    let eventLive: String
-    let eventCountryKey: Int
+    let eventKey: Int?
+    let eventDate: String?
+    let eventTime: String?
+    let eventHomeTeam: String?
+    let homeTeamKey: Int?
+    let eventAwayTeam: String?
+    let awayTeamKey: Int?
+    let homeTeamLogo: String?
+    let awayTeamLogo: String?
+    let eventHalftimeResult: String?
+    let eventFinalResult: String?
+    let eventStatus: String?
+    let countryName: String?
+    let leagueName: String?
+    let leagueKey: Int?
+    let leagueRound: String?
+    let leagueSeason: String?
+    let eventLive: String?
+    let eventCountryKey: Int?
 
     enum CodingKeys: String, CodingKey {
         case eventKey = "event_key"
@@ -140,9 +138,9 @@ struct SecondTeamResults: Codable {
 }
 
 struct H2HResponseDTO: Codable {
-    let h2H: [H2H]
-    let firstTeamResults: [FirstTeamResults]
-    let secondTeamResults: [SecondTeamResults]
+    let h2H: [H2H]?
+    let firstTeamResults: [FirstTeamResults]?
+    let secondTeamResults: [SecondTeamResults]?
 
     enum CodingKeys: String, CodingKey {
         case h2H = "H2H"

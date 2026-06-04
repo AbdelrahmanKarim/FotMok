@@ -14,14 +14,13 @@ class NetworkManager {
     private let apiKey = Secrets.apiKey
     
     func fetch<T: Decodable>(sport: String, parameters: [String: Any]) async throws -> ResultDTO<T> {
+        
         let url = "\(baseURL)/\(sport)/"
         var finalParameters = parameters
         finalParameters["APIkey"] = apiKey
-        
         let request = AF.request(url, method: .get, parameters: finalParameters)
-        print("🌐 SENT URL: \(request.request?.url?.absoluteString ?? "Failed to construct URL")")
-        let response = try await request.serializingDecodable(ResultDTO<T>.self).value
-        return response
+        let dataResponse = await request.serializingDecodable(ResultDTO<T>.self).response
+        return try dataResponse.result.get()
     }
     enum Secrets {
         

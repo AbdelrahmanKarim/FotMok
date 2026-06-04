@@ -21,4 +21,9 @@ class LeagueService {
         func fetchStandings(sport: String, leagueId: String) async throws -> ResultDTO<StandingDTO> {
             return try await network.fetch(sport: sport, parameters: ["met": "Standings", "leagueId": leagueId])
         }
+    
+    func fetchTennisStandings( leagueId: String) async throws -> ResultDTO<StandingDTO> {
+        return try await network.fetch(sport: "tennis", parameters: ["met": "Standings", "league": leagueId])
+    }
+    
 }

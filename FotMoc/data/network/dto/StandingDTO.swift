@@ -1,34 +1,32 @@
 //
-//  StandingRowDTO.swift
+//  StandingDTO.swift
 //  FotMoc
-//
-//  Created by abdelrahman karim on 02/06/2026.
 //
 
 import Foundation
 
 struct Total: Codable {
-    let standingPlace: Int
-    let standingPlaceType: String
-    let standingTeam: String
-    let standingP: Int
-    let standingW: Int
-    let standingD: Int
-    let standingL: Int
-    let standingF: Int
-    let standingA: Int
-    let standingGD: Int
-    let standingPTS: Int
-    let teamKey: Int
-    let leagueKey: Int
-    let leagueSeason: String
-    let leagueRound: String
-    let standingUpdated: String
-    let fkStageKey: Int
-    let stageName: String
-    let teamLogo: String
-    let standingLP: Int
-    let standingWP: Int
+    let standingPlace: Int?
+    let standingPlaceType: String?
+    let standingTeam: String?
+    let standingP: Int?
+    let standingW: Int?
+    let standingD: Int?
+    let standingL: Int?
+    let standingF: Int?
+    let standingA: Int?
+    let standingGD: Int?
+    let standingPTS: Int?
+    let teamKey: Int?
+    let leagueKey: Int?
+    let leagueSeason: String?
+    let leagueRound: String?
+    let standingUpdated: String?
+    let fkStageKey: Int?
+    let stageName: String?
+    let teamLogo: String?
+    let standingLP: Int?
+    let standingWP: Int?
 
     enum CodingKeys: String, CodingKey {
         case standingPlace = "standing_place"
@@ -56,27 +54,27 @@ struct Total: Codable {
 }
 
 struct Home: Codable {
-    let standingPlace: Int
+    let standingPlace: Int?
     let standingPlaceType: String?
-    let standingTeam: String
-    let standingP: Int
-    let standingW: Int
-    let standingD: Int
-    let standingL: Int
-    let standingF: Int
-    let standingA: Int
-    let standingGD: Int
-    let standingPTS: Int
-    let teamKey: Int
-    let leagueKey: Int
-    let leagueSeason: String
-    let leagueRound: String
-    let standingUpdated: String
-    let fkStageKey: Int
-    let stageName: String
-    let teamLogo: String
-    let standingLP: Int
-    let standingWP: Int
+    let standingTeam: String?
+    let standingP: Int?
+    let standingW: Int?
+    let standingD: Int?
+    let standingL: Int?
+    let standingF: Int?
+    let standingA: Int?
+    let standingGD: Int?
+    let standingPTS: Int?
+    let teamKey: Int?
+    let leagueKey: Int?
+    let leagueSeason: String?
+    let leagueRound: String?
+    let standingUpdated: String?
+    let fkStageKey: Int?
+    let stageName: String?
+    let teamLogo: String?
+    let standingLP: Int?
+    let standingWP: Int?
 
     enum CodingKeys: String, CodingKey {
         case standingPlace = "standing_place"
@@ -104,27 +102,27 @@ struct Home: Codable {
 }
 
 struct Away: Codable {
-    let standingPlace: Int
+    let standingPlace: Int?
     let standingPlaceType: String?
-    let standingTeam: String
-    let standingP: Int
-    let standingW: Int
-    let standingD: Int
-    let standingL: Int
-    let standingF: Int
-    let standingA: Int
-    let standingGD: Int
-    let standingPTS: Int
-    let teamKey: Int
-    let leagueKey: Int
-    let leagueSeason: String
-    let leagueRound: String
-    let standingUpdated: String
-    let fkStageKey: Int
-    let stageName: String
-    let teamLogo: String
-    let standingLP: Int
-    let standingWP: Int
+    let standingTeam: String?
+    let standingP: Int?
+    let standingW: Int?
+    let standingD: Int?
+    let standingL: Int?
+    let standingF: Int?
+    let standingA: Int?
+    let standingGD: Int?
+    let standingPTS: Int?
+    let teamKey: Int?
+    let leagueKey: Int?
+    let leagueSeason: String?
+    let leagueRound: String?
+    let standingUpdated: String?
+    let fkStageKey: Int?
+    let stageName: String?
+    let teamLogo: String?
+    let standingLP: Int?
+    let standingWP: Int?
 
     enum CodingKeys: String, CodingKey {
         case standingPlace = "standing_place"
@@ -152,8 +150,7 @@ struct Away: Codable {
 }
 
 struct StandingDTO: Codable {
-    let total: [Total]
-    let home: [Home]
-    let away: [Away]
+    let total: [Total]?
+    let home: [Home]?
+    let away: [Away]?
 }
-

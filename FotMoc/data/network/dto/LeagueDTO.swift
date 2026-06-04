@@ -5,12 +5,15 @@
 //  Created by abdelrahman karim on 02/06/2026.
 //
 
+
+import Foundation
+
 struct LeagueDTO: Codable {
-    let leagueKey: Int
-    let leagueName: String
-    let countryKey: Int
-    let countryName: String
-    let leagueLogo: String
+    let leagueKey: Int?
+    let leagueName: String?
+    let countryKey: Int?
+    let countryName: String?
+    let leagueLogo: String?
     let countryLogo: String?
 
     enum CodingKeys: String, CodingKey {
@@ -22,4 +25,3 @@ struct LeagueDTO: Codable {
         case countryLogo = "country_logo"
     }
 }
-
