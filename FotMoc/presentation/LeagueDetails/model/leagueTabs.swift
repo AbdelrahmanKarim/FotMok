@@ -10,5 +10,5 @@ enum LeagueTab: Int {
     case overview = 0
     case table = 1
     case topScorers = 2
-    case news = 3
+   
 }

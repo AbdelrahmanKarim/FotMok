@@ -26,5 +26,7 @@ extension Container {
     var leagueDetailsPresenter: Factory<LeagueDetailsPresenter> {
             self { LeagueDetailsPresenterImpl(sportProvider: self.currentSportProvider()) }
         }
-   
+    var latestEventsPresenter: Factory<LatestPresenter> {
+        self { LatestPresenterImpl(sportProvider: self.currentSportProvider()) }
+     }
 }
