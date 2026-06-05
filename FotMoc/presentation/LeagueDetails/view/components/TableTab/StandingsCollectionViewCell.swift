@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import SkeletonView
 class StandingsCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var rank: UILabel!
@@ -33,6 +33,7 @@ class StandingsCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         setupCardStyle()
+        setupSkeleton()
         // Initialization code
     }
     func setupCardStyle(){
@@ -68,17 +69,39 @@ class StandingsCollectionViewCell: UICollectionViewCell {
         
         
     }
-    func configure(rank: String, teamName: String, PG: Int, W: Int ,D: Int, L: Int ,  goals: Int, GD: Int ,  PTS: Int) {
-        self.rank.text = rank
-        self.teamName.text = teamName
-        self.playedGames.text = "\(PG)"
-        self.winsNumber.text = "\(W)"
-        self.drawsNumber.text = "\(D)"
-        self.losesNumber.text = "\(L)"
-        self.goals.text = "\(goals)"
-        self.goalsDifference.text = "\(GD)"
-        self.points.text = "\(PTS)"
+   
+    // MARK: - Skeleton Configuration
+        private func setupSkeleton() {
+            // Make the cell containers skeletonable
+            self.isSkeletonable = true
+            self.contentView.isSkeletonable = true
+            
+            // Make individual components skeletonable
+            rank.isSkeletonable = true
+            teamImage.isSkeletonable = true
+            teamName.isSkeletonable = true
+            playedGames.isSkeletonable = true
+            winsNumber.isSkeletonable = true
+            drawsNumber.isSkeletonable = true
+            losesNumber.isSkeletonable = true
+            goals.isSkeletonable = true
+            goalsDifference.isSkeletonable = true
+            points.isSkeletonable = true
+            
+            // Optional: Apply rounding configurations matching your design styles
+            teamImage.layer.cornerRadius = teamImage.frame.height / 2
+            teamImage.clipsToBounds = true
+        }
         
-         
+        func configure(rank: String, teamName: String, PG: Int, W: Int, D: Int, L: Int, goals: Int, GD: Int, PTS: Int) {
+            self.rank.text = rank
+            self.teamName.text = teamName
+            self.playedGames.text = "\(PG)"
+            self.winsNumber.text = "\(W)"
+            self.drawsNumber.text = "\(D)"
+            self.losesNumber.text = "\(L)"
+            self.goals.text = "\(goals)"
+            self.goalsDifference.text = "\(GD)"
+            self.points.text = "\(PTS)"
         }
 }

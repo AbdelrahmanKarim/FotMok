@@ -18,7 +18,7 @@ extension Total {
         return StandingRow(
             rank: standingPlace ?? 0,
             competitor: .team(team),
-            matchesPlayed: standingP ?? 0,
+            matchesPlayed: standingP ?? 0,	
             wins: standingW ?? 0,
             losses: standingL ?? 0,
             points: standingPTS ?? 0,

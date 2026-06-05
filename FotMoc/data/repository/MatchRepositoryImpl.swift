@@ -81,9 +81,12 @@ class MatchRepositoryImpl: MatchRepository {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         let today = formatter.string(from: Date())
-        let pastDate = formatter.string(from: Calendar.current.date(byAdding: .day, value: -14, to: Date())!)
-        
-        let dtos = try await remoteDataSource.getFixtures(sport: sport.rawValue, from: pastDate, to: today, leagueId: leagueId)
+        let pastDate = formatter.string(from: Calendar.current.date(byAdding: .day, value: -60, to: Date())!)
+   //     let pastDate = "2026-05-18"
+   //             let today = "2026-06-05"
+        let dtos = try await remoteDataSource.getFixtures(
+            sport: sport.rawValue, leagueId: leagueId, from: pastDate, to: today
+        )
         return dtos.map { $0.toEntity(sport: sport) }
     }
         
@@ -94,7 +97,7 @@ class MatchRepositoryImpl: MatchRepository {
         let tomorrow = formatter.string(from: Calendar.current.date(byAdding: .day, value: 1, to: Date())!)
         let futureDate = formatter.string(from: Calendar.current.date(byAdding: .day, value: 14, to: Date())!)
             
-        let dtos = try await remoteDataSource.getFixtures(sport: sport.rawValue, from: tomorrow, to: futureDate, leagueId: leagueId)
+        let dtos = try await remoteDataSource.getFixtures(sport: sport.rawValue, leagueId: leagueId, from: tomorrow, to: futureDate)
         return dtos.map { $0.toEntity(sport: sport) }
     }
         
