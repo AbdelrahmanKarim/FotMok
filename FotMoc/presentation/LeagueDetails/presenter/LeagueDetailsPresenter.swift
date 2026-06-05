@@ -7,5 +7,17 @@
 
 import Foundation
 
-protocol LeagueDetailsPresenter {
+protocol LeagueDetailsPresenter: AnyObject {
+    func attachView(_ view: LeagueDetailsView)
+    func detachView()
+    func loadLeagueContent(leagueId: String)
+    func loadTableContent(leagueId: String)
+    func didTapBack()
+    func didTapShowMoreLatest()
+    func loadLeagueDetails(leagueId: String)
+    func loadTopScorers(leagueId: String)
 }
+
+
+
+

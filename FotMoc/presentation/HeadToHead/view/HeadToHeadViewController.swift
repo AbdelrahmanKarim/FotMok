@@ -86,7 +86,7 @@ extension HeadToHeadViewController : UICollectionViewDelegate , UICollectionView
         {
         case 0:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "upcomingEventsCell", for: indexPath) as! UpcomingCollectionViewCell
-            cell.configure(homeTeam: "Al Ahly SC",awayTeam: "Zamalek SC",date: "May 24",time: "20:00")
+            //cell.configure(homeTeam: "Al Ahly SC",awayTeam: "Zamalek SC",date: "May 24",time: "20:00")
             return cell
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "recentFormCell", for: indexPath) as! RecentFormCollectionViewCell

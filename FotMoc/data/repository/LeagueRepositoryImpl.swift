@@ -22,7 +22,12 @@ class LeagueRepositoryImpl: LeagueRepository {
     }
     
     func getLeagueDetails(leagueId: String) async throws -> League {
-        throw AppException.custom(message: "Not implemented")
+        let sport = sportProvider.selectedSport
+        let leagues = try await remoteDataSource.getLeagues(sport: sport)
+        guard let match = leagues.first(where: { String($0.leagueKey ?? 0) == leagueId }) else {
+            throw AppException.noData
+        }
+        return match.toEntity(sport: sport)
     }
     
     func getLeagues(sport: SportType) async throws -> [League] {
@@ -55,4 +60,5 @@ class LeagueRepositoryImpl: LeagueRepository {
                 }
             }
     }
+  
 }

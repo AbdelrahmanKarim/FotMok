@@ -24,11 +24,11 @@ class MatchRemoteDataSourceImpl: MatchRemoteDataSource {
         }
     }
     
-    func getFixtures(sport: String, from: String, to: String, leagueId: String?) async throws -> [MatchDTO] {
+    func getFixtures(sport: String, leagueId: String?, from: String, to: String) async throws -> [MatchDTO] {
         do {
-            let res = try await service.fetchFixtures(sport: sport, from: from, to: to, leagueId: leagueId)
-            guard res.success == 1, let result = res.result else { throw AppException.noData }
-            return result
+            let res = try await service.fetchFixtures(sport: sport,  leagueId: leagueId, from: from, to: to)
+            guard res.success == 1 else { throw AppException.noData }
+            return res.result ?? []
         } catch {
             throw AppException.map(error)
         }

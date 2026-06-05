@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -32,24 +31,38 @@
                                             </constraints>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="gray" image="arrow.backward" catalog="system" title=""/>
+                                            <connections>
+                                                <action selector="backButtonTapped:" destination="XvZ-c9-Fry" eventType="touchUpInside" id="qPp-Zw-YAj"/>
+                                            </connections>
                                         </button>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="gGg-lk-lGh">
-                                            <rect key="frame" x="46" y="1.3333333333333286" width="362" height="34.333333333333343"/>
+                                            <rect key="frame" x="46" y="1.3333333333333321" width="300" height="34.333333333333343"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Egypt" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="grh-9w-Xaf">
-                                                    <rect key="frame" x="0.0" y="0.0" width="362" height="12"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="300" height="12"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Egypt Premier League" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jb5-ar-l3i">
-                                                    <rect key="frame" x="0.0" y="13.999999999999998" width="362" height="20.333333333333329"/>
+                                                    <rect key="frame" x="0.0" y="13.999999999999998" width="300" height="20.333333333333329"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </stackView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7P3-oF-ytg">
+                                            <rect key="frame" x="358" y="1.3333333333333321" width="50" height="34.333333333333343"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="50" id="b1t-P4-Bak"/>
+                                            </constraints>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain" image="heart" catalog="system" title=""/>
+                                            <connections>
+                                                <action selector="favBtn:" destination="XvZ-c9-Fry" eventType="touchUpInside" id="an3-Zi-3Ss"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="Pp6-4m-8Ah">
@@ -122,6 +135,7 @@
             <connections>
                 <outlet property="backBtn" destination="MsC-Mb-Bro" id="DvK-NT-SNr"/>
                 <outlet property="contentUiView" destination="UQN-gn-Dvs" id="8Up-X2-Flu"/>
+                <outlet property="favBtn" destination="7P3-oF-ytg" id="cHr-pZ-99o"/>
                 <outlet property="headerStackView" destination="h1q-ZE-6Dv" id="37s-y6-dt6"/>
                 <outlet property="indicatorLeadingConstraint" destination="VHR-qV-Zso" id="dcd-KP-8je"/>
                 <outlet property="indicatorView" destination="hFX-Ri-hwo" id="AqC-nO-pec"/>
@@ -137,11 +151,12 @@
     </objects>
     <resources>
         <image name="arrow.backward" catalog="system" width="128" height="95"/>
+        <image name="heart" catalog="system" width="128" height="107"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGreenColor">
-            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

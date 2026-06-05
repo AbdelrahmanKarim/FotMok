@@ -8,14 +8,6 @@
 import Foundation
 
 
-
-//
-//  PlayerMapper.swift
-//  FotMoc
-//
-
-import Foundation
-
 extension PlayerDTO {
     func toEntity() -> Player {
         var validImageUrl: URL? = nil

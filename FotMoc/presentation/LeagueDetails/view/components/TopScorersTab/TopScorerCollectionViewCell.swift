@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import Kingfisher
 class TopScorerCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var contentUiView: UIView!
     
@@ -26,6 +26,7 @@ class TopScorerCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         setupCardStyle()
+        setupSkeleton()
         // Initialization code
     }
     func setupCardStyle(){
@@ -52,5 +53,31 @@ class TopScorerCollectionViewCell: UICollectionViewCell {
         goalsLabel.textColor = AppColor.textSecondary
         
         
+    }
+    private func setupSkeleton() {
+        isSkeletonable = true
+        contentView.isSkeletonable = true
+        contentUiView.isSkeletonable = true
+        playerPlaceLabel.isSkeletonable = true
+        playerNameLabel.isSkeletonable = true
+        playerTeamLabel.isSkeletonable = true
+        goalsNumber.isSkeletonable = true
+        goalsLabel.isSkeletonable = true
+        playerImage.isSkeletonable = true
+        circularImageView.isSkeletonable = true
+    }
+    
+    func configure(rank: Int, name: String, teamName: String, goals: Int, playerImageURL: URL?) {
+        playerPlaceLabel.text = "\(rank)"
+        playerNameLabel.text = name
+        playerTeamLabel.text = teamName
+        goalsNumber.text = "\(goals)"
+        goalsLabel.text = "Goals"
+
+        playerImage.kf.setImage(
+            with: playerImageURL,
+            placeholder: UIImage(systemName: "person.circle.fill"),
+            options: [.transition(.fade(0.3)), .cacheOriginalImage]
+        )
     }
 }

@@ -21,7 +21,7 @@ class MatchService {
                 return try await network.fetch(sport: sport, parameters: parameters)
     }
     
-    func fetchFixtures(sport: String, from: String, to: String, leagueId: String?) async throws -> ResultDTO<[MatchDTO]> {
+    func fetchFixtures(sport: String, leagueId: String?, from: String, to: String) async throws -> ResultDTO<[MatchDTO]> {
             var params: [String: Any] = ["met": "Fixtures", "from": from, "to": to]
             if let leagueId = leagueId { params["leagueId"] = leagueId }
             return try await network.fetch(sport: sport, parameters: params)

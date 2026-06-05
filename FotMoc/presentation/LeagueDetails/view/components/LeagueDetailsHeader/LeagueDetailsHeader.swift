@@ -30,7 +30,8 @@ class LeagueDetailsHeader: UICollectionReusableView {
     @IBOutlet weak var indicatorView: UIView!
     @IBOutlet var tabButtons: [UIButton]!
     
- 
+    @IBOutlet weak var favBtn: UIButton!
+    
     @IBOutlet weak var leagueTitle: UILabel!
     @IBOutlet weak var leagueCountry: UILabel!
     
@@ -59,7 +60,10 @@ class LeagueDetailsHeader: UICollectionReusableView {
           
 
       }
-      @IBAction func tabButtonTapped(_ sender: UIButton) {
+    
+    @IBAction func favBtn(_ sender: Any) {
+    }
+    @IBAction func tabButtonTapped(_ sender: UIButton) {
 
           updateSelectedTab(index: sender.tag, animated: true)
 
@@ -103,7 +107,7 @@ class LeagueDetailsHeader: UICollectionReusableView {
         delegate?.didTapBackButton()
     }
     
-    func configure(title: String, country: String , showTabs : Bool = false , showBackButton : Bool = true , showHeader : Bool = true) {
+    func configure(title: String, country: String , showTabs : Bool = false , showBackButton : Bool = true , showHeader : Bool = true , showFavBtn :Bool = false) {
 
             leagueTitle.text = title
 
@@ -114,6 +118,7 @@ class LeagueDetailsHeader: UICollectionReusableView {
             indicatorView.isHidden = !showTabs
             backBtn.isHidden = !showBackButton
             headerStackView.isHidden = !showHeader
+             favBtn.isHidden = !showFavBtn
         }
     }
     

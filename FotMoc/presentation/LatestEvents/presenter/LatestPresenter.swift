@@ -7,5 +7,10 @@
 
 import Foundation
 
-protocol LatestPresenter {
+protocol LatestPresenter  {
+    func attachView(_ view: LatestView)
+    func detachView()
+    func loadLatestMatches()
+    func didTapBack()
 }
+

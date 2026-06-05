@@ -10,4 +10,5 @@ struct TopScorer {
     let player: Player
     let goals: Int
     let assists: Int?
+    let teamName: String
 }

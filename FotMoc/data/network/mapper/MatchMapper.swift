@@ -12,7 +12,7 @@ extension MatchDTO {
         let homeTeam = Team(
             id: String(homeTeamKey ?? 0),
             name: eventHomeTeam ?? "Unknown",
-            logoUrl: eventHomeTeam.flatMap { URL(string: $0) },
+            logoUrl: homeTeamLogo.flatMap { URL(string: $0) },
             sport: sport,
             countryName: nil, foundedYear: nil, description: nil
         )
@@ -20,7 +20,7 @@ extension MatchDTO {
         let awayTeam = Team(
             id: String(awayTeamKey ?? 0),
             name: eventAwayTeam ?? "Unknown",
-            logoUrl: eventAwayTeam.flatMap { URL(string: $0) },
+            logoUrl: awayTeamLogo.flatMap { URL(string: $0) },
             sport: sport,
             countryName: nil, foundedYear: nil, description: nil
         )

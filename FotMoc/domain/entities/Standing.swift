@@ -20,5 +20,5 @@ enum StandingMetrics {
     case football(draws: Int, goalDifference: Int, goalsFor:Int, goalsAgainst: Int)
     case basketball(winPercentage: Double)
     case cricket(noResults: Int, netRunRate: Double)
-    case tennis(movement: String) 
+    case tennis(movement: String) 	
 }

@@ -42,6 +42,7 @@ extension Container {
     var getLeagueUpcomingMatchesUseCase: Factory<GetLeagueUpcomingMatchesUseCase> {
         self { GetLeagueUpcomingMatchesUseCase(repository: self.matchRepository()) }
     }
+ 
     var getLiveMatchesUseCase: Factory<GetLiveMatchesUseCase> {
         self { GetLiveMatchesUseCase(repository: self.matchRepository()) }
     }

@@ -6,11 +6,14 @@
 //
 
 import UIKit
-
-
+import Factory
+import SkeletonView
 
 class LatestEventsViewController: UIViewController , LatestView{
-
+    
+    private var matches: [Match] = []
+    
+    @Injected(\.latestEventsPresenter) private var presenter: LatestPresenter
     @IBOutlet weak var collectionView: UICollectionView!
     override func viewDidLoad() {
         
@@ -19,6 +22,12 @@ class LatestEventsViewController: UIViewController , LatestView{
         collectionView.setCollectionViewLayout(setUpCollectionViewLayout(), animated: true)
         registerCells()
         registerHeaders()
+        collectionView.isSkeletonable = true
+         collectionView.delegate = self
+         collectionView.dataSource = self
+        presenter.attachView(self)
+        presenter.loadLatestMatches()
+   
      
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -46,6 +55,59 @@ class LatestEventsViewController: UIViewController , LatestView{
             
         )
     }
+    deinit {
+            presenter.detachView()
+        }
+
+        
+        
+        func showLoading() {
+            
+            collectionView.showAnimatedGradientSkeleton(transition: .crossDissolve(0.25))
+        }
+        
+        func hideLoading() {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                self.collectionView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.5))
+            }
+        }
+        
+        func displayMatches(_ matches: [Match]) {
+            self.matches = matches
+            
+           
+   
+            DispatchQueue.main.async {
+                        self.collectionView.reloadData()
+                    }
+            
+        }
+        
+        func displayEmptyState() {
+            self.matches = []
+            
+          
+            if let emptyView = Bundle.main.loadNibNamed("EmptyStateCollectionViewCell", owner: self, options: nil)?.first as? UIView {
+            
+                emptyView.frame = self.collectionView.bounds
+                self.collectionView.backgroundView = emptyView
+            }
+            
+            self.collectionView.reloadData()
+        }
+        
+        func displayError(message: String) {
+            print("Error fetching latest events: \(message)")
+            displayEmptyState()
+        }
+        
+        func navigateBack() {
+            self.navigationController?.popViewController(animated: true)
+        }
+        
+      
+        
+      
     /*
     // MARK: - Navigation
 
@@ -69,13 +131,15 @@ extension LatestEventsViewController : UICollectionViewDelegate , UICollectionVi
 
      func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 10
+         return matches.count
     }
 
      func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "latestEventCell",
-            for: indexPath) as! LatestEventCollectionViewCell
-        return cell
+         
+         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "latestEventCell", for: indexPath) as! LatestEventCollectionViewCell
+                 let match = matches[indexPath.item]
+                 cell.configure(with: match)
+                 return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -84,7 +148,7 @@ extension LatestEventsViewController : UICollectionViewDelegate , UICollectionVi
            withReuseIdentifier: "leagueDetailsHeader",
            for: indexPath
        ) as! LeagueDetailsHeader
-        
+        header.delegate = self
        header.configure(title: "Latest Matches", country: "Global")
 
 
@@ -138,4 +202,35 @@ extension LatestEventsViewController : UICollectionViewDelegate , UICollectionVi
     }
     
     
+}
+extension LatestEventsViewController: LeagueDetailsHeaderDelegate{
+    func didTapBackButton() {
+        presenter.didTapBack()
+    }
+    
+    func didSelectTab(index: Int) {
+      
+    }
+    
+}
+
+extension LatestEventsViewController: SkeletonCollectionViewDataSource {
+    
+    
+    func collectionSkeletonView(_ skeletonView: UICollectionView, cellIdentifierForItemAt indexPath: IndexPath) -> ReusableCellIdentifier {
+         return "latestEventCell"
+        
+        
+    }
+    
+    
+    func collectionSkeletonView(_ skeletonView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+     
+                return 3
+            
+      	
+    }
+    func numSections(in collectionSkeletonView: UICollectionView) -> Int {
+         return 1
+     }
 }
