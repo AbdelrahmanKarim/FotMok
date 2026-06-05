@@ -8,4 +8,13 @@
 import Foundation
 
 protocol LatestView: AnyObject {
+    func showLoading()
+    func hideLoading()
+    func displayMatches(_ matches: [Match])
+
+    func displayEmptyState()
+    func displayError(message: String)
+    func navigateBack()
 }
+
+

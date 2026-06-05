@@ -19,7 +19,8 @@ extension TopScorerDTO {
             rank: playerPlace ?? 0,
             player: player,
             goals: goals ?? 0,
-            assists: assists ?? 0
+            assists: assists ?? 0,
+            teamName: teamName ?? ""
         )
     }
 }
