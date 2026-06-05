@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import SkeletonView
 class Teams_Players_Cell: UICollectionViewCell {
    
     @IBOutlet weak var cardContainerView: UIView!
@@ -32,10 +32,34 @@ class Teams_Players_Cell: UICollectionViewCell {
         teamNameLabel.textColor = AppColor.textPrimary
        
     }
-    
-    func configure(teamName: String) {
-            teamNameLabel.text = teamName
-         
+    private func setupSkeleton() {
+        
+            self.isSkeletonable = true
+            self.contentView.isSkeletonable = true
+        cardContainerView.isSkeletonable = true
+        cardContainerView.layer.cornerRadius = 20
+        cardContainerView.clipsToBounds = false
+        cardContainerView.layer.masksToBounds = false
+      
+        circularView.isSkeletonable = true
+        teamNameLabel.isSkeletonable = true
+        teamImage.isSkeletonable = true
+            
+        }
+    func configure(with item: Any) {
+            if let team = item as? Team {
+                teamNameLabel.text = team.name
+                teamImage.kf.setImage(
+                    with: team.logoUrl,
+                    placeholder: UIImage(systemName: "shield")
+                )
+            } else if let player = item as? Player {
+                teamNameLabel.text = player.name
+                teamImage.kf.setImage(
+                    with: player.imageUrl,
+                    placeholder: UIImage(systemName: "person.fill")
+                )
+            }
         }
 }
 

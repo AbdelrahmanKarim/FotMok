@@ -6,7 +6,8 @@
 //
 
 import UIKit
-
+import Kingfisher
+import SkeletonView
 class LatestEventCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var contentUiView: UIView!
     @IBOutlet weak var firstTeamImage: UIImageView!
@@ -25,6 +26,7 @@ class LatestEventCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         setupCardStyle()
+        setupSkeleton()
         // Initialization code
     }
     
@@ -55,4 +57,58 @@ class LatestEventCollectionViewCell: UICollectionViewCell {
         secondTagLabelBtn.layer.cornerRadius = 8
         
     }
+    private func setupSkeleton() {
+        
+            self.isSkeletonable = true
+            self.contentView.isSkeletonable = true
+            contentUiView.isSkeletonable = true
+            contentUiView.layer.cornerRadius = 20
+            contentUiView.clipsToBounds = false
+            contentUiView.layer.masksToBounds = false
+      
+            firstTeamImage.isSkeletonable = true
+            secondTeamImage.isSkeletonable = true
+            firstTeamLabel.isSkeletonable = true
+            secondTeamLabel.isSkeletonable = true
+            scoreLabel.isSkeletonable = true
+            firstTagLabelBtn.isSkeletonable = true
+            secondTagLabelBtn.isSkeletonable = true
+        }
+    func configure(with match: Match) {
+            firstTeamLabel.text = extractName(from: match.homeCompetitor)
+            secondTeamLabel.text = extractName(from: match.awayCompetitor)
+            scoreLabel.text = match.score ?? "N/A"
+     
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM dd"
+        firstTagLabelBtn.setTitle(dateFormatter.string(from: match.date), for: .normal)
+        
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "HH:mm"
+        secondTagLabelBtn.setTitle(timeFormatter.string(from: match.date), for: .normal)
+        
+     
+        firstTeamImage.kf.setImage(
+            with: extractLogoUrl(from: match.homeCompetitor),
+            placeholder: UIImage(systemName: "shield")
+        )
+        secondTeamImage.kf.setImage(
+            with: extractLogoUrl(from: match.awayCompetitor),
+            placeholder: UIImage(systemName: "shield")
+        )
+    }
+
+    private func extractLogoUrl(from competitor: Competitor) -> URL? {
+        switch competitor {
+        case .team(let team): return team.logoUrl
+        case .player(let player): return player.imageUrl  
+        }
+    }
+    private func extractName(from competitor: Competitor) -> String {
+            switch competitor {
+            case .team(let team): return team.name
+            case .player(let player): return player.name
+            }
+        }
 }
