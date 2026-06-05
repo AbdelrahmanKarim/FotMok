@@ -22,6 +22,7 @@ class LeaguesViewController: UIViewController , LeaguesView{
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var backButton: UIButton!
+    var sport: SportType!
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()

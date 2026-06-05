@@ -6,19 +6,21 @@
 //
 
 import UIKit
-
-class HomeCollectionViewController: UIViewController {
+import Factory
+class HomeCollectionViewController: UIViewController  {
   
    
     @IBOutlet weak var collectionView: UICollectionView!
     let sports: [SportCell] = [
-        SportCell(title: "Football", imageName: "football"),
-        SportCell(title: "Basketball", imageName: "basketball"),
-        SportCell(title: "Tennis", imageName: "tennis"),
-        SportCell(title: "Cricket", imageName: "cricket")
+        SportCell(title: "football", imageName: "football"),
+        SportCell(title: "basketball", imageName: "basketball"),
+        SportCell(title: "tennis", imageName: "tennis"),
+        SportCell(title: "cricket", imageName: "cricket")
     ]
+    @Injected(\.homePresenter) private var presenter: HomePresenter
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter.attachView(self)
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = AppColor.bgPrimary
@@ -26,7 +28,10 @@ class HomeCollectionViewController: UIViewController {
         registerHeaders()
         // Do any additional setup after loading the view.
     }
-
+    deinit {
+           
+            presenter.detachView()
+        }
     func registerHeaders(){
         let globalHeaderNib = UINib(nibName: "LeagueDetailsHeader", bundle: nil)
         collectionView.register(
@@ -37,15 +42,19 @@ class HomeCollectionViewController: UIViewController {
         )
     }
    
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+
+}
+extension HomeCollectionViewController: HomeView {
+    
+    func navigateToLeagueDetails(with sport: SportType) {
+        
+        
+        guard let leaguesVC = storyboard?.instantiateViewController(withIdentifier: "leaguesScreen") as? LeaguesViewController else {return}
+        navigationController?.pushViewController(leaguesVC, animated: true)
+        leaguesVC.sport = sport
     }
-    */
+    
 
 }
 extension HomeCollectionViewController :UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
@@ -57,13 +66,15 @@ extension HomeCollectionViewController :UICollectionViewDelegate , UICollectionV
         return 1
     }
     
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+            presenter.selectSport(at: indexPath.item, from: sports)
+        }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) ->  UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CustomHomeCollectionViewCell
         // Configure the cell
         let sport = sports[indexPath.item]
            cell.sportImage.image = UIImage(named: sport.imageName)
-           cell.sportTitle.text = sport.title
+        cell.sportTitle.text = sport.title.capitalized
            
         return cell
     }

@@ -20,4 +20,11 @@ extension Container {
     var currentSportProvider: Factory<CurrentSportProvider> {
         self { CurrentSportProvider() }.singleton
     }
+    var homePresenter: Factory<HomePresenter> {
+            self { HomePresenterImpl(sportProvider: self.currentSportProvider()) }
+        }
+    var leagueDetailsPresenter: Factory<LeagueDetailsPresenter> {
+            self { LeagueDetailsPresenterImpl(sportProvider: self.currentSportProvider()) }
+        }
+   
 }
