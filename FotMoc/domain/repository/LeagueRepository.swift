@@ -10,6 +10,7 @@ protocol LeagueRepository {
     func getLeagues(sport: SportType) async throws -> [League]
     func getLeagueTableStandings(leagueId: String) async throws -> [StandingRow]
     func saveFavouriteLeague(league: League) async throws
+    func getLeagueDetails(leagueId : String) async throws -> League
     func searchLeagues(query: String) -> Observable<[League]>
     func removeFavouriteLeague(id: String) async throws
 }

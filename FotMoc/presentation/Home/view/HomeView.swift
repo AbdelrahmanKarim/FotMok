@@ -9,6 +9,6 @@ import Foundation
 
 
 protocol HomeView: AnyObject {
-    func navigateToLeagueDetails(with sport: SportType)
+    func navigateToLeagues(with sport: SportType)
 }
 

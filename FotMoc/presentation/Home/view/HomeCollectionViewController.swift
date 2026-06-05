@@ -47,10 +47,10 @@ class HomeCollectionViewController: UIViewController  {
 }
 extension HomeCollectionViewController: HomeView {
     
-    func navigateToLeagueDetails(with sport: SportType) {
+    func navigateToLeagues(with sport: SportType) {
+        print("Presenter told view to navigate forward using active sport slug: \(sport.rawValue)")
         
-        
-        guard let leaguesVC = storyboard?.instantiateViewController(withIdentifier: "leaguesScreen") as? LeaguesViewController else {return}
+        guard let leaguesVC = storyboard?.instantiateViewController(withIdentifier: "leagueScreen") as? LeagueDetailsViewController else {return}
         navigationController?.pushViewController(leaguesVC, animated: true)
         leaguesVC.sport = sport
     }
