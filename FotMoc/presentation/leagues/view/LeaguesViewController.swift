@@ -4,7 +4,7 @@ import RxSwift
 import RxCocoa
 import Factory
 
-class LeaguesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, LeaguesView {
+class LeaguesViewController: UIViewController, UITableViewDelegate,SkeletonTableViewDataSource ,UITableViewDataSource,UISearchBarDelegate, LeaguesView {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -29,7 +29,9 @@ class LeaguesViewController: UIViewController, UITableViewDelegate, UITableViewD
         presenter.attachView(self)
         presenter.viewDidLoad()
     }
- 
+    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
+            return "leagueCell"
+        }
     private func setupUI() {
         view.backgroundColor = AppColor.bgPrimary
         tableView.backgroundColor = .clear

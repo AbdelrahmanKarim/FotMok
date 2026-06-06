@@ -17,7 +17,6 @@ protocol LeagueDetailsPresenter: AnyObject {
     func loadLeagueDetails(leagueId: String)
     func loadTopScorers(leagueId: String)
     func toggleFavourite()
-    
     func didSelectMatch(_ match: Match, leagueId: String)
 }
 

@@ -12,7 +12,7 @@
         <!--Leagues View Controller-->
         <scene sceneID="U0i-Ht-GVN">
             <objects>
-                <viewController id="CgA-IM-zcB" customClass="LeaguesViewController" customModule="FotMoc" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="leagueScreen" id="CgA-IM-zcB" customClass="LeaguesViewController" customModule="FotMoc" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LGl-1r-SZw">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -195,6 +195,7 @@
                     <navigationItem key="navigationItem" id="wop-JX-19u"/>
                     <connections>
                         <outlet property="browseMoreLabel" destination="SqJ-Xo-VVE" id="Rwb-WT-oQ2"/>
+                        <outlet property="browseMorePlusIcon" destination="Slv-K8-0R5" id="ncj-v3-moR"/>
                         <outlet property="browseMoreView" destination="oyl-WP-b7S" id="kHI-AU-V9B"/>
                         <outlet property="tableView" destination="NdN-jE-wNn" id="YS0-Hx-Uzr"/>
                         <outlet property="titleLabel" destination="cAY-M5-9K5" id="9Yq-S4-FnP"/>
@@ -285,7 +286,7 @@
         <!--Item-->
         <scene sceneID="Tdg-rg-9Tp">
             <objects>
-                <viewController id="p3m-JY-XCv" customClass="LeagueDetailsViewController" customModule="FotMoc" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="leagueDetailsScreen" id="p3m-JY-XCv" customClass="LeagueDetailsViewController" customModule="FotMoc" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jcd-zC-5V0">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -497,7 +498,7 @@
         <!--Item-->
         <scene sceneID="46n-pR-gpF">
             <objects>
-                <viewController id="sMZ-rr-6D5" customClass="LatestEventsViewController" customModule="FotMoc" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="latestMatchScreen" id="sMZ-rr-6D5" customClass="LatestEventsViewController" customModule="FotMoc" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vNg-dO-slh">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -548,7 +549,7 @@
         <!--Item-->
         <scene sceneID="Hnh-S1-h6n">
             <objects>
-                <viewController id="esU-yK-CfY" customClass="HeadToHeadViewController" customModule="FotMoc" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="headToHeadScreen" id="esU-yK-CfY" customClass="HeadToHeadViewController" customModule="FotMoc" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3e8-uT-dnK">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -818,6 +819,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="iV1-jO-Ns1" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="d3U-qt-1tD">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
