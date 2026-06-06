@@ -90,23 +90,20 @@ class LeagueDetailsPresenterImpl: LeagueDetailsPresenter {
  
     
     func loadLeagueDetails(leagueId: String) {
-        guard guardConnectivity(leagueId: leagueId) else { return }
-            Task { @MainActor in
-                do {
-                    let league = try await leagueDetailsUseCase.execute(leagueId: leagueId)
-                    self.currentLeague = league
-                    view?.displayLeagueInfo(name: league.name, country: league.country?.name ?? "")
-                    
-                    // 2. Check if it's already a favourite to set the initial heart icon!
-                    let favs = try await getFavUseCase.execute()
-                    self.isFavourite = favs.contains(where: { $0.id == leagueId })
-                    view?.updateFavouriteIcon(isFavourite: self.isFavourite)
-                    
-                } catch {
-                    view?.displayError(message: "Could not load League Info : \(error.localizedDescription)")
+            guard guardConnectivity(leagueId: leagueId) else { return }
+                Task { @MainActor in
+                    do {
+                        let league = try await leagueDetailsUseCase.execute(leagueId: leagueId)
+                        self.currentLeague = league
+                        view?.displayLeagueInfo(name: league.name, country: league.country?.name ?? "")
+                        let favs = try await getFavUseCase.execute()
+                        self.isFavourite = favs.contains(where: { $0.id == leagueId })
+                        view?.updateFavouriteIcon(isFavourite: self.isFavourite)
+                    } catch {
+                        view?.displayError(message: "Could not load League Info : \(error.localizedDescription)")
+                    }
                 }
             }
-        }
         
         func toggleFavourite() {
             guard let league = currentLeague else { return }
@@ -135,30 +132,28 @@ class LeagueDetailsPresenterImpl: LeagueDetailsPresenter {
             view?.navigateToPlayerProfile(playerId: playerId)
         }
     func loadLeagueContent(leagueId: String) {
-        guard guardConnectivity(leagueId: leagueId) else { return }
-        view?.showLoading()
-        Task { @MainActor in
-            let sport = sportProvider.selectedSport
-            do {
-                let upcoming = try await upcomingUseCase.execute(leagueId: leagueId)
-                let latest = try await latestUseCase.execute(leagueId: leagueId)
-                
-                let data: [Any]
-                switch sport {
-                case .tennis:
-                    data = (try? await leaguePlayersUseCase.execute(leagueId: leagueId)) ?? []
-                default:
-                    data = try await leagueTeamsUseCase.execute(leagueId: leagueId)
+            guard guardConnectivity(leagueId: leagueId) else { return }
+            view?.showLoading()
+            Task { @MainActor in
+                let sport = sportProvider.selectedSport
+                do {
+                    let upcoming = try await upcomingUseCase.execute(leagueId: leagueId)
+                    let latest = try await latestUseCase.execute(leagueId: leagueId)
+                    let data: [Any]
+                    switch sport {
+                    case .tennis:
+                        data = (try? await leaguePlayersUseCase.execute(leagueId: leagueId)) ?? []
+                    default:
+                        data = try await leagueTeamsUseCase.execute(leagueId: leagueId)
+                    }
+                    view?.hideLoading()
+                    view?.displayOverviewData(upcoming: upcoming, latest: latest, teamsOrPlayers: data)
+                } catch {
+                    view?.hideLoading()
+                    view?.displayError(message: error.localizedDescription)
                 }
-                
-                view?.hideLoading()
-                view?.displayOverviewData(upcoming: upcoming, latest: latest, teamsOrPlayers: data)
-            } catch {
-                view?.hideLoading()
-                view?.displayError(message: error.localizedDescription)
             }
         }
-    }
     func loadTableContent(leagueId: String) {
         guard guardConnectivity(leagueId: leagueId) else { return }
       

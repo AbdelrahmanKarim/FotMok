@@ -24,34 +24,14 @@
                                     <outlet property="delegate" destination="CgA-IM-zcB" id="OPU-lj-OOx"/>
                                 </connections>
                             </searchBar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Leagues" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dK7-Yc-8sf">
-                                <rect key="frame" x="73.333333333333329" y="134" width="87.999999999999986" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <color key="textColor" systemColor="groupTableViewBackgroundColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHAMPIONSHIP GROUP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gHO-tX-12q">
-                                <rect key="frame" x="16" y="262" width="127" height="13"/>
+                                <rect key="frame" x="16" y="345" width="127" height="13"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gde-m5-gLE">
-                                <rect key="frame" x="16" y="134" width="34" height="34"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="gray" image="arrow.backward" catalog="system" title="">
-                                    <color key="baseForegroundColor" systemColor="systemBackgroundColor"/>
-                                    <color key="baseBackgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </buttonConfiguration>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Soccer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bT4-5C-JJi">
-                                <rect key="frame" x="323" y="134" width="54" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.73725490199999999" green="0.75294117650000003" blue="0.74117647060000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="SvS-qi-67b">
-                                <rect key="frame" x="16" y="293" width="361" height="500"/>
+                                <rect key="frame" x="16" y="376" width="361" height="500"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="500" id="9B3-O4-u82"/>
@@ -67,34 +47,35 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="goY-70-g3x">
+                                <rect key="frame" x="16" y="214" width="361" height="39"/>
+                                <color key="tintColor" systemColor="systemPinkColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="gray" title="Explore Live Matches"/>
+                                <connections>
+                                    <action selector="exploreLiveBtn:" destination="CgA-IM-zcB" eventType="touchUpInside" id="iuU-T2-hpS"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Vil-41-kwF"/>
                         <color key="backgroundColor" systemColor="viewFlipsideBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Vil-41-kwF" firstAttribute="trailing" secondItem="goY-70-g3x" secondAttribute="trailing" constant="16" id="3lR-yn-yjg"/>
                             <constraint firstItem="a37-v7-VGR" firstAttribute="leading" secondItem="Vil-41-kwF" secondAttribute="leading" constant="10" id="4gP-df-BrJ"/>
-                            <constraint firstItem="Gde-m5-gLE" firstAttribute="top" secondItem="Vil-41-kwF" secondAttribute="top" constant="16" id="69Z-JQ-N88"/>
-                            <constraint firstItem="Vil-41-kwF" firstAttribute="trailing" secondItem="bT4-5C-JJi" secondAttribute="trailing" constant="16" id="CBA-lj-LEj"/>
+                            <constraint firstItem="goY-70-g3x" firstAttribute="top" secondItem="Vil-41-kwF" secondAttribute="top" constant="96" id="9Y9-5d-her"/>
+                            <constraint firstItem="a37-v7-VGR" firstAttribute="top" secondItem="goY-70-g3x" secondAttribute="bottom" constant="18" id="9ZX-Xo-P22"/>
                             <constraint firstItem="Vil-41-kwF" firstAttribute="trailing" secondItem="SvS-qi-67b" secondAttribute="trailing" constant="16" id="EZC-kw-OVC"/>
                             <constraint firstItem="Vil-41-kwF" firstAttribute="trailing" secondItem="a37-v7-VGR" secondAttribute="trailing" constant="10" id="O8Y-Kv-0Ez"/>
                             <constraint firstItem="gHO-tX-12q" firstAttribute="leading" secondItem="Vil-41-kwF" secondAttribute="leading" constant="16" id="P6I-OP-8zO"/>
                             <constraint firstItem="gHO-tX-12q" firstAttribute="top" secondItem="a37-v7-VGR" secondAttribute="bottom" constant="18" id="P8O-6p-LSY"/>
                             <constraint firstItem="SvS-qi-67b" firstAttribute="leading" secondItem="Vil-41-kwF" secondAttribute="leading" constant="16" id="PUZ-gF-3cq"/>
-                            <constraint firstItem="bT4-5C-JJi" firstAttribute="top" secondItem="Gde-m5-gLE" secondAttribute="top" id="TeY-80-xUb"/>
-                            <constraint firstItem="dK7-Yc-8sf" firstAttribute="leading" secondItem="Gde-m5-gLE" secondAttribute="trailing" constant="8" id="Zu6-Fo-eAQ"/>
                             <constraint firstItem="SvS-qi-67b" firstAttribute="top" secondItem="gHO-tX-12q" secondAttribute="bottom" constant="18" id="ay6-LQ-7gY"/>
-                            <constraint firstItem="dK7-Yc-8sf" firstAttribute="bottom" secondItem="Gde-m5-gLE" secondAttribute="bottom" id="bfJ-oI-5IV"/>
-                            <constraint firstItem="Gde-m5-gLE" firstAttribute="leading" secondItem="Vil-41-kwF" secondAttribute="leading" constant="16" id="dRj-FY-YPe"/>
-                            <constraint firstItem="dK7-Yc-8sf" firstAttribute="top" secondItem="Gde-m5-gLE" secondAttribute="top" id="pvB-LH-8XT"/>
-                            <constraint firstItem="bT4-5C-JJi" firstAttribute="bottom" secondItem="Gde-m5-gLE" secondAttribute="bottom" id="rec-8L-k3C"/>
-                            <constraint firstItem="a37-v7-VGR" firstAttribute="top" secondItem="Gde-m5-gLE" secondAttribute="bottom" constant="20" id="y1n-i1-LRr"/>
+                            <constraint firstItem="goY-70-g3x" firstAttribute="leading" secondItem="Vil-41-kwF" secondAttribute="leading" constant="16" id="fYj-jj-aTf"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="backButton" destination="Gde-m5-gLE" id="YdC-8Y-x6W"/>
-                        <outlet property="gameHeader" destination="bT4-5C-JJi" id="dFa-dc-jsk"/>
                         <outlet property="searchBar" destination="a37-v7-VGR" id="xG2-oW-yUV"/>
                         <outlet property="tableView" destination="SvS-qi-67b" id="mLJ-02-y1l"/>
-                        <outlet property="titleLabel" destination="dK7-Yc-8sf" id="4WT-ZM-91D"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OLA-OP-esi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -104,7 +85,7 @@
         <!--Player Details View Controller-->
         <scene sceneID="bTL-ow-xVK">
             <objects>
-                <viewController id="BSP-en-S2f" customClass="PlayerDetailsViewController" customModule="FotMoc" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="playerDetailsScreen" id="BSP-en-S2f" customClass="PlayerDetailsViewController" customModule="FotMoc" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="q2N-jA-JFy">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -480,10 +461,10 @@
             </objects>
             <point key="canvasLocation" x="-7541" y="-630"/>
         </scene>
-        <!--View Controller-->
+        <!--Team Details View Controller-->
         <scene sceneID="ai5-bw-EhA">
             <objects>
-                <viewController id="5Ih-LC-1O5" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="teamDetailsScreen" id="5Ih-LC-1O5" customClass="TeamDetailsViewController" customModule="FotMoc" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Iay-yW-2jX">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -600,7 +581,7 @@
         <!--Item-->
         <scene sceneID="dhl-dQ-6jf">
             <objects>
-                <viewController id="yLn-bg-cey" customClass="LiveMatchesViewController" customModule="FotMoc" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="liveMatchesScreen" id="yLn-bg-cey" customClass="LiveMatchesViewController" customModule="FotMoc" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UPb-ry-j9C">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -832,11 +813,11 @@
             </objects>
             <point key="canvasLocation" x="-4943" y="-630"/>
         </scene>
-        <!--Item-->
+        <!--Favourites-->
         <scene sceneID="klJ-r5-LXp">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="NlL-da-2pY" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="AS8-KM-xlo"/>
+                    <tabBarItem key="tabBarItem" title="Favourites" image="star.circle.fill" catalog="system" id="AS8-KM-xlo"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="oaw-nm-MDP">
                         <rect key="frame" x="0.0" y="118" width="393" height="44"/>
@@ -851,11 +832,11 @@
             </objects>
             <point key="canvasLocation" x="-3214.5038167938928" y="-60.563380281690144"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Home-->
         <scene sceneID="QTk-bo-KCl">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="deC-aT-gvG" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="featured" id="IyQ-6O-miI"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="figure.disc.sports" catalog="system" id="IyQ-6O-miI"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hyd-vF-swc">
                         <rect key="frame" x="0.0" y="118" width="393" height="44"/>
@@ -872,21 +853,22 @@
         </scene>
     </scenes>
     <resources>
-        <image name="arrow.backward" catalog="system" width="128" height="95"/>
         <image name="basketball" width="56" height="56"/>
         <image name="basketballOnboarding" width="736" height="1288"/>
+        <image name="figure.disc.sports" catalog="system" width="128" height="108"/>
         <image name="football" width="52" height="51"/>
         <image name="footballOnboarding" width="564" height="1002"/>
         <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="star.circle.fill" catalog="system" width="128" height="123"/>
         <image name="tennisOnboarding" width="736" height="1104"/>
-        <systemColor name="groupTableViewBackgroundColor">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="viewFlipsideBackgroundColor">
             <color red="0.12156862745098039" green="0.12941176470588237" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
