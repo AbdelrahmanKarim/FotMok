@@ -32,7 +32,15 @@ extension Container {
     var headToHeadPresenter: Factory<HeadToHeadPresenter> {
         self { HeadToHeadPresenterImpl() }
      }
+    var playerDetailsPresenter: Factory<PlayerProfilePresenter> {
+        self { PlayerProfilePresenterImpl() }
+     }
     
+    var teamDetailsPresenter: Factory<TeamDetailsPresenter> {
+        self { TeamDetailsPresenterImpl() }
+     }
+    
+
 
     
 }

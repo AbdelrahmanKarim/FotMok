@@ -18,6 +18,8 @@ protocol LeagueDetailsPresenter: AnyObject {
     func loadTopScorers(leagueId: String)
     func toggleFavourite()
     func didSelectMatch(_ match: Match, leagueId: String)
+    func didSelectTeam(teamId: String)
+    func didSelectPlayer(playerId: String)
 }
 
 
