@@ -48,6 +48,13 @@ class LiveMatchesViewController: UIViewController {
             withReuseIdentifier: "leagueDetailsHeader"
         )
     }
+    func navigateBack() {
+        if let navigationController = self.navigationController {
+            navigationController.popViewController(animated: true)
+        } else {
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
 }
 
 // MARK: - LiveMatchesView
@@ -115,7 +122,7 @@ extension LiveMatchesViewController: UICollectionViewDelegate, UICollectionViewD
         header.configure(
             title: NSLocalizedString("live_matches_title", comment: ""),
             country: "",
-            showBackButton: false
+            showBackButton: true
         )
         header.delegate = self
         return header
@@ -164,7 +171,9 @@ extension LiveMatchesViewController: LeagueDetailsHeaderDelegate {
     }
     
     func didSelectTab(index: Int) { }
-    func didTapBackButton() { }
+    func didTapBackButton() {
+        presenter.didTapBack()
+    }
     func didTapThemeButton() { }
     func didSelectLanguage(_ code: String) { }
 }

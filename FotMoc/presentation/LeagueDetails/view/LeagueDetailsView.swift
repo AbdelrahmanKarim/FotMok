@@ -19,5 +19,7 @@ protocol LeagueDetailsView: AnyObject {
     func displayTopScorers(scorers: [TopScorer])
     func updateFavouriteIcon(isFavourite: Bool)
     func navigateToH2H(teamId1: String, teamId2: String, leagueId: String, title: String)
+    func navigateToTeamDetails(teamId: String, leagueId: String)
+    func navigateToPlayerProfile(playerId: String)
 }
 

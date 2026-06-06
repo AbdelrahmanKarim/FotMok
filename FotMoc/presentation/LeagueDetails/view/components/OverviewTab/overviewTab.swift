@@ -13,7 +13,7 @@ class OverviewTab: LeagueTabManager {
     
     private var upcomingMatches: [Match] = []
     private var latestMatches: [Match] = []
-    private var teamsOrPlayers: [Any] = []
+     var teamsOrPlayers: [Any] = []
     var onShowMoreTapped: (() -> Void)?
     
     func updateData(upcoming: [Match], latest: [Match], teamsOrPlayers : [Any]) {

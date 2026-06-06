@@ -7,5 +7,10 @@
 
 import Foundation
 
-protocol TeamDetailsPresenter {
+protocol TeamDetailsPresenter: AnyObject {
+    func attachView(_ view: TeamDetailsView)
+    func detachView()
+    func loadTeamData(teamId: String, leagueId: String)
+    func didSelectPlayer(at index: Int)
+    func didTapBack()
 }

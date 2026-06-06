@@ -4,13 +4,10 @@ import RxSwift
 import RxCocoa
 import Factory
 
-class LeaguesViewController: UIViewController, UITableViewDelegate,SkeletonTableViewDataSource ,UITableViewDataSource,UISearchBarDelegate, LeaguesView {
+class LeaguesViewController: UIViewController, UITableViewDelegate, SkeletonTableViewDataSource, UITableViewDataSource, UISearchBarDelegate, LeaguesView {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var gameHeader: UILabel!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var backButton: UIButton!
     
     @Injected(\.leaguesPresenter) private var presenter: LeaguesPresenter
     private let disposeBag = DisposeBag()
@@ -18,8 +15,13 @@ class LeaguesViewController: UIViewController, UITableViewDelegate,SkeletonTable
     private let noResultsLabel = UILabel()
     private let noInternetLabel = UILabel()
     
+    private var globalHeader: LeagueDetailsHeader?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        
         setupUI()
         setupEmptyStates()
         setupSearchBinding()
@@ -29,9 +31,21 @@ class LeaguesViewController: UIViewController, UITableViewDelegate,SkeletonTable
         presenter.attachView(self)
         presenter.viewDidLoad()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+
+    @IBAction func exploreLiveBtn(_ sender: Any) {
+        guard let liveMatchesVC = storyboard?.instantiateViewController(withIdentifier: "liveMatchesScreen") else { return }
+        navigationController?.pushViewController(liveMatchesVC, animated: true)
+    }
+    
     func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
-            return "leagueCell"
-        }
+        return "leagueCell"
+    }
+    
     private func setupUI() {
         view.backgroundColor = AppColor.bgPrimary
         tableView.backgroundColor = .clear
@@ -40,10 +54,19 @@ class LeaguesViewController: UIViewController, UITableViewDelegate,SkeletonTable
         let nib = UINib(nibName: "LeagueTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "leagueCell")
         
-        titleLabel.textColor = AppColor.textPrimary
-        titleLabel.font = AppFont.h2
-        gameHeader.textColor = AppColor.textSecondary
-        gameHeader.font = AppFont.small
+        if let header = Bundle.main.loadNibNamed("LeagueDetailsHeader", owner: nil, options: nil)?.first as? LeagueDetailsHeader {
+            header.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview(header)
+            NSLayoutConstraint.activate([
+                header.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+                header.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                header.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                header.heightAnchor.constraint(equalToConstant: 80)
+            ])
+            globalHeader = header
+            globalHeader?.delegate = self
+            globalHeader?.configure(title: "Leagues", country: "", showTabs: false, showBackButton: true, showHeader: true, showFavBtn: false)
+        }
         
         searchBar.backgroundImage = UIImage()
         searchBar.backgroundColor = .clear
@@ -158,6 +181,16 @@ class LeaguesViewController: UIViewController, UITableViewDelegate,SkeletonTable
     }
     
     func setGameHeader(sportName: String) {
-        gameHeader.text = "\(sportName)"
+        globalHeader?.configure(title: "Leagues", country: sportName, showTabs: false, showBackButton: true, showHeader: true, showFavBtn: false)
     }
+}
+
+extension LeaguesViewController: LeagueDetailsHeaderDelegate {
+    func didTapBackButton() {
+        navigationController?.popViewController(animated: true)
+    }
+    func didSelectTab(index: Int) {}
+    func didTapFavourite() {}
+    func didTapThemeButton() {}
+    func didSelectLanguage(_ code: String) {}
 }
