@@ -19,17 +19,28 @@ class PlayerRepositoryImpl: PlayerRepository {
     
     func getLeaguePlayers(leagueId: String) async throws -> [Player] {
         let currentSport = sportProvider.selectedSport
-        let teams = try await teamRemoteDataSource.getTeamsInLeague(sport: currentSport, leagueId: leagueId)
-        
-        let leaguePlayers = teams.flatMap { team -> [Player] in
-            let teamIdString = String(team.teamKey ?? 0)
-            let playersList = team.players ?? []
-            return playersList.map { playerDTO in
-                playerDTO.toEntity(teamId: teamIdString)
+
+        if currentSport == .tennis {
+            
+            let dtos = try await remoteDataSource.getLeaguePlayersList(sport: currentSport, leagueId: leagueId)
+            return dtos.map { dto in
+                Player(
+                    id: String(dto.playerKey ?? 0),
+                    name: dto.playerName ?? "Unknown",
+                    imageUrl: dto.playerImage.flatMap { URL(string: $0) },
+                    nationality: dto.playerCountry,
+                    age: nil, 
+                    sportDetails: .tennis(rank: nil, plays: nil)
+                )
             }
         }
-        
-        return leaguePlayers
+
+        // Football/Cricket/Others: extract from teams as before
+        let teams = try await teamRemoteDataSource.getTeamsInLeague(sport: currentSport, leagueId: leagueId)
+        return teams.flatMap { team -> [Player] in
+            let teamIdString = String(team.teamKey ?? 0)
+            return (team.players ?? []).map { $0.toEntity(teamId: teamIdString) }
+        }
     }
     
     func getPlayerDetails(playerId: String) async throws -> Player {

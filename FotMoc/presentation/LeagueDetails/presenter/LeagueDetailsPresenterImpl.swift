@@ -11,7 +11,7 @@ import Factory
 import Network
 
 class LeagueDetailsPresenterImpl: LeagueDetailsPresenter {
-   
+  
     
     private weak var view: LeagueDetailsView?
     private let sportProvider: CurrentSportProvider
@@ -43,9 +43,10 @@ class LeagueDetailsPresenterImpl: LeagueDetailsPresenter {
         monitor = nil
     }
     func retryLoading() {
-          guard let id = pendingLeagueId else { return }
-          retryAll(leagueId: id)
-      }
+            guard let id = pendingLeagueId else { return }
+            retryAll(leagueId: id)
+        }
+   
     private func startMonitoring() {
         monitor = NWPathMonitor()
         monitor?.pathUpdateHandler = { [weak self] path in
@@ -73,8 +74,7 @@ class LeagueDetailsPresenterImpl: LeagueDetailsPresenter {
         loadLeagueContent(leagueId: leagueId)
     }
 
-    // call this from loadLeagueContent / loadTableContent / loadTopScorers
-    // before firing the network request
+  
     private func guardConnectivity(leagueId: String) -> Bool {
         pendingLeagueId = leagueId
         if !isConnected {
@@ -130,20 +130,17 @@ class LeagueDetailsPresenterImpl: LeagueDetailsPresenter {
         guard guardConnectivity(leagueId: leagueId) else { return }
         view?.showLoading()
         Task { @MainActor in
-            
-            let isTennis = sportProvider.selectedSport == .tennis
-            
+            let sport = sportProvider.selectedSport
             do {
-          
                 let upcoming = try await upcomingUseCase.execute(leagueId: leagueId)
                 let latest = try await latestUseCase.execute(leagueId: leagueId)
                 
                 let data: [Any]
-                if isTennis {
-                    data = try await leaguePlayersUseCase.execute(leagueId: leagueId)
-                } else {
+                switch sport {
+                case .tennis:
+                    data = (try? await leaguePlayersUseCase.execute(leagueId: leagueId)) ?? []
+                default:
                     data = try await leagueTeamsUseCase.execute(leagueId: leagueId)
-                    
                 }
                 
                 view?.hideLoading()
