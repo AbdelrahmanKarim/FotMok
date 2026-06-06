@@ -6,7 +6,16 @@
 //
 
 
+
 import Foundation
 
 protocol LeaguesView: AnyObject {
+    func showLoading()
+    func hideLoading()
+    func reloadData()
+    func showError(_ message: String)
+    func showNoResults(isHidden: Bool)
+    func showNoInternet(isHidden: Bool)
+    func navigateToLeagueDetails(with league: League)
+    func setGameHeader(sportName: String)
 }

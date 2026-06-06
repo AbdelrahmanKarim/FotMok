@@ -35,6 +35,6 @@ class HomePresenterImpl: HomePresenter {
             
             print("Sport provider updated to: \(sportProvider.selectedSport.rawValue)")
             
-            view?.navigateToLeagueDetails(with: resolvedSportType)
+            view?.navigateToLeagues(with: resolvedSportType)
         }
 }
