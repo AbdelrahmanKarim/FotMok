@@ -25,36 +25,31 @@ class OverallH2HCollectionViewCell: UICollectionViewCell {
         setupUI()
     }
     private func setupUI() {
-           
-            contentView.backgroundColor = AppColor.accentLight
-            contentView.layer.cornerRadius = 16
-            contentView.layer.masksToBounds = true
-            
-    
-            homeWinsValue.font = AppFont.bigCaption
-            homeWinsValue.textColor = AppColor.textPrimary
-            
-            drawsValue.font = AppFont.bigCaption
-            drawsValue.textColor = AppColor.warning
-            
-            awayWinsValue.font = AppFont.bigCaption
-            awayWinsValue.textColor = AppColor.textPrimary
-            
-           
-            let subtitleFont = AppFont.caption
-            let subtitleColor = AppColor.textSecondary
-            
-            homeWinsLabel.font = subtitleFont
-            homeWinsLabel.textColor = subtitleColor
-            
-            drawsLabel.font = subtitleFont
-            drawsLabel.textColor = subtitleColor
-            
-            awayWinsLabel.font = subtitleFont
-            awayWinsLabel.textColor = subtitleColor
-            
-           
-        }
+        contentView.backgroundColor = AppColor.accentLight
+        contentView.layer.cornerRadius = 16
+        contentView.layer.masksToBounds = true
+
+        homeWinsValue.font = AppFont.bigCaption
+        homeWinsValue.textColor = AppColor.success
+        
+        drawsValue.font = AppFont.bigCaption
+        drawsValue.textColor = AppColor.warning
+
+        awayWinsValue.font = AppFont.bigCaption
+        awayWinsValue.textColor = AppColor.error           
+
+        let subtitleFont  = AppFont.caption
+        let subtitleColor = AppColor.textSecondary
+
+        homeWinsLabel.font  = subtitleFont
+        homeWinsLabel.textColor = subtitleColor
+
+        drawsLabel.font  = subtitleFont
+        drawsLabel.textColor = subtitleColor
+
+        awayWinsLabel.font  = subtitleFont
+        awayWinsLabel.textColor = subtitleColor
+    }
     func configure(homeWins: String, draws: String, awayWins: String) {
             homeWinsValue.text = homeWins
             drawsValue.text = draws

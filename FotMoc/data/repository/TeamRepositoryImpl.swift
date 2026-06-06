@@ -53,20 +53,38 @@ class TeamRepositoryImpl: TeamRepository {
     
     func getTeamRecentForm(teamId: String, leagueId: String) async throws -> TeamRecentForm {
         let sport = sportProvider.selectedSport
-        
+
         let team = try await remoteDataSource.getTeamDetails(sport: sport, teamId: teamId)
+
+        let matches = try await remoteDataSource.getTeamRecentFixtures(
+            sport: sport.rawValue, leagueId: leagueId, teamId: teamId
+        )
+
         
-        let matches = try await remoteDataSource.getTeamRecentFixtures(sport: sport.rawValue, leagueId: leagueId, teamId: teamId)
-        let sortedMatches = matches.sorted { ($0.eventDate ?? "") > ($1.eventDate ?? "") }
+        let sortFormatter = DateFormatter()
+        sortFormatter.dateFormat = "yyyy-MM-dd"
+        sortFormatter.locale = Locale(identifier: "en_US_POSIX")
+        sortFormatter.calendar = Calendar(identifier: .gregorian)
+
+        let sortedMatches = matches.sorted {
+            let d1 = sortFormatter.date(from: $0.eventDate ?? "") ?? .distantPast
+            let d2 = sortFormatter.date(from: $1.eventDate ?? "") ?? .distantPast
+            return d1 > d2  
+        }
+
         let last5Matches = Array(sortedMatches.prefix(5))
-        
+
         var formOutcomes: [MatchOutcome] = []
-        
+
         for match in last5Matches {
             let isHome = String(match.homeTeamKey ?? 0) == teamId
-            let scoreParts = (match.eventFinalResult ?? "").split(separator: "-").map { String($0).trimmingCharacters(in: .whitespaces) }
-            
-            if scoreParts.count == 2, let homeScore = Int(scoreParts[0]), let awayScore = Int(scoreParts[1]) {
+            let scoreParts = (match.eventFinalResult ?? "")
+                .split(separator: "-")
+                .map { String($0).trimmingCharacters(in: .whitespaces) }
+
+            if scoreParts.count == 2,
+               let homeScore = Int(scoreParts[0]),
+               let awayScore = Int(scoreParts[1]) {
                 if homeScore == awayScore {
                     formOutcomes.append(.draw)
                 } else if (isHome && homeScore > awayScore) || (!isHome && awayScore > homeScore) {
@@ -76,7 +94,7 @@ class TeamRepositoryImpl: TeamRepository {
                 }
             }
         }
-        
+
         return TeamRecentForm(
             teamId: teamId,
             teamName: team.teamName ?? "Unknown",
