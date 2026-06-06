@@ -21,6 +21,8 @@ class MatchRepositoryImpl: MatchRepository {
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.calendar = Calendar(identifier: .gregorian)
         let today = Calendar.current.startOfDay(for: Date())
         
         let upcomingH2H = response.h2H?.first { h2h in
@@ -80,24 +82,29 @@ class MatchRepositoryImpl: MatchRepository {
         let sport = sportProvider.selectedSport
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.calendar = Calendar(identifier: .gregorian)
         let today = formatter.string(from: Date())
         let pastDate = formatter.string(from: Calendar.current.date(byAdding: .day, value: -60, to: Date())!)
-   //     let pastDate = "2026-05-18"
-   //             let today = "2026-06-05"
+
         let dtos = try await remoteDataSource.getFixtures(
             sport: sport.rawValue, leagueId: leagueId, from: pastDate, to: today
         )
         return dtos.map { $0.toEntity(sport: sport) }
     }
-        
+
     func getLeagueUpcomingMatches(leagueId: String) async throws -> [Match] {
         let sport = sportProvider.selectedSport
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
+        formatter.locale = Locale(identifier: "en_US_POSIX")  // ADD THIS
+        formatter.calendar = Calendar(identifier: .gregorian)  // ADD THIS
         let tomorrow = formatter.string(from: Calendar.current.date(byAdding: .day, value: 1, to: Date())!)
         let futureDate = formatter.string(from: Calendar.current.date(byAdding: .day, value: 14, to: Date())!)
-            
-        let dtos = try await remoteDataSource.getFixtures(sport: sport.rawValue, leagueId: leagueId, from: tomorrow, to: futureDate)
+
+        let dtos = try await remoteDataSource.getFixtures(
+            sport: sport.rawValue, leagueId: leagueId, from: tomorrow, to: futureDate
+        )
         return dtos.map { $0.toEntity(sport: sport) }
     }
         

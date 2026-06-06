@@ -58,6 +58,50 @@ class PlayerRepositoryImpl: PlayerRepository {
     func getLeagueTopScorers(leagueId: String) async throws -> [TopScorer] {
         let sport = sportProvider.selectedSport
         let dtos = try await remoteDataSource.getTopScorers(sport: sport.rawValue, leagueId: leagueId)
-        return dtos.map { $0.toEntity() }
+
+        
+        let scorers = await withTaskGroup(of: TopScorer.self, returning: [TopScorer].self) { group in
+            for dto in dtos {
+                group.addTask {
+                    var base = dto.toEntity()
+
+                 
+                    if let imageUrl = try? await self.fetchPlayerImage(
+                        playerId: String(dto.playerKey ?? 0), sport: sport) {
+                        let enrichedPlayer = Player(
+                            id: base.player.id,
+                            name: base.player.name,
+                            imageUrl: imageUrl,
+                            nationality: base.player.nationality,
+                            age: base.player.age,
+                            sportDetails: base.player.sportDetails
+                        )
+                        base = TopScorer(
+                            rank: base.rank,
+                            player: enrichedPlayer,
+                            goals: base.goals,
+                            assists: base.assists,
+                            teamName: base.teamName
+                        )
+                    }
+                    return base
+                }
+            }
+
+            var results: [TopScorer] = []
+            for await scorer in group {
+                results.append(scorer)
+            }
+           
+            return results.sorted { $0.rank < $1.rank }
+        }
+
+        return scorers
+    }
+
+    private func fetchPlayerImage(playerId: String, sport: SportType) async throws -> URL? {
+        let dto = try await remoteDataSource.getPlayerDetails(sport: sport, playerId: playerId)
+        guard let img = dto.playerImage, !img.isEmpty else { return nil }
+        return URL(string: img)
     }
 }

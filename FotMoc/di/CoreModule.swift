@@ -6,8 +6,6 @@
 //
 
 import Factory
-
-
 import Foundation
 
 class CurrentSportProvider {
@@ -28,5 +26,11 @@ extension Container {
         }
     var latestEventsPresenter: Factory<LatestPresenter> {
         self { LatestPresenterImpl(sportProvider: self.currentSportProvider()) }
+     }
+    var liveMatchesPresenter: Factory<LiveMatchesPresenter> {
+        self { LiveMatchesPresenterImpl(sportProvider: self.currentSportProvider()) }
+     }
+    var headToHeadPresenter: Factory<HeadToHeadPresenter> {
+        self { HeadToHeadPresenterImpl() }
      }
 }

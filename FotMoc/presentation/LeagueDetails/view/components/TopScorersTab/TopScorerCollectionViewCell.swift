@@ -29,30 +29,29 @@ class TopScorerCollectionViewCell: UICollectionViewCell {
         setupSkeleton()
         // Initialization code
     }
-    func setupCardStyle(){
+    func setupCardStyle() {
         contentUiView.backgroundColor = AppColor.accentLight
         contentUiView.layer.cornerRadius = 20
         contentUiView.layer.masksToBounds = true
-      
-        playerPlaceLabel.font = AppFont.h2
-        playerPlaceLabel.textColor = AppColor.textPrimary
-        
+
+        playerPlaceLabel.font      = AppFont.h2
+        playerPlaceLabel.textColor = AppColor.textTertiary
+
         circularImageView.layer.cornerRadius = circularImageView.frame.height / 2
         circularImageView.clipsToBounds = true
-        
-        playerNameLabel.font = AppFont.h3
+        circularImageView.backgroundColor = AppColor.bgSurface2
+
+        playerNameLabel.font      = AppFont.h3
         playerNameLabel.textColor = AppColor.textPrimary
-        
-        playerTeamLabel.font = AppFont.caption
+
+        playerTeamLabel.font      = AppFont.caption
         playerTeamLabel.textColor = AppColor.textSecondary
-        
-        goalsNumber.font = AppFont.h2
+
+        goalsNumber.font      = AppFont.h2
         goalsNumber.textColor = AppColor.accentPrimary
-        
-        goalsLabel.font = AppFont.caption
+
+        goalsLabel.font      = AppFont.caption
         goalsLabel.textColor = AppColor.textSecondary
-        
-        
     }
     private func setupSkeleton() {
         isSkeletonable = true
