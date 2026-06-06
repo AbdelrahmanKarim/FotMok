@@ -26,28 +26,24 @@ class LatestPresenterImpl: LatestPresenter {
             self.view = nil
         }
         
-        func loadLatestMatches() {
-            view?.showLoading()
-            
-            let leagueId = sportProvider.selectedLeague
-            
-            Task { @MainActor in
-                do {
-                    let matches = try await latestUseCase.execute(leagueId: leagueId)
-                    view?.hideLoading()
-                    
-                  
-                    if matches.isEmpty {
-                        view?.displayEmptyState()
-                    } else {
-                        view?.displayMatches(matches)
-                    }
-                } catch {
-                    view?.hideLoading()
-                    view?.displayError(message: error.localizedDescription)
+  
+    func loadLatestMatches() {
+        view?.showLoading()
+        let leagueId = sportProvider.selectedLeague
+
+        Task { @MainActor in
+            do {
+                let matches = try await latestUseCase.execute(leagueId: leagueId)
+                if matches.isEmpty {
+                    view?.hideLoading(then: { self.view?.displayEmptyState() })
+                } else {
+                    view?.hideLoading(then: { self.view?.displayMatches(matches) })
                 }
+            } catch {
+                view?.hideLoading(then: { self.view?.displayError(message: error.localizedDescription) })
             }
         }
+    }
         
         func didTapBack() {
             view?.navigateBack()
