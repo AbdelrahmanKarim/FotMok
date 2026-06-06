@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 class TopScorersTab: LeagueTabManager {
     
-    private var topScorers: [TopScorer] = []
+     var topScorers: [TopScorer] = []
     var isLoading: Bool = true
 
     func updateData(topScorers: [TopScorer]) {

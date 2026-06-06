@@ -51,6 +51,11 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="J4E-iF-mZU" secondAttribute="trailing" constant="142" id="PYE-wx-iTu"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="J4E-iF-mZU" secondAttribute="bottom" constant="258" id="r1J-cN-gl4"/>
             </constraints>
+            <connections>
+                <outlet property="statProgressView" destination="OOG-Ri-7Q4" id="het-GD-QeW"/>
+                <outlet property="statTitleLabel" destination="d9Q-SQ-HrV" id="hdF-W5-bNL"/>
+                <outlet property="statValueLabel" destination="06d-Qg-dBC" id="dZT-LE-XB6"/>
+            </connections>
             <point key="canvasLocation" x="131" y="-32"/>
         </view>
     </objects>

@@ -50,6 +50,11 @@
                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="xxK-UL-sHd" secondAttribute="bottom" constant="12" id="M4N-Av-LLe"/>
             </constraints>
             <size key="customSize" width="100" height="140"/>
+            <connections>
+                <outlet property="playerImageView" destination="0vw-ju-qT5" id="Ipa-7T-Kjh"/>
+                <outlet property="playerNameLabel" destination="b3W-BN-eAN" id="sVP-GF-wug"/>
+                <outlet property="playerRoleLabel" destination="FaH-KU-sAU" id="Hgb-Wt-ykL"/>
+            </connections>
             <point key="canvasLocation" x="167.93893129770993" y="-64.08450704225352"/>
         </collectionViewCell>
     </objects>
