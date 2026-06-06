@@ -17,7 +17,16 @@ class LeagueDetailsViewController: UIViewController {
     private var activeLeagueId: String = ""
     private var isLeagueFavourite: Bool = false
 
-   
+    private lazy var noInternetView: NoInternetOverlayView = {
+        let v = NoInternetOverlayView()
+        v.translatesAutoresizingMaskIntoConstraints = false
+        v.isHidden = true
+        v.onRetry = { [weak self] in
+            self?.presenter.retryLoading()
+        }
+        return v
+    }()
+
     
     private weak var globalHeader: LeagueDetailsHeader?
 
@@ -42,6 +51,13 @@ class LeagueDetailsViewController: UIViewController {
         activeLeagueId = leagueIdPassed
         presenter.loadLeagueDetails(leagueId: activeLeagueId)
         presenter.loadLeagueContent(leagueId: activeLeagueId)
+        view.addSubview(noInternetView)
+         NSLayoutConstraint.activate([
+             noInternetView.topAnchor.constraint(equalTo: collectionView.topAnchor, constant: 150), // below global header
+             noInternetView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+             noInternetView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+             noInternetView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+         ])
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -190,6 +206,8 @@ extension LeagueDetailsViewController: UICollectionViewDataSource, UICollectionV
 }
 
 extension LeagueDetailsViewController: LeagueDetailsView {
+  
+    
     func navigateToLatestMatches() {
         guard let latestMatchVC = storyboard?.instantiateViewController(withIdentifier: "latestMatchScreen") as? LatestEventsViewController else { return }
         navigationController?.pushViewController(latestMatchVC, animated: true)
@@ -235,19 +253,21 @@ extension LeagueDetailsViewController: LeagueDetailsView {
         collectionView.showAnimatedGradientSkeleton(transition: .crossDissolve(0.25))
     }
     
+   
     func hideLoading() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-            self.collectionView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.5))
+            self.collectionView.setCollectionViewLayout(
+                self.setUpCollectionViewLayout(), animated: false
+            )
+            self.collectionView.hideSkeleton(reloadDataAfter: true,
+                                             transition: .crossDissolve(0.25))
         }
     }
-    
     func displayOverviewData(upcoming: [Match], latest: [Match], teamsOrPlayers: [Any]) {
         overviewTab.updateData(upcoming: upcoming, latest: latest, teamsOrPlayers: teamsOrPlayers)
-        DispatchQueue.main.async {
-            self.collectionView.reloadData()
-        }
+        
     }
-    
+ 
     func displayTableData(standings: [StandingRow]) {
         tableTab.updateData(standings: standings)
         DispatchQueue.main.async {
@@ -272,6 +292,18 @@ extension LeagueDetailsViewController: LeagueDetailsView {
     }
     
     func displayError(message: String) {
+    }
+    func showNoInternet() {
+        DispatchQueue.main.async {
+            self.collectionView.hideSkeleton()
+            self.noInternetView.isHidden = false
+        }
+    }
+
+    func hideNoInternet() {
+        DispatchQueue.main.async {
+            self.noInternetView.isHidden = true
+        }
     }
 }
 
@@ -326,4 +358,5 @@ extension LeagueDetailsViewController: SkeletonCollectionViewDataSource {
          return getActiveTab().numberOfSections()
      }
 }
+
 

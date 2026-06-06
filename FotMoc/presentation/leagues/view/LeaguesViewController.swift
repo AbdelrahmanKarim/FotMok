@@ -4,7 +4,9 @@ import RxSwift
 import RxCocoa
 import Factory
 
-class LeaguesViewController: UIViewController, UITableViewDelegate, SkeletonTableViewDataSource, UITableViewDataSource, UISearchBarDelegate, LeaguesView {
+class LeaguesViewController: UIViewController, UITableViewDelegate,SkeletonTableViewDataSource ,UITableViewDataSource,UISearchBarDelegate, LeaguesView {
+   
+    
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -15,6 +17,15 @@ class LeaguesViewController: UIViewController, UITableViewDelegate, SkeletonTabl
     private let noResultsLabel = UILabel()
     private let noInternetLabel = UILabel()
     
+    private lazy var noInternetView: NoInternetOverlayView = {
+        let v = NoInternetOverlayView()
+        v.translatesAutoresizingMaskIntoConstraints = false
+        v.isHidden = true
+        v.onRetry = { [weak self] in
+            self?.presenter.retryLoading()
+        }
+        return v
+    }()
     private var globalHeader: LeagueDetailsHeader?
     
     override func viewDidLoad() {
@@ -30,6 +41,13 @@ class LeaguesViewController: UIViewController, UITableViewDelegate, SkeletonTabl
         tableView.delegate = self
         presenter.attachView(self)
         presenter.viewDidLoad()
+        view.addSubview(noInternetView)
+        NSLayoutConstraint.activate([
+            noInternetView.topAnchor.constraint(equalTo: tableView.topAnchor, constant: 0), // 150pt 
+            noInternetView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            noInternetView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            noInternetView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -122,7 +140,7 @@ class LeaguesViewController: UIViewController, UITableViewDelegate, SkeletonTabl
     
     func showLoading() {
         showNoResults(isHidden: true)
-        showNoInternet(isHidden: true)
+        
         tableView.isHidden = false
         tableView.showAnimatedGradientSkeleton()
     }
@@ -146,11 +164,19 @@ class LeaguesViewController: UIViewController, UITableViewDelegate, SkeletonTabl
         tableView.isHidden = !isHidden
     }
     
-    func showNoInternet(isHidden: Bool) {
-        noInternetLabel.isHidden = isHidden
-        tableView.isHidden = !isHidden
+
+    func showNoInternet() {
+        DispatchQueue.main.async {
+            
+            self.noInternetView.isHidden = false
+        }
     }
-    
+
+    func hideNoInternet() {
+        DispatchQueue.main.async {
+            self.noInternetView.isHidden = true
+        }
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return presenter.getLeaguesCount()
     }

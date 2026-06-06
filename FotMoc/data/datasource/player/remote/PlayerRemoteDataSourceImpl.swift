@@ -34,4 +34,13 @@ class PlayerRemoteDataSourceImpl: PlayerRemoteDataSource {
             throw AppException.map(error)
         }
     }
+    func getLeaguePlayersList(sport: SportType, leagueId: String) async throws -> [PlayerDTO] {
+        do {
+            let response = try await service.fetchPlayersByLeague(sport: sport.rawValue, leagueId: leagueId)
+            guard response.success == 1, let result = response.result else { throw AppException.noData }
+            return result
+        } catch {
+            throw AppException.map(error)
+        }
+    }
 }

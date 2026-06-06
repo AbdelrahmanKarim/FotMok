@@ -11,5 +11,6 @@ protocol LiveMatchesPresenter : AnyObject {
     func attachView(_ view: LiveMatchesView)
      func detachView()
      func loadLiveMatches()
+    func retryLoading()
     func didTapBack()
 }

@@ -15,7 +15,9 @@ protocol LeaguesView: AnyObject {
     func reloadData()
     func showError(_ message: String)
     func showNoResults(isHidden: Bool)
-    func showNoInternet(isHidden: Bool)
+  
     func navigateToLeagueDetails(with league: League)
     func setGameHeader(sportName: String)
+    func showNoInternet()
+     func hideNoInternet()
 }

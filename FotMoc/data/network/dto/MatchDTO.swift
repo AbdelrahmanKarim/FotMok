@@ -5,16 +5,13 @@
 //  Created by abdelrahman karim on 02/06/2026.
 //
 
+
 import Foundation
 
 struct MatchDTO: Codable {
     let eventKey: Int?
     let eventDate: String?
     let eventTime: String?
-    let eventHomeTeam: String?
-    let homeTeamKey: Int?
-    let eventAwayTeam: String?
-    let awayTeamKey: Int?
     let eventHalftimeResult: String?
     let eventFinalResult: String?
     let eventFtResult: String?
@@ -28,8 +25,6 @@ struct MatchDTO: Codable {
     let eventLive: String?
     let eventStadium: String?
     let eventReferee: String?
-    let homeTeamLogo: String?
-    let awayTeamLogo: String?
     let eventCountryKey: Int?
     let leagueLogo: String?
     let countryLogo: String?
@@ -39,6 +34,25 @@ struct MatchDTO: Codable {
     let stageName: String?
     let leagueGroup: String?
     
+    // Football Specific Keys
+    let eventHomeTeam: String?
+    let homeTeamKey: Int?
+    let eventAwayTeam: String?
+    let awayTeamKey: Int?
+    let homeTeamLogo: String?
+    let awayTeamLogo: String?
+    
+    // Tennis Specific Keys
+    let eventFirstPlayer: String?
+    let firstPlayerKey: Int?
+    let eventSecondPlayer: String?
+    let secondPlayerKey: Int?
+    let eventFirstPlayerLogo: String?
+    let eventSecondPlayerLogo: String?
+    let eventGameResult: String?
+    let scores: [TennisScoreDTO]?
+    
+    // Sub-structures
     let goalscorers: [Goalscorers]?
     let substitutes: [Substitutes]?
     let cards: [Cards]?
@@ -50,10 +64,6 @@ struct MatchDTO: Codable {
         case eventKey = "event_key"
         case eventDate = "event_date"
         case eventTime = "event_time"
-        case eventHomeTeam = "event_home_team"
-        case homeTeamKey = "home_team_key"
-        case eventAwayTeam = "event_away_team"
-        case awayTeamKey = "away_team_key"
         case eventHalftimeResult = "event_halftime_result"
         case eventFinalResult = "event_final_result"
         case eventFtResult = "event_ft_result"
@@ -67,8 +77,6 @@ struct MatchDTO: Codable {
         case eventLive = "event_live"
         case eventStadium = "event_stadium"
         case eventReferee = "event_referee"
-        case homeTeamLogo = "home_team_logo"
-        case awayTeamLogo = "away_team_logo"
         case eventCountryKey = "event_country_key"
         case leagueLogo = "league_logo"
         case countryLogo = "country_logo"
@@ -77,12 +85,40 @@ struct MatchDTO: Codable {
         case fkStageKey = "fk_stage_key"
         case stageName = "stage_name"
         case leagueGroup = "league_group"
-        case goalscorers
-        case substitutes
-        case cards
-        case vars
-        case lineups
-        case statistics
+        
+        // Football Mapping
+        case eventHomeTeam = "event_home_team"
+        case homeTeamKey = "home_team_key"
+        case eventAwayTeam = "event_away_team"
+        case awayTeamKey = "away_team_key"
+        case homeTeamLogo = "home_team_logo"
+        case awayTeamLogo = "away_team_logo"
+        
+        // Tennis Mapping
+        case eventFirstPlayer = "event_first_player"
+        case firstPlayerKey = "first_player_key"
+        case eventSecondPlayer = "event_second_player"
+        case secondPlayerKey = "second_player_key"
+        case eventFirstPlayerLogo = "event_first_player_logo"
+        case eventSecondPlayerLogo = "event_second_player_logo"
+        case eventGameResult = "event_game_result"
+        case scores
+        
+        case goalscorers, substitutes, cards, vars, lineups, statistics
+    }
+}
+
+// MARK: - Sub-structure Supporting DTOs
+
+struct TennisScoreDTO: Codable {
+    let scoreFirst: String?
+    let scoreSecond: String?
+    let scoreSet: String?
+
+    enum CodingKeys: String, CodingKey {
+        case scoreFirst = "score_first"
+        case scoreSecond = "score_second"
+        case scoreSet = "score_set"
     }
 }
 
@@ -123,15 +159,12 @@ struct Substitutes: Codable {
     let info: String?
     let homeAssist: String?
     let awayAssist: String?
-    
     let homeScorer: FlexibleSubstitution?
     let awayScorer: FlexibleSubstitution?
 
     enum CodingKeys: String, CodingKey {
-        case time
-        case score
+        case time, score, info
         case infoTime = "info_time"
-        case info
         case homeAssist = "home_assist"
         case awayAssist = "away_assist"
         case homeScorer = "home_scorer"
@@ -159,30 +192,25 @@ enum FlexibleSubstitution: Codable {
 
     init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        
         if let detail = try? container.decode(SubstitutionDetail.self) {
             self = .detail(detail)
             return
         }
-        
         if let array = try? container.decode([String].self), array.isEmpty {
             self = .emptyArray
             return
         }
-        
         throw DecodingError.typeMismatch(
             FlexibleSubstitution.self,
-            DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Expected Substitution Object or Empty Array")
+            DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Expected Object or Empty Array")
         )
     }
 
     func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         switch self {
-        case .detail(let detail):
-            try container.encode(detail)
-        case .emptyArray:
-            try container.encode([String]())
+        case .detail(let detail): try container.encode(detail)
+        case .emptyArray: try container.encode([String]())
         }
     }
 }
@@ -198,11 +226,9 @@ struct Cards: Codable {
     let infoTime: String?
 
     enum CodingKeys: String, CodingKey {
-        case time
+        case time, card, info
         case homeFault = "home_fault"
-        case card
         case awayFault = "away_fault"
-        case info
         case homePlayerId = "home_player_id"
         case awayPlayerId = "away_player_id"
         case infoTime = "info_time"
@@ -255,8 +281,7 @@ struct TeamLineup: Codable {
 
     enum CodingKeys: String, CodingKey {
         case startingLineups = "starting_lineups"
-        case substitutes
-        case coaches
+        case substitutes, coaches
         case missingPlayers = "missing_players"
     }
 }

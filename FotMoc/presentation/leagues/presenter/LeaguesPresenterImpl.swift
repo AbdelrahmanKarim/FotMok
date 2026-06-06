@@ -3,6 +3,7 @@ import Network
 import Factory
 
 class LeaguesPresenterImpl: LeaguesPresenter {
+    
     private weak var view: LeaguesView?
     @Injected(\.getLeaguesUseCase) private var getLeaguesUseCase: GetLeaguesUseCase
     private let sportProvider: CurrentSportProvider!
@@ -10,20 +11,69 @@ class LeaguesPresenterImpl: LeaguesPresenter {
     private var allLeagues: [League] = []
     private var filteredLeagues: [League] = []
     
-    private let monitor = NWPathMonitor()
-    private var isOnline = true
     private var isDataLoaded = false
     
+    // Core monitoring variables
+    private var monitor: NWPathMonitor?
+    private var isConnected: Bool = true
+    private var isMonitoringStarted = false
+
     init(sportProvider: CurrentSportProvider) {
         self.sportProvider = sportProvider
-        setupNetworkMonitor()
+    }
+
+    func attachView(_ view: LeaguesView) {
+        self.view = view
+        startMonitoring()
+    }
+
+    func detachView() {
+        self.view = nil
+        monitor?.cancel()
+        monitor = nil
+        isMonitoringStarted = false
     }
     
-    private func setupNetworkMonitor() {
-        monitor.pathUpdateHandler = { [weak self] path in
-            self?.isOnline = (path.status == .satisfied)
+    func retryLoading() {
+        retryAll()
+    }
+    
+    private func startMonitoring() {
+        guard !isMonitoringStarted else { return }
+        isMonitoringStarted = true
+        
+        monitor = NWPathMonitor()
+        monitor?.pathUpdateHandler = { [weak self] path in
+            guard let self = self else { return }
+            let wasConnected = self.isConnected
+            self.isConnected = path.status == .satisfied
+
+            DispatchQueue.main.async {
+                if self.isConnected && !wasConnected {
+                    // Device reconnected — auto retry data pull
+                    self.view?.hideNoInternet()
+                    self.retryAll()
+                } else if !self.isConnected {
+                    self.view?.hideLoading()
+                    self.view?.showNoInternet()
+                }
+            }
         }
-        monitor.start(queue: DispatchQueue.global(qos: .background))
+        monitor?.start(queue: DispatchQueue(label: "LeaguesNetworkMonitor"))
+    }
+
+    private func retryAll() {
+        fetchLeagues()
+    }
+
+    // Modern baseline pre-flight validation
+    private func guardConnectivity() -> Bool {
+        if !isConnected {
+            view?.hideLoading()
+            view?.showNoInternet()
+            return false
+        }
+        return true
     }
     
     func viewDidLoad() {
@@ -32,25 +82,12 @@ class LeaguesPresenterImpl: LeaguesPresenter {
         fetchLeagues()
     }
     
-    func attachView(_ view: LeaguesView) {
-        self.view = view
-    }
-    
-    func detachView() {
-        self.view = nil
-    }
-    
     private func fetchLeagues() {
-        guard isOnline else {
-            DispatchQueue.main.async { [weak self] in
-                self?.view?.showNoInternet(isHidden: false)
-                self?.view?.showNoResults(isHidden: true)
-            }
-            return
-        }
+        // 1. Pre-flight check replacing old 'isOnline' guard
+        guard guardConnectivity() else { return }
         
         DispatchQueue.main.async {
-            self.view?.showNoInternet(isHidden: true)
+            self.view?.hideNoInternet()
             self.view?.showNoResults(isHidden: true)
             self.view?.showLoading()
         }
@@ -58,38 +95,41 @@ class LeaguesPresenterImpl: LeaguesPresenter {
         Task {
             do {
                 let leagues = try await getLeaguesUseCase.execute(sport: sportProvider.selectedSport)
-                DispatchQueue.main.async { [weak self] in
-                    self?.isDataLoaded = true
-                    self?.view?.hideLoading()
-                    self?.allLeagues = leagues
-                    self?.filteredLeagues = leagues
+                await MainActor.run { [weak self] in
+                    guard let self = self else { return }
+                    self.isDataLoaded = true
+                    self.view?.hideLoading()
+                    self.allLeagues = leagues
+                    self.filteredLeagues = leagues
                     
                     if leagues.isEmpty {
-                        self?.view?.showNoResults(isHidden: false)
+                        self.view?.showNoResults(isHidden: false)
                     } else {
-                        self?.view?.showNoResults(isHidden: true)
-                        self?.view?.reloadData()
+                        self.view?.showNoResults(isHidden: true)
+                        self.view?.reloadData()
                     }
                 }
             } catch let error as AppException {
-                DispatchQueue.main.async { [weak self] in
-                    self?.isDataLoaded = true
-                    self?.view?.hideLoading()
+                await MainActor.run { [weak self] in
+                    guard let self = self else { return }
+                    self.isDataLoaded = true
+                    self.view?.hideLoading()
                     
                     switch error {
                     case .noInternetConnection:
-                        self?.view?.showNoInternet(isHidden: false)
+                        self.view?.showNoInternet()
                     case .noData, .notFound:
-                        self?.view?.showNoResults(isHidden: false)
+                        self.view?.showNoResults(isHidden: false)
                     default:
-                        self?.view?.showError(error.localizedDescription)
+                        self.view?.showError(error.localizedDescription)
                     }
                 }
             } catch {
-                DispatchQueue.main.async { [weak self] in
-                    self?.isDataLoaded = true
-                    self?.view?.hideLoading()
-                    self?.view?.showError(error.localizedDescription)
+                await MainActor.run { [weak self] in
+                    guard let self = self else { return }
+                    self.isDataLoaded = true
+                    self.view?.hideLoading()
+                    self.view?.showError(error.localizedDescription)
                 }
             }
         }

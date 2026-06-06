@@ -4,9 +4,8 @@
 //
 //  Created by Alaa Ayman on 29/05/2026.
 //
-
-import Foundation
 import UIKit
+import Foundation
 class TopScorersTab: LeagueTabManager {
     
      var topScorers: [TopScorer] = []
@@ -43,7 +42,7 @@ class TopScorersTab: LeagueTabManager {
     }
 
     func getSectionFor(index: Int) -> NSCollectionLayoutSection {
-        return setupTopScorersSection(isEmpty: topScorers.isEmpty && !isLoading)
+        return setupTopScorersSection(isEmpty: topScorers.isEmpty)
     }
 
     func getSkeletonCellIdentifier(for section: Int) -> String { return "topScorerCell" }
@@ -52,14 +51,20 @@ class TopScorersTab: LeagueTabManager {
     func supplementaryView(for collectionView: UICollectionView, kind: String, at indexPath: IndexPath) -> UICollectionReusableView? {
         return nil
     }
+
     func getMatch(at indexPath: IndexPath) -> Match? { return nil }
-    private func setupTopScorersSection(isEmpty: Bool = false) -> NSCollectionLayoutSection {
+
+    private func setupTopScorersSection(isEmpty: Bool) -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: isEmpty ? .absolute(200) : .absolute(120))
+
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: isEmpty ? .absolute(200) : .absolute(120)
+        )
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+
         let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .none
         section.interGroupSpacing = 10
         section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
         return section

@@ -16,4 +16,5 @@ protocol LeaguesPresenter {
     func getLeaguesCount() -> Int
     func getLeague(at index: Int) -> League
     func didSelectLeague(at index: Int)
+    func retryLoading()
 }
