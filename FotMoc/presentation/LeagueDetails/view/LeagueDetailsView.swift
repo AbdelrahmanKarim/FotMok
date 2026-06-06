@@ -17,5 +17,6 @@ protocol LeagueDetailsView: AnyObject {
     func displayTableData(standings: [StandingRow])
     func displayLeagueInfo(name: String, country: String)
     func displayTopScorers(scorers: [TopScorer])
+    func navigateToH2H(teamId1: String, teamId2: String, leagueId: String, title: String)
 }
 

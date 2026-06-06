@@ -9,7 +9,7 @@ import Foundation
 
 protocol LatestView: AnyObject {
     func showLoading()
-    func hideLoading()
+    func hideLoading(then completion: (() -> Void)?)
     func displayMatches(_ matches: [Match])
 
     func displayEmptyState()

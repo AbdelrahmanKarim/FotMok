@@ -70,13 +70,12 @@ class StandingsCollectionViewCell: UICollectionViewCell {
         
     }
    
-    // MARK: - Skeleton Configuration
+ 
         private func setupSkeleton() {
-            // Make the cell containers skeletonable
+          
             self.isSkeletonable = true
             self.contentView.isSkeletonable = true
-            
-            // Make individual components skeletonable
+           
             rank.isSkeletonable = true
             teamImage.isSkeletonable = true
             teamName.isSkeletonable = true
@@ -87,21 +86,28 @@ class StandingsCollectionViewCell: UICollectionViewCell {
             goals.isSkeletonable = true
             goalsDifference.isSkeletonable = true
             points.isSkeletonable = true
-            
-            // Optional: Apply rounding configurations matching your design styles
+           
             teamImage.layer.cornerRadius = teamImage.frame.height / 2
             teamImage.clipsToBounds = true
         }
-        
-        func configure(rank: String, teamName: String, PG: Int, W: Int, D: Int, L: Int, goals: Int, GD: Int, PTS: Int) {
-            self.rank.text = rank
-            self.teamName.text = teamName
-            self.playedGames.text = "\(PG)"
-            self.winsNumber.text = "\(W)"
-            self.drawsNumber.text = "\(D)"
-            self.losesNumber.text = "\(L)"
-            self.goals.text = "\(goals)"
-            self.goalsDifference.text = "\(GD)"
-            self.points.text = "\(PTS)"
-        }
+    func configure(rank: String, teamName: String, logoUrl: URL?,
+                   PG: Int, W: Int, D: Int, L: Int,
+                   goals: Int, GD: Int, PTS: Int) {
+        self.rank.text          = rank
+        self.teamName.text      = teamName
+        self.playedGames.text   = "\(PG)"
+        self.winsNumber.text    = "\(W)"
+        self.drawsNumber.text   = "\(D)"
+        self.losesNumber.text   = "\(L)"
+        self.goals.text         = "\(goals)"
+        self.goalsDifference.text = "\(GD)"
+        self.points.text        = "\(PTS)"
+
+        teamImage.kf.setImage(
+            with: logoUrl,
+            placeholder: UIImage(systemName: "shield"),
+            options: [.transition(.fade(0.3)), .cacheOriginalImage]
+        )
+    }
+
 }

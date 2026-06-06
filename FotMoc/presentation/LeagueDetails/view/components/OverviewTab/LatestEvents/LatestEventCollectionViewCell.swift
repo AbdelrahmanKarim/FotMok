@@ -29,7 +29,20 @@ class LatestEventCollectionViewCell: UICollectionViewCell {
         setupSkeleton()
         // Initialization code
     }
-    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        guard traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) else { return }
+        applyColors()
+    }
+    private func applyColors() {
+        contentUiView.backgroundColor = AppColor.accentLight
+        firstTeamLabel.textColor  = AppColor.textPrimary
+        secondTeamLabel.textColor = AppColor.textPrimary
+       
+        firstTagLabelBtn.backgroundColor  = AppColor.bgSurface3
+        secondTagLabelBtn.backgroundColor = AppColor.bgSurface3
+        
+    }
     private func setupCardStyle() {
         contentUiView.backgroundColor = AppColor.accentLight
         contentUiView.layer.cornerRadius = 20

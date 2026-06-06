@@ -19,6 +19,18 @@ class Teams_Players_Cell: UICollectionViewCell {
         super.layoutSubviews()
         setupCardStyle()
     }
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        guard traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) else { return }
+        applyColors()
+    }
+
+    
+    private func applyColors() {
+        cardContainerView.backgroundColor = AppColor.accentLight
+        circularView.backgroundColor      = AppColor.bgSurface3
+        teamNameLabel.textColor           = AppColor.textPrimary
+    }
     private func setupCardStyle() {
         cardContainerView.backgroundColor = AppColor.accentLight
         cardContainerView.layer.cornerRadius = 16

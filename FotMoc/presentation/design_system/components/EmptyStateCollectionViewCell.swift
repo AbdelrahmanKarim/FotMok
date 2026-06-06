@@ -33,4 +33,8 @@ class EmptyStateCollectionViewCell: UICollectionViewCell {
             emptyStateImage.tintColor = AppColor.accentPrimary
             emptyStateImage.contentMode = .scaleAspectFit
         }
+    static func loadFromNib() -> EmptyStateCollectionViewCell {
+        return Bundle.main.loadNibNamed("EmptyStateCollectionViewCell", owner: nil)?.first
+            as! EmptyStateCollectionViewCell
+    }
 }

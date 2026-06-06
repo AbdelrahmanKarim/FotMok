@@ -15,4 +15,5 @@ protocol LeagueTabManager {
  
     func getSkeletonCellIdentifier(for section: Int) -> String
     func numberOfItemsInSectionSkeleton(section : Int)-> Int
+    func getMatch(at indexPath: IndexPath) -> Match?
 }

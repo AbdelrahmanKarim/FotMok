@@ -52,7 +52,7 @@ class TopScorersTab: LeagueTabManager {
     func supplementaryView(for collectionView: UICollectionView, kind: String, at indexPath: IndexPath) -> UICollectionReusableView? {
         return nil
     }
-
+    func getMatch(at indexPath: IndexPath) -> Match? { return nil }
     private func setupTopScorersSection(isEmpty: Bool = false) -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)

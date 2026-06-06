@@ -1,0 +1,58 @@
+/* 
+  Localizable.strings
+  FotMoc
+
+  Created by Alaa Ayman on 05/06/2026.
+  
+*/
+
+"sports_title"       = "Sports";
+"football"           = "Football";
+"basketball"         = "Basketball";
+"tennis"             = "Tennis";
+"cricket"            = "Cricket";
+
+
+"language_menu_title" = "Language";
+"language_english"    = "English";
+"language_arabic"     = "Arabic";
+
+
+"upcoming_title"     = "Upcoming Matches";
+"latest_title"       = "Latest Matches";
+"teams_title"        = "Teams";
+"players_title"      = "Players";
+"standings_title"    = "Standings";
+"top_scorers_title"  = "Top Scorers";
+
+"goals_label"        = "Goals";
+"score_na"           = "N/A";
+
+"empty_no_results"   = "No results found";
+"empty_no_upcoming"  = "No upcoming matches Scheduled";
+"empty_no_latest"    = "No recent matches";
+"empty_no_standings" = "No standings available";
+"empty_no_scorers"   = "No top scorers available";
+
+"restart_title"      = "Restart Required";
+"restart_message"    = "Please restart the app to apply the language change.";
+"ok_button"          = "OK";
+"tab_overview"    = "Overview";
+"tab_table"       = "Table";
+"tab_top_scorers" = "Top Scorers";
+
+"live_matches_title" = "Live Matches";
+"live_label"         = "LIVE";
+"empty_no_live"      = "No live matches right now";
+
+// en
+"h2h_title"    = "Head to Head";
+"h2h_upcoming" = "Upcoming Match";
+"h2h_form"     = "Recent Form";
+"h2h_previous" = "Previous Matches";
+"h2h_overall"  = "Overall Record";
+
+
+"empty_no_form" = "Recent form not available";
+
+
