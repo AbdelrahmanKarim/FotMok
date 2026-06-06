@@ -76,13 +76,11 @@ class HomeCollectionViewController: UIViewController {
 
 
 extension HomeCollectionViewController: HomeView {
+    
 
     func navigateToLeagues(with sport: SportType) {
-        guard let leaguesVC = storyboard?
-            .instantiateViewController(withIdentifier: "leaguesScreen") as? LeaguesViewController
-        else { return }
-        navigationController?.pushViewController(leaguesVC, animated: true)
-        leaguesVC.sport = sport
+    guard let leaguesVC = storyboard?.instantiateViewController(withIdentifier: "leagueScreen") else { return }
+    self.navigationController?.pushViewController(leaguesVC, animated: true)
     }
 
     func updateThemeIcon(isDark: Bool) {

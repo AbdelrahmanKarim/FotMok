@@ -197,6 +197,7 @@ extension LatestEventsViewController : UICollectionViewDelegate , UICollectionVi
     
 }
 extension LatestEventsViewController: LeagueDetailsHeaderDelegate{
+    func didTapFavourite() {}
     func didSelectLanguage(_ code: String) {
         
     }

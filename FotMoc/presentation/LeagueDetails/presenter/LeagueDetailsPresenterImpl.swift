@@ -23,6 +23,12 @@ class LeagueDetailsPresenterImpl: LeagueDetailsPresenter {
     @Injected(\.getLeaguePlayersUseCase) private var leaguePlayersUseCase
     @Injected(\.getLeagueDetailsUseCase) private var leagueDetailsUseCase
     @Injected(\.getLeagueTopScorersUseCase) private var topScorersUseCase
+    @Injected(\.saveFavouriteLeagueUseCase) private var saveUseCase
+    @Injected(\.removeFavouriteLeagueUseCase) private var removeUseCase
+    @Injected(\.getFavouriteLeaguesUseCase) private var getFavUseCase
+    private var currentLeague: League?
+    private var isFavourite: Bool = false
+    
     init(sportProvider: CurrentSportProvider) {
         self.sportProvider = sportProvider
     }
@@ -35,17 +41,42 @@ class LeagueDetailsPresenterImpl: LeagueDetailsPresenter {
         self.view = nil
     }
     
-   
     func loadLeagueDetails(leagueId: String) {
-        Task { @MainActor in
-            do {
-                let league = try await leagueDetailsUseCase.execute(leagueId: leagueId)
-                view?.displayLeagueInfo(name: league.name, country: league.country?.name ?? "")
-            } catch {
-                print("Could not load league info: \(error)")
+            Task { @MainActor in
+                do {
+                    let league = try await leagueDetailsUseCase.execute(leagueId: leagueId)
+                    self.currentLeague = league
+                    view?.displayLeagueInfo(name: league.name, country: league.country?.name ?? "")
+                    
+                    // 2. Check if it's already a favourite to set the initial heart icon!
+                    let favs = try await getFavUseCase.execute()
+                    self.isFavourite = favs.contains(where: { $0.id == leagueId })
+                    view?.updateFavouriteIcon(isFavourite: self.isFavourite)
+                    
+                } catch {
+                    view?.displayError(message: "Could not load League Info : \(error.localizedDescription)")
+                }
             }
         }
-    }
+        
+        func toggleFavourite() {
+            guard let league = currentLeague else { return }
+            
+            Task { @MainActor in
+                do {
+                    if isFavourite {
+                        try await removeUseCase.execute(leagueId: league.id)
+                        self.isFavourite = false
+                    } else {
+                        try await saveUseCase.execute(league: league)
+                        self.isFavourite = true
+                    }
+                    view?.updateFavouriteIcon(isFavourite: self.isFavourite)
+                } catch {
+                    view?.displayError(message: "Could not update favourite: \(error.localizedDescription)")
+                }
+            }
+        }
     func loadLeagueContent(leagueId: String) {
         view?.showLoading()
         Task { @MainActor in

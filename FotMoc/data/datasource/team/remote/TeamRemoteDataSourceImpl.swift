@@ -73,7 +73,7 @@ class TeamRemoteDataSourceImpl: TeamRemoteDataSource {
         let pastDate = formatter.string(from: Calendar.current.date(byAdding: .day, value: -60, to: Date())!)
         
         do {
-            let res = try await matchService.fetchFixtures(sport: sport, from: pastDate, to: today, leagueId: leagueId)
+            let res = try await matchService.fetchFixtures(sport: sport, leagueId: leagueId, from: pastDate, to: today)
             guard res.success == 1, let result = res.result else { throw AppException.noData }
             return result.filter {
                 (String($0.homeTeamKey ?? 0) == teamId || String($0.awayTeamKey ?? 0) == teamId) &&

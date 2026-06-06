@@ -29,7 +29,9 @@ extension Container {
     var searchLeaguesUseCase: Factory<SearchLeaguesUseCase> {
         self { SearchLeaguesUseCase(repository: self.leagueRepository()) }
     }
-    
+    var removeFavouriteLeagueUseCase: Factory<RemoveFavouriteLeagueUseCase> {
+            self { RemoveFavouriteLeagueUseCase(repository: self.leagueRepository()) }
+        }
     var getHeadToHeadPreviousMatchesUseCase: Factory<GetHeadToHeadPreviousMatchesUseCase> {
         self { GetHeadToHeadPreviousMatchesUseCase(repository: self.matchRepository()) }
     }

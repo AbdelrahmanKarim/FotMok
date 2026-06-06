@@ -8,4 +8,11 @@
 import Foundation
 
 protocol FavouritesView: AnyObject {
+    func showLoading()
+    func hideLoading()
+    func showFavourites(_ leagues: [League])
+    func showError(_ message: String)
+    func showEmptyState(isHidden: Bool)
+    
+    
 }

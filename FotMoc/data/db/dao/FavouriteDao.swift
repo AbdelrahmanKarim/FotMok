@@ -27,7 +27,7 @@ final class FavouriteDAO  : FavoritesDAOProtocol{
     
     func deleteFavourite(id: String) throws {
         let request = NSFetchRequest<NSManagedObject>(entityName: "LeagueEntity")
-        request.predicate = NSPredicate(format: "leagueId == %@", id)
+        request.predicate = NSPredicate(format: "leagueID == %@", id)
         
         if let objectToDelete = try context.fetch(request).first {
             context.delete(objectToDelete)
