@@ -1,0 +1,84 @@
+
+/* Class = "UITabBarItem"; title = "Item"; ObjectID = "7It-hG-cDg"; */
+"7It-hG-cDg.title" = "Item";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "9AT-YB-zRf"; */
+"9AT-YB-zRf.text" = "Label";
+
+/* Class = "UITabBarItem"; title = "Item"; ObjectID = "AS8-KM-xlo"; */
+"AS8-KM-xlo.title" = "Item";
+
+/* Class = "UIButton"; configuration.title = "Skip"; ObjectID = "BpH-Es-1rj"; */
+"BpH-Es-1rj.configuration.title" = "التخطي";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "BpH-Es-1rj"; */
+"BpH-Es-1rj.normalTitle" = "Button";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Gde-m5-gLE"; */
+"Gde-m5-gLE.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "Start"; ObjectID = "NUi-HJ-dSQ"; */
+"NUi-HJ-dSQ.configuration.title" = "البدء ";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "NUi-HJ-dSQ"; */
+"NUi-HJ-dSQ.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Browse More Leagues"; ObjectID = "SqJ-Xo-VVE"; */
+"SqJ-Xo-VVE.text" = "تصفح دوريات اكثر";
+
+/* Class = "UITabBarItem"; title = "Item"; ObjectID = "WKI-gI-SvG"; */
+"WKI-gI-SvG.title" = "Item";
+
+/* Class = "UILabel"; text = "Track your favorite teams, view detailed player stats, and catch every buzzer-beater as it happens."; ObjectID = "b51-Dj-gIc"; */
+"b51-Dj-gIc.text" = "Track your favorite teams, view detailed player stats, and catch every buzzer-beater as it happens.";
+
+/* Class = "UILabel"; text = "Soccer"; ObjectID = "bT4-5C-JJi"; */
+"bT4-5C-JJi.text" = "كرة قدم";
+
+/* Class = "UILabel"; text = "Favourites"; ObjectID = "cAY-M5-9K5"; */
+"cAY-M5-9K5.text" = "المفضله";
+
+/* Class = "UILabel"; text = "From the first serve to match point, stay updated with live brackets, player rankings, and tournament news."; ObjectID = "cYd-E9-qGE"; */
+"cYd-E9-qGE.text" = "From the first serve to match point, stay updated with live brackets, player rankings, and tournament news.";
+
+/* Class = "UILabel"; text = "Leagues"; ObjectID = "dK7-Yc-8sf"; */
+"dK7-Yc-8sf.text" = "الدوريات";
+
+/* Class = "UILabel"; text = "CHAMPIONSHIP GROUP"; ObjectID = "gHO-tX-12q"; */
+"gHO-tX-12q.text" = "CHAMPIONSHIP GROUP";
+
+/* Class = "UILabel"; text = "SAVED LEAGUES"; ObjectID = "gS2-hJ-rd2"; */
+"gS2-hJ-rd2.text" = "الدوريات المفضلة";
+
+/* Class = "UILabel"; text = "Never Miss A Goal"; ObjectID = "hjO-gh-kMT"; */
+"hjO-gh-kMT.text" = "Never Miss A Goal";
+
+/* Class = "UIButton"; configuration.title = "Skip"; ObjectID = "hvh-x8-W64"; */
+"hvh-x8-W64.configuration.title" = "التخطي";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "hvh-x8-W64"; */
+"hvh-x8-W64.normalTitle" = "Button";
+
+/* Class = "UIButton"; configuration.title = "Skip"; ObjectID = "kbs-dF-Nqu"; */
+"kbs-dF-Nqu.configuration.title" = "Skip";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "kbs-dF-Nqu"; */
+"kbs-dF-Nqu.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Follow Every Grand Slam"; ObjectID = "p9I-wy-Bby"; */
+"p9I-wy-Bby.text" = "Follow Every Grand Slam";
+
+/* Class = "UITabBarItem"; title = "Item"; ObjectID = "pKg-gU-znc"; */
+"pKg-gU-znc.title" = "Item";
+
+/* Class = "UILabel"; text = "Courtside Action, Anywhere"; ObjectID = "rGE-PY-Wy1"; */
+"rGE-PY-Wy1.text" = "Courtside Action, Anywhere";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "v3T-Jx-lx1"; */
+"v3T-Jx-lx1.text" = "Label";
+
+/* Class = "UITabBarItem"; title = "Item"; ObjectID = "wr7-Kx-DWy"; */
+"wr7-Kx-DWy.title" = "Item";
+
+/* Class = "UILabel"; text = "Get real-time updates, live scores, and breaking news from the top leagues around the world."; ObjectID = "xMj-cn-QNh"; */
+"xMj-cn-QNh.text" = "Get real-time updates, live scores, and breaking news from the top leagues around the world.";

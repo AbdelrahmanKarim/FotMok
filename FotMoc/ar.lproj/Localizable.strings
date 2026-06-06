@@ -1,0 +1,54 @@
+/* 
+  Localizable.strings
+  FotMoc
+
+  Created by Alaa Ayman on 05/06/2026.
+  
+*/
+
+"sports_title"       = "الرياضة";
+"football"           = "كرة القدم";
+"basketball"         = "كرة السلة";
+"tennis"             = "التنس";
+"cricket"            = "الكريكيت";
+
+
+"language_menu_title" = "اللغة";
+"language_english"    = "الإنجليزية";
+"language_arabic"     = "العربية";
+
+"upcoming_title"     = "القادمة";
+"latest_title"       = "الأخيرة";
+"teams_title"        = "الفرق";
+"players_title"      = "اللاعبون";
+"standings_title"    = "الترتيب";
+"top_scorers_title"  = "هدافو الدوري";
+
+"goals_label"        = "أهداف";
+"score_na"           = "غير متاح";
+
+"empty_no_results"   = "لا توجد نتائج";
+"empty_no_upcoming"  = "لا توجد مباريات قادمة";
+"empty_no_latest"    = "لا توجد مباريات حديثة";
+"empty_no_standings" = "الترتيب غير متاح";
+"empty_no_scorers"   = "لا يوجد هدافون";
+
+
+"restart_title"      = "يتطلب إعادة التشغيل";
+"restart_message"    = "أعد تشغيل التطبيق لتطبيق اللغة.";
+"ok_button"          = "حسناً";
+"tab_overview"    = "نظرة عامة";
+"tab_table"       = "الترتيب";
+"tab_top_scorers" = "الهدافون";
+
+"live_matches_title" = "المباريات المباشرة";
+"live_label"         = "مباشر";
+"empty_no_live"      = "لا توجد مباريات مباشرة الآن";
+
+"h2h_title"    = "المواجهات المباشرة";
+"h2h_upcoming" = "المباراة القادمة";
+"h2h_form"     = "الشكل الأخير";
+"h2h_previous" = "المباريات السابقة";
+"h2h_overall"  = "السجل العام";
+
+"empty_no_form" =  "غير متاح";
