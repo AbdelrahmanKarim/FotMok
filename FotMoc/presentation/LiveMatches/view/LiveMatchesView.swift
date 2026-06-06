@@ -15,4 +15,5 @@ protocol LiveMatchesView: AnyObject {
     func displayError(message: String)
     func showNoInternet()
      func hideNoInternet()
+    func navigateBack()
 }

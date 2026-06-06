@@ -9,15 +9,17 @@ import Foundation
 
 protocol LeagueDetailsPresenter: AnyObject {
     func attachView(_ view: LeagueDetailsView)
-      func detachView()
-      func loadLeagueDetails(leagueId: String)
-      func loadLeagueContent(leagueId: String)
-      func loadTableContent(leagueId: String)
-      func loadTopScorers(leagueId: String)
-      func toggleFavourite()
-      func didTapBack()
-      func didTapShowMoreLatest()
-      func didSelectMatch(_ match: Match, leagueId: String)
+    func detachView()
+    func loadLeagueContent(leagueId: String)
+    func loadTableContent(leagueId: String)
+    func didTapBack()
+    func didTapShowMoreLatest()
+    func loadLeagueDetails(leagueId: String)
+    func loadTopScorers(leagueId: String)
+    func toggleFavourite()
+    func didSelectMatch(_ match: Match, leagueId: String)
+    func didSelectTeam(teamId: String)
+    func didSelectPlayer(playerId: String)
     func retryLoading()
 }
 

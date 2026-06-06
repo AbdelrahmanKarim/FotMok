@@ -73,6 +73,10 @@ class LiveMatchesPresenterImpl: LiveMatchesPresenter {
         return true
     }
     
+    func didTapBack(){
+        view?.navigateBack()
+    }
+
     func loadLiveMatches() {
         guard guardConnectivity() else { return }
         

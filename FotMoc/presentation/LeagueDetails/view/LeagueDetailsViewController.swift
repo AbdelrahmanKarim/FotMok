@@ -104,6 +104,18 @@ class LeagueDetailsViewController: UIViewController {
             self?.presenter.didTapShowMoreLatest()
         }
     }
+    func navigateToTeamDetails(teamId: String, leagueId: String) {
+            guard let teamVC = storyboard?.instantiateViewController(withIdentifier: "teamDetailsScreen") as? TeamDetailsViewController else { return }
+            teamVC.teamIdPassed = teamId
+            teamVC.leagueIdPassed = leagueId
+            navigationController?.pushViewController(teamVC, animated: true)
+        }
+        
+        func navigateToPlayerProfile(playerId: String) {
+            guard let playerVC = storyboard?.instantiateViewController(withIdentifier: "playerDetailsScreen") as? PlayerDetailsViewController else { return }
+            playerVC.playerIdPassed = playerId
+            navigationController?.pushViewController(playerVC, animated: true)
+        }
 }
 
 extension LeagueDetailsViewController: UICollectionViewDataSource, UICollectionViewDelegate {
@@ -166,11 +178,28 @@ extension LeagueDetailsViewController: UICollectionViewDataSource, UICollectionV
         
         return UICollectionReusableView()
     }
-    func collectionView(_ collectionView: UICollectionView,
-                        didSelectItemAt indexPath: IndexPath) {
-        guard let match = getActiveTab().getMatch(at: indexPath) else { return }
-        presenter.didSelectMatch(match, leagueId: activeLeagueId)
-    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+            switch currentTab {
+            case .overview:
+                if let match = getActiveTab().getMatch(at: indexPath) {
+                    presenter.didSelectMatch(match, leagueId: activeLeagueId)
+                }
+                else if indexPath.section == 2 {
+                    if indexPath.item < overviewTab.teamsOrPlayers.count,
+                       let team = overviewTab.teamsOrPlayers[indexPath.item] as? Team {
+                        presenter.didSelectTeam(teamId: team.id)
+                    }
+                }
+            case .topScorers:
+                if indexPath.item < topScorersTab.topScorers.count {
+                    let scorer = topScorersTab.topScorers[indexPath.item]
+                    presenter.didSelectPlayer(playerId: scorer.player.id)
+                }
+                
+            case .table:
+                break
+            }
+        }
 
     
    

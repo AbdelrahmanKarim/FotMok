@@ -126,6 +126,14 @@ class LeagueDetailsPresenterImpl: LeagueDetailsPresenter {
                 }
             }
         }
+    func didSelectTeam(teamId: String) {
+            let targetLeagueId = currentLeague?.id ?? ""
+            view?.navigateToTeamDetails(teamId: teamId, leagueId: targetLeagueId)
+        }
+        
+        func didSelectPlayer(playerId: String) {
+            view?.navigateToPlayerProfile(playerId: playerId)
+        }
     func loadLeagueContent(leagueId: String) {
         guard guardConnectivity(leagueId: leagueId) else { return }
         view?.showLoading()

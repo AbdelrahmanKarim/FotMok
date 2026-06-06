@@ -21,5 +21,7 @@ protocol LeagueDetailsView: AnyObject {
     func navigateToLatestMatches()
     func navigateToH2H(teamId1: String, teamId2: String, leagueId: String, title: String)
     func showNoInternet()
-     func hideNoInternet()
+    func hideNoInternet()
+    func navigateToTeamDetails(teamId: String, leagueId: String)
+    func navigateToPlayerProfile(playerId: String)
 }

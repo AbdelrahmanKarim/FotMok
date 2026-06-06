@@ -63,6 +63,13 @@ class LiveMatchesViewController: UIViewController {
     private func registerHeaders() {
         collectionView.register(UINib(nibName: "LeagueDetailsHeader", bundle: nil), forSupplementaryViewOfKind: "GlobalHeaderKind", withReuseIdentifier: "leagueDetailsHeader")
     }
+    func navigateBack() {
+        if let navigationController = self.navigationController {
+            navigationController.popViewController(animated: true)
+        } else {
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
 }
 
 
@@ -131,6 +138,19 @@ extension LiveMatchesViewController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "leagueDetailsHeader", for: indexPath) as! LeagueDetailsHeader
         header.configure(title: NSLocalizedString("live_matches_title", comment: ""), country: "", showBackButton: false)
+
+    func collectionView(_ collectionView: UICollectionView,
+                        viewForSupplementaryElementOfKind kind: String,
+                        at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(
+            ofKind: kind,
+            withReuseIdentifier: "leagueDetailsHeader",
+            for: indexPath) as! LeagueDetailsHeader
+        header.configure(
+            title: NSLocalizedString("live_matches_title", comment: ""),
+            country: "",
+            showBackButton: true
+        )
         header.delegate = self
         return header
     }
@@ -166,7 +186,9 @@ extension LiveMatchesViewController: UICollectionViewDelegate, UICollectionViewD
 extension LiveMatchesViewController: LeagueDetailsHeaderDelegate {
     func didTapFavourite() {}
     func didSelectTab(index: Int) { }
-    func didTapBackButton() { }
+    func didTapBackButton() {
+        presenter.didTapBack()
+    }
     func didTapThemeButton() { }
     func didSelectLanguage(_ code: String) { }
 }

@@ -8,4 +8,10 @@
 import Foundation
 
 protocol TeamDetailsView: AnyObject {
+    func showLoading()
+    func hideLoading()
+    func displayTeamDetails(team: Team, stats: TeamSeasonStats?, players: [Player])
+    func displayError(message: String)
+    func navigateBack()
+    func navigateToPlayerProfile(playerId: String)
 }
