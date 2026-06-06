@@ -13,4 +13,6 @@ protocol LiveMatchesView: AnyObject {
     func displayMatches(_ matches: [Match])
     func displayEmptyState()
     func displayError(message: String)
+    func showNoInternet()
+     func hideNoInternet()
 }

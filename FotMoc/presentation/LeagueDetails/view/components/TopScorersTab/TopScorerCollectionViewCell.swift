@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+import SkeletonView
 class TopScorerCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var contentUiView: UIView!
     

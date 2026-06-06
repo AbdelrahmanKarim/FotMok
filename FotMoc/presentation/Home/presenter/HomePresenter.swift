@@ -15,4 +15,5 @@ protocol HomePresenter: AnyObject {
     func currentThemeIsDark() -> Bool
     func selectLanguage(_ code: String)
     func currentLanguageCode() -> String
+  
 }

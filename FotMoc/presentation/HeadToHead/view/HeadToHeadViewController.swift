@@ -15,24 +15,33 @@ class HeadToHeadViewController: UIViewController {
 
     @Injected(\.headToHeadPresenter) private var presenter: HeadToHeadPresenter
 
-   
     var teamId1: String = ""
     var teamId2: String = ""
     var leagueId: String = ""
     var headerTitle: String = ""
 
-  
     private var upcomingMatch: Match?
     private var previousMatches: [Match] = []
     private var overallRecord: HeadToHeadRecord?
     private var firstTeamForm: TeamRecentForm?
     private var secondTeamForm: TeamRecentForm?
 
+    // Custom overlay overlay view matching details layout pattern
+    private lazy var noInternetView: NoInternetOverlayView = {
+        let v = NoInternetOverlayView()
+        v.translatesAutoresizingMaskIntoConstraints = false
+        v.isHidden = true
+        v.onRetry = { [weak self] in
+            self?.presenter.retryLoading()
+        }
+        return v
+    }()
+
     private let sectionHeaders: [Int: SectionHeader] = [
-        0: SectionHeader(title: NSLocalizedString("h2h_upcoming",  comment: ""), iconName: "clock.arrow.trianglehead.2.counterclockwise.rotate.90"),
-        1: SectionHeader(title: NSLocalizedString("h2h_form",      comment: ""), iconName: "chart.xyaxis.line"),
-        2: SectionHeader(title: NSLocalizedString("h2h_previous",  comment: ""), iconName: "sportscourt"),
-        3: SectionHeader(title: NSLocalizedString("h2h_overall",   comment: ""), iconName: "chart.pie")
+        0: SectionHeader(title: NSLocalizedString("h2h_upcoming",      comment: ""), iconName: "clock.arrow.trianglehead.2.counterclockwise.rotate.90"),
+        1: SectionHeader(title: NSLocalizedString("h2h_form",          comment: ""), iconName: "chart.xyaxis.line"),
+        2: SectionHeader(title: NSLocalizedString("h2h_previous",      comment: ""), iconName: "sportscourt"),
+        3: SectionHeader(title: NSLocalizedString("h2h_overall",       comment: ""), iconName: "chart.pie")
     ]
 
     override func viewDidLoad() {
@@ -44,6 +53,9 @@ class HeadToHeadViewController: UIViewController {
         collectionView.setCollectionViewLayout(setUpCollectionViewLayout(), animated: false)
         registerCells()
         registerHeaders()
+        
+        setupNoInternetConstraints()
+        
         presenter.attachView(self)
         presenter.loadData(teamId1: teamId1, teamId2: teamId2, leagueId: leagueId)
     }
@@ -64,9 +76,17 @@ class HeadToHeadViewController: UIViewController {
         collectionView.register(UINib(nibName: "CustomSectionHeader",  bundle: nil),
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "customHeader")
     }
+    
+    private func setupNoInternetConstraints() {
+        view.addSubview(noInternetView)
+        NSLayoutConstraint.activate([
+            noInternetView.topAnchor.constraint(equalTo: collectionView.topAnchor, constant: 100), // Pushed past global header
+            noInternetView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            noInternetView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            noInternetView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
 }
-
-
 
 extension HeadToHeadViewController: HeadToHeadView {
 
@@ -78,6 +98,20 @@ extension HeadToHeadViewController: HeadToHeadView {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             self.collectionView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.5))
             completion?()
+        }
+    }
+
+    func showNoInternet() {
+        DispatchQueue.main.async {
+            self.collectionView.isHidden = true
+            self.noInternetView.isHidden = false
+        }
+    }
+
+    func hideNoInternet() {
+        DispatchQueue.main.async {
+            self.collectionView.isHidden = false
+            self.noInternetView.isHidden = true
         }
     }
 
@@ -112,8 +146,6 @@ extension HeadToHeadViewController: HeadToHeadView {
     }
 }
 
-
-
 extension HeadToHeadViewController: UICollectionViewDelegate, UICollectionViewDataSource {
 
     func numberOfSections(in collectionView: UICollectionView) -> Int { 4 }
@@ -122,7 +154,7 @@ extension HeadToHeadViewController: UICollectionViewDelegate, UICollectionViewDa
                         numberOfItemsInSection section: Int) -> Int {
         switch section {
         case 0: return 1
-        case 1: return (firstTeamForm != nil && secondTeamForm != nil) ? 1 : 1
+        case 1: return 1
         case 2: return previousMatches.isEmpty ? 1 : previousMatches.count
         case 3: return 1
         default: return 0
@@ -161,9 +193,6 @@ extension HeadToHeadViewController: UICollectionViewDelegate, UICollectionViewDa
                 withReuseIdentifier: "recentFormCell", for: indexPath) as! RecentFormCollectionViewCell
             cell.configure(firstTeam: f1, secondTeam: f2)
             return cell
-
-           
-               
 
         case 2:
             if previousMatches.isEmpty {
@@ -214,8 +243,6 @@ extension HeadToHeadViewController: UICollectionViewDelegate, UICollectionViewDa
         }
         return header
     }
-
-    
 
     func setUpCollectionViewLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { index, _ in
@@ -273,19 +300,13 @@ extension HeadToHeadViewController: UICollectionViewDelegate, UICollectionViewDa
     }
 }
 
-
-
 extension HeadToHeadViewController: LeagueDetailsHeaderDelegate {
-    func didTapFavourite() {
-    }
-    
+    func didTapFavourite() { }
     func didSelectTab(index: Int) { }
     func didTapThemeButton() { }
     func didSelectLanguage(_ code: String) { }
     func didTapBackButton() { presenter.didTapBack() }
 }
-
-
 
 extension HeadToHeadViewController: SkeletonCollectionViewDataSource {
     func collectionSkeletonView(_ skeletonView: UICollectionView,

@@ -15,6 +15,8 @@ protocol LatestView: AnyObject {
     func displayEmptyState()
     func displayError(message: String)
     func navigateBack()
+    func showNoInternet()
+     func hideNoInternet()
 }
 
 

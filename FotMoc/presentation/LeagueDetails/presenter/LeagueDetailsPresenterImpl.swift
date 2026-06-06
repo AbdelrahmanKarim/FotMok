@@ -8,7 +8,7 @@
 
 import Foundation
 import Factory
-
+import Network
 
 class LeagueDetailsPresenterImpl: LeagueDetailsPresenter {
    
@@ -28,20 +28,69 @@ class LeagueDetailsPresenterImpl: LeagueDetailsPresenter {
     @Injected(\.getFavouriteLeaguesUseCase) private var getFavUseCase
     private var currentLeague: League?
     private var isFavourite: Bool = false
-    
+    private var monitor: NWPathMonitor?
+    private var isConnected: Bool = true
+    private var pendingLeagueId: String?
+
+    func attachView(_ view: LeagueDetailsView) {
+        self.view = view
+        startMonitoring()
+    }
+
+    func detachView() {
+        self.view = nil
+        monitor?.cancel()
+        monitor = nil
+    }
+    func retryLoading() {
+          guard let id = pendingLeagueId else { return }
+          retryAll(leagueId: id)
+      }
+    private func startMonitoring() {
+        monitor = NWPathMonitor()
+        monitor?.pathUpdateHandler = { [weak self] path in
+            guard let self else { return }
+            let wasConnected = self.isConnected
+            self.isConnected = path.status == .satisfied
+
+            DispatchQueue.main.async {
+                if self.isConnected && !wasConnected {
+                    // just reconnected — auto retry
+                    if let id = self.pendingLeagueId {
+                        self.view?.hideNoInternet()
+                        self.retryAll(leagueId: id)
+                    }
+                } else if !self.isConnected {
+                    self.view?.showNoInternet()
+                }
+            }
+        }
+        monitor?.start(queue: DispatchQueue(label: "NetworkMonitor"))
+    }
+
+    private func retryAll(leagueId: String) {
+        loadLeagueDetails(leagueId: leagueId)
+        loadLeagueContent(leagueId: leagueId)
+    }
+
+    // call this from loadLeagueContent / loadTableContent / loadTopScorers
+    // before firing the network request
+    private func guardConnectivity(leagueId: String) -> Bool {
+        pendingLeagueId = leagueId
+        if !isConnected {
+            view?.showNoInternet()
+            return false
+        }
+        return true
+    }
     init(sportProvider: CurrentSportProvider) {
         self.sportProvider = sportProvider
     }
     
-    func attachView(_ view: LeagueDetailsView) {
-        self.view = view
-    }
-    
-    func detachView() {
-        self.view = nil
-    }
+ 
     
     func loadLeagueDetails(leagueId: String) {
+        guard guardConnectivity(leagueId: leagueId) else { return }
             Task { @MainActor in
                 do {
                     let league = try await leagueDetailsUseCase.execute(leagueId: leagueId)
@@ -78,6 +127,7 @@ class LeagueDetailsPresenterImpl: LeagueDetailsPresenter {
             }
         }
     func loadLeagueContent(leagueId: String) {
+        guard guardConnectivity(leagueId: leagueId) else { return }
         view?.showLoading()
         Task { @MainActor in
             
@@ -105,6 +155,7 @@ class LeagueDetailsPresenterImpl: LeagueDetailsPresenter {
         }
     }
     func loadTableContent(leagueId: String) {
+        guard guardConnectivity(leagueId: leagueId) else { return }
       
             view?.showLoading()
             
@@ -125,6 +176,7 @@ class LeagueDetailsPresenterImpl: LeagueDetailsPresenter {
   
 
     func loadTopScorers(leagueId: String) {
+        guard guardConnectivity(leagueId: leagueId) else { return }
         view?.showLoading()
         Task { @MainActor in
             do {
