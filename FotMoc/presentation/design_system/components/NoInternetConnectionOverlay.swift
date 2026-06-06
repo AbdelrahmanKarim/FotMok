@@ -65,23 +65,12 @@ class NoInternetOverlayView: UIView {
     required init?(coder: NSCoder) { fatalError() }
 
     @objc private func retryTapped() { onRetry?() }
-}//
-//  NoInternetConnectionOverlay.swift
-//  FotMoc
-//
-//  Created by Alaa Ayman on 06/06/2026.
-//
+}
+
 
 import UIKit
 
 class NoInternetConnectionOverlay: UIView {
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
 
 }

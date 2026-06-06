@@ -17,4 +17,6 @@ protocol HeadToHeadView: AnyObject {
     func displayOverallRecord(_ record: HeadToHeadRecord)
     func displayError(message: String)
     func navigateBack()
+    func showNoInternet()
+     func hideNoInternet()
 }

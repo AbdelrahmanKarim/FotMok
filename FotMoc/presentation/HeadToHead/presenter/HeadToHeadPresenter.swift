@@ -14,4 +14,5 @@ protocol HeadToHeadPresenter: AnyObject {
     func detachView()
     func loadData(teamId1: String, teamId2: String, leagueId: String)
     func didTapBack()
+    func retryLoading()
 }
