@@ -94,21 +94,26 @@ class MatchRepositoryImpl: MatchRepository {
     }
         
     func getLeagueLatestMatches(leagueId: String) async throws -> [Match] {
-        let sport = sportProvider.selectedSport
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.calendar = Calendar(identifier: .gregorian)
-        let today = formatter.string(from: Date())
+            let sport = sportProvider.selectedSport
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
+            formatter.locale = Locale(identifier: "en_US_POSIX")
+            formatter.calendar = Calendar(identifier: .gregorian)
+            let today = formatter.string(from: Date())
 
-        let daysBack: Int = (sport == .tennis || sport == .cricket) ? -7 : -60
-        let pastDate = formatter.string(from: Calendar.current.date(byAdding: .year, value: daysBack, to: Date())!)
+            
+            let pastDate: String
+            if sport == .tennis || sport == .cricket {
+                pastDate = formatter.string(from: Calendar.current.date(byAdding: .year, value: -7, to: Date())!)
+            } else {
+                pastDate = formatter.string(from: Calendar.current.date(byAdding: .day, value: -60, to: Date())!)
+            }
 
-        let dtos = try await remoteDataSource.getFixtures(
-            sport: sport.rawValue, leagueId: leagueId, from: pastDate, to: today
-        )
-        return dtos.map { $0.toEntity(sport: sport) }
-    }
+            let dtos = try await remoteDataSource.getFixtures(
+                sport: sport.rawValue, leagueId: leagueId, from: pastDate, to: today
+            )
+            return dtos.map { $0.toEntity(sport: sport) }
+        }
 
     func getLeagueUpcomingMatches(leagueId: String) async throws -> [Match] {
         let sport = sportProvider.selectedSport
