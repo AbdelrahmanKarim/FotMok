@@ -27,6 +27,9 @@ class LiveMatchesPresenterImpl: LiveMatchesPresenter {
     func detachView() {
         self.view = nil
     }
+    func didTapBack(){
+        view?.navigateBack()
+    }
 
     func loadLiveMatches() {
         view?.showLoading()
