@@ -7,5 +7,10 @@
 
 import Foundation
 
-protocol PlayerDetailsView: AnyObject {
+protocol PlayerProfileView: AnyObject {
+    func showLoading()
+    func hideLoading()
+    func displayPlayerProfile(player: Player, stats: PlayerProfileStats?)
+    func displayError(message: String)
+    func navigateBack()
 }
