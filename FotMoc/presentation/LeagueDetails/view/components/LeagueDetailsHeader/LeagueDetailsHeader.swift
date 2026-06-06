@@ -13,6 +13,7 @@ protocol LeagueDetailsHeaderDelegate: AnyObject {
 
     func didSelectTab(index: Int)
     func didTapBackButton()
+    func didTapFavourite()
 
 }
 class LeagueDetailsHeader: UICollectionReusableView {
@@ -62,6 +63,7 @@ class LeagueDetailsHeader: UICollectionReusableView {
       }
     
     @IBAction func favBtn(_ sender: Any) {
+        delegate?.didTapFavourite()
     }
     @IBAction func tabButtonTapped(_ sender: UIButton) {
 
@@ -105,6 +107,19 @@ class LeagueDetailsHeader: UICollectionReusableView {
       
     @IBAction func backButtonTapped(_ sender: UIButton) {
         delegate?.didTapBackButton()
+    }
+    func updateFavouriteState(isFavourite: Bool) {
+        let imageName = isFavourite ? "heart.fill" : "heart"
+        let color: UIColor = isFavourite ? .red : .white
+        
+        if var config = favBtn.configuration {
+            config.image = UIImage(systemName: imageName)
+            config.baseForegroundColor = color
+            favBtn.configuration = config
+        } else {
+            favBtn.setImage(UIImage(systemName: imageName), for: .normal)
+            favBtn.tintColor = color
+        }
     }
     
     func configure(title: String, country: String , showTabs : Bool = false , showBackButton : Bool = true , showHeader : Bool = true , showFavBtn :Bool = false) {

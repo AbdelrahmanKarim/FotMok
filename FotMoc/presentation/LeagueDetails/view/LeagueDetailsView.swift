@@ -17,5 +17,6 @@ protocol LeagueDetailsView: AnyObject {
     func displayTableData(standings: [StandingRow])
     func displayLeagueInfo(name: String, country: String)
     func displayTopScorers(scorers: [TopScorer])
+    func updateFavouriteIcon(isFavourite: Bool)
 }
 

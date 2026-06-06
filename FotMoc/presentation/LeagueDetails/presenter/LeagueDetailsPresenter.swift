@@ -16,8 +16,8 @@ protocol LeagueDetailsPresenter: AnyObject {
     func didTapShowMoreLatest()
     func loadLeagueDetails(leagueId: String)
     func loadTopScorers(leagueId: String)
+    func toggleFavourite()
+    
 }
-
-
 
 
