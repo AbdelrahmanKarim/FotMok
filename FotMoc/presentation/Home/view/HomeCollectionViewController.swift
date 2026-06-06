@@ -79,7 +79,7 @@ extension HomeCollectionViewController: HomeView {
 
     func navigateToLeagues(with sport: SportType) {
         guard let leaguesVC = storyboard?
-            .instantiateViewController(withIdentifier: "leagueDetailsScreen") as? LeagueDetailsViewController
+            .instantiateViewController(withIdentifier: "leaguesScreen") as? LeaguesViewController
         else { return }
         navigationController?.pushViewController(leaguesVC, animated: true)
         leaguesVC.sport = sport
