@@ -66,36 +66,29 @@ class LatestEventsViewController: UIViewController , LatestView{
             collectionView.showAnimatedGradientSkeleton(transition: .crossDissolve(0.25))
         }
         
-        func hideLoading() {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                self.collectionView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.5))
-            }
+    
+    func hideLoading(then completion: (() -> Void)? = nil) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            self.collectionView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.5))
+            completion?()
         }
-        
-        func displayMatches(_ matches: [Match]) {
-            self.matches = matches
-            
-           
-   
-            DispatchQueue.main.async {
-                        self.collectionView.reloadData()
-                    }
-            
-        }
-        
-        func displayEmptyState() {
-            self.matches = []
-            
-          
-            if let emptyView = Bundle.main.loadNibNamed("EmptyStateCollectionViewCell", owner: self, options: nil)?.first as? UIView {
-            
-                emptyView.frame = self.collectionView.bounds
-                self.collectionView.backgroundView = emptyView
-            }
-            
-            self.collectionView.reloadData()
-        }
-        
+    }
+
+    func displayEmptyState() {
+        self.matches = []
+        collectionView.backgroundView = nil
+        let emptyCell = EmptyStateCollectionViewCell.loadFromNib()
+        emptyCell.configure(message: NSLocalizedString("empty_no_latest", comment: ""))
+        emptyCell.frame = collectionView.bounds
+        collectionView.backgroundView = emptyCell
+        collectionView.reloadData()
+    }
+
+    func displayMatches(_ matches: [Match]) {
+        self.matches = matches
+        collectionView.backgroundView = nil
+        DispatchQueue.main.async { self.collectionView.reloadData() }
+    }
         func displayError(message: String) {
             print("Error fetching latest events: \(message)")
             displayEmptyState()
@@ -204,7 +197,12 @@ extension LatestEventsViewController : UICollectionViewDelegate , UICollectionVi
     
 }
 extension LatestEventsViewController: LeagueDetailsHeaderDelegate{
-    func didTapFavourite() {
+    func didTapFavourite() {}
+    func didSelectLanguage(_ code: String) {
+        
+    }
+    
+    func didTapThemeButton() {
         
     }
     

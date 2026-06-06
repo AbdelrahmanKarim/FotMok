@@ -144,5 +144,24 @@ class LeagueDetailsPresenterImpl: LeagueDetailsPresenter {
     func didTapShowMoreLatest() {
         view?.navigateToLatestMatches()
     }
-    
+    func didSelectMatch(_ match: Match, leagueId: String) {
+        let homeId = extractId(from: match.homeCompetitor)
+        let awayId = extractId(from: match.awayCompetitor)
+        let title  = "\(extractName(from: match.homeCompetitor)) vs \(extractName(from: match.awayCompetitor))"
+        view?.navigateToH2H(teamId1: homeId, teamId2: awayId, leagueId: leagueId, title: title)
+    }
+
+    private func extractId(from competitor: Competitor) -> String {
+        switch competitor {
+        case .team(let t):   return t.id
+        case .player(let p): return p.id
+        }
+    }
+
+    private func extractName(from competitor: Competitor) -> String {
+        switch competitor {
+        case .team(let t):   return t.name
+        case .player(let p): return p.name
+        }
+    }
 }

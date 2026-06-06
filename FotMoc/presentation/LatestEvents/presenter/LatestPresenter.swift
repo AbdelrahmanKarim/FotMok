@@ -12,5 +12,6 @@ protocol LatestPresenter  {
     func detachView()
     func loadLatestMatches()
     func didTapBack()
+    
 }
 

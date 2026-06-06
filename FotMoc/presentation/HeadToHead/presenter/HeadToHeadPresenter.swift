@@ -7,5 +7,11 @@
 
 import Foundation
 
-protocol HeadToHeadPresenter {
+
+
+protocol HeadToHeadPresenter: AnyObject {
+    func attachView(_ view: HeadToHeadView)
+    func detachView()
+    func loadData(teamId1: String, teamId2: String, leagueId: String)
+    func didTapBack()
 }

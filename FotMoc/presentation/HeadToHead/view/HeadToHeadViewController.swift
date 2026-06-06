@@ -6,184 +6,304 @@
 //
 
 import UIKit
+import Factory
+import SkeletonView
 
+class HeadToHeadViewController: UIViewController {
 
-class HeadToHeadViewController: UIViewController , HeadToHeadView {
-
-    
     @IBOutlet weak var collectionView: UICollectionView!
-    let sectionHeaders: [Int: SectionHeader] = [
-        0: SectionHeader(title: "Upcoming Events",    iconName: "clock.arrow.trianglehead.2.counterclockwise.rotate.90"),
-        1: SectionHeader(title: "Recent Forms",       iconName: "chart.xyaxis.line"),
-        2: SectionHeader(title: "Recent Matches",     iconName: "sportscourt"),
-        3: SectionHeader(title: "Overall H2H Record", iconName: "chart.pie")
-    ]
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        collectionView.setCollectionViewLayout(setUpCollectionViewLayout(), animated: true)
-        
-        collectionView.backgroundColor = AppColor.bgPrimary
-        registerHeaders()
-        registerCells()
-        
 
-        // Do any additional setup after loading the view.
-    }
-    private func registerCells(){
-        let upcomingEventNib = UINib(nibName: "UpcomingCollectionViewCell", bundle: nil)
-            collectionView.register(upcomingEventNib,forCellWithReuseIdentifier: "upcomingEventsCell" )
-        
-        let recentFormNib = UINib(nibName: "RecentFormCollectionViewCell", bundle: nil)
-        collectionView.register(recentFormNib,forCellWithReuseIdentifier: "recentFormCell" )
-        
-        let previousMatchNib = UINib(nibName: "LatestEventCollectionViewCell", bundle: nil)
-        collectionView.register(previousMatchNib, forCellWithReuseIdentifier: "latestEventCell")
-        
-        let overallH2HNib = UINib(nibName: "OverallH2HCollectionViewCell", bundle: nil)
-        collectionView.register(overallH2HNib,forCellWithReuseIdentifier: "overallH2HCell" )
-    }
-    private func registerHeaders(){
-        let globalHeaderNib = UINib(nibName: "LeagueDetailsHeader", bundle: nil)
-        collectionView.register(globalHeaderNib,forSupplementaryViewOfKind: "GlobalHeaderKind",withReuseIdentifier: "leagueDetailsHeader")
-        
-        let headerNib = UINib(nibName: "CustomSectionHeader", bundle: nil)
-        collectionView.register(headerNib,forSupplementaryViewOfKind:UICollectionView.elementKindSectionHeader,withReuseIdentifier: "customHeader")
-    }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
+    @Injected(\.headToHeadPresenter) private var presenter: HeadToHeadPresenter
 
    
-    
-    
-}
-extension HeadToHeadViewController : UICollectionViewDelegate , UICollectionViewDataSource{
-     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 4
+    var teamId1: String = ""
+    var teamId2: String = ""
+    var leagueId: String = ""
+    var headerTitle: String = ""
+
+  
+    private var upcomingMatch: Match?
+    private var previousMatches: [Match] = []
+    private var overallRecord: HeadToHeadRecord?
+    private var firstTeamForm: TeamRecentForm?
+    private var secondTeamForm: TeamRecentForm?
+
+    private let sectionHeaders: [Int: SectionHeader] = [
+        0: SectionHeader(title: NSLocalizedString("h2h_upcoming",  comment: ""), iconName: "clock.arrow.trianglehead.2.counterclockwise.rotate.90"),
+        1: SectionHeader(title: NSLocalizedString("h2h_form",      comment: ""), iconName: "chart.xyaxis.line"),
+        2: SectionHeader(title: NSLocalizedString("h2h_previous",  comment: ""), iconName: "sportscourt"),
+        3: SectionHeader(title: NSLocalizedString("h2h_overall",   comment: ""), iconName: "chart.pie")
+    ]
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        collectionView.backgroundColor = AppColor.bgPrimary
+        collectionView.delegate   = self
+        collectionView.dataSource = self
+        collectionView.isSkeletonable = true
+        collectionView.setCollectionViewLayout(setUpCollectionViewLayout(), animated: false)
+        registerCells()
+        registerHeaders()
+        presenter.attachView(self)
+        presenter.loadData(teamId1: teamId1, teamId2: teamId2, leagueId: leagueId)
     }
 
+    deinit { presenter.detachView() }
 
-     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-         switch section {
+    private func registerCells() {
+        collectionView.register(UINib(nibName: "UpcomingCollectionViewCell",   bundle: nil), forCellWithReuseIdentifier: "upcomingEventsCell")
+        collectionView.register(UINib(nibName: "RecentFormCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "recentFormCell")
+        collectionView.register(UINib(nibName: "LatestEventCollectionViewCell",bundle: nil), forCellWithReuseIdentifier: "latestEventCell")
+        collectionView.register(UINib(nibName: "OverallH2HCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "overallH2HCell")
+        collectionView.register(UINib(nibName: "EmptyStateCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "emptyState")
+    }
+
+    private func registerHeaders() {
+        collectionView.register(UINib(nibName: "LeagueDetailsHeader",  bundle: nil),
+            forSupplementaryViewOfKind: "GlobalHeaderKind", withReuseIdentifier: "leagueDetailsHeader")
+        collectionView.register(UINib(nibName: "CustomSectionHeader",  bundle: nil),
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "customHeader")
+    }
+}
+
+
+
+extension HeadToHeadViewController: HeadToHeadView {
+
+    func showLoading() {
+        collectionView.showAnimatedGradientSkeleton(transition: .crossDissolve(0.25))
+    }
+
+    func hideLoading(then completion: (() -> Void)? = nil) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            self.collectionView.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.5))
+            completion?()
+        }
+    }
+
+    func displayUpcomingMatch(_ match: Match?) {
+        upcomingMatch = match
+        collectionView.reloadSections(IndexSet(integer: 0))
+    }
+
+    func displayRecentForm(firstTeam: TeamRecentForm, secondTeam: TeamRecentForm) {
+        firstTeamForm  = firstTeam
+        secondTeamForm = secondTeam
+        collectionView.reloadSections(IndexSet(integer: 1))
+    }
+
+    func displayPreviousMatches(_ matches: [Match]) {
+        previousMatches = matches
+        collectionView.reloadSections(IndexSet(integer: 2))
+    }
+
+    func displayOverallRecord(_ record: HeadToHeadRecord) {
+        overallRecord = record
+        collectionView.reloadSections(IndexSet(integer: 3))
+    }
+
+    func displayError(message: String) {
+        hideLoading(then: nil)
+        print("H2H error: \(message)")
+    }
+
+    func navigateBack() {
+        navigationController?.popViewController(animated: true)
+    }
+}
+
+
+
+extension HeadToHeadViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+
+    func numberOfSections(in collectionView: UICollectionView) -> Int { 4 }
+
+    func collectionView(_ collectionView: UICollectionView,
+                        numberOfItemsInSection section: Int) -> Int {
+        switch section {
         case 0: return 1
-        case 1: return 1
-        case 2: return 5
+        case 1: return (firstTeamForm != nil && secondTeamForm != nil) ? 1 : 1
+        case 2: return previousMatches.isEmpty ? 1 : previousMatches.count
         case 3: return 1
         default: return 0
         }
     }
 
-     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch indexPath.section
-        {
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        switch indexPath.section {
+
         case 0:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "upcomingEventsCell", for: indexPath) as! UpcomingCollectionViewCell
-            //cell.configure(homeTeam: "Al Ahly SC",awayTeam: "Zamalek SC",date: "May 24",time: "20:00")
-            return cell
+            if let match = upcomingMatch {
+                let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: "upcomingEventsCell", for: indexPath) as! UpcomingCollectionViewCell
+                cell.configure(with: match)
+                return cell
+            } else {
+                let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: "emptyState", for: indexPath) as! EmptyStateCollectionViewCell
+                cell.configure(message: NSLocalizedString("empty_no_upcoming", comment: ""),
+                               iconName: "calendar.badge.minus")
+                return cell
+            }
+
         case 1:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "recentFormCell", for: indexPath) as! RecentFormCollectionViewCell
-            let ahlyResults = ["W", "W", "D", "W", "L"]
-            let zamalekResults = ["W", "D", "W", "W", "W"]
-                    
-          cell.configure(firstTeam: "Al Ahly SC",secondTeam: "Zamalek SC",teamOneResults: ahlyResults,teamTwoResults: zamalekResults)
+            guard let f1 = firstTeamForm, let f2 = secondTeamForm else {
+                let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: "emptyState", for: indexPath) as! EmptyStateCollectionViewCell
+                cell.configure(
+                    message: NSLocalizedString("empty_no_form", comment: ""),
+                    iconName: "chart.xyaxis.line"
+                )
+                return cell
+            }
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: "recentFormCell", for: indexPath) as! RecentFormCollectionViewCell
+            cell.configure(firstTeam: f1, secondTeam: f2)
             return cell
+
+           
+               
+
         case 2:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "latestEventCell", for: indexPath) as! LatestEventCollectionViewCell
-            
+            if previousMatches.isEmpty {
+                let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: "emptyState", for: indexPath) as! EmptyStateCollectionViewCell
+                cell.configure(message: NSLocalizedString("empty_no_latest", comment: ""),
+                               iconName: "sportscourt")
+                return cell
+            }
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: "latestEventCell", for: indexPath) as! LatestEventCollectionViewCell
+            cell.configure(with: previousMatches[indexPath.item])
             return cell
+
         case 3:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "overallH2HCell", for: indexPath) as! OverallH2HCollectionViewCell
-            cell.configure(homeWins: "2", draws: "1", awayWins: "2")
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: "overallH2HCell", for: indexPath) as! OverallH2HCollectionViewCell
+            if let r = overallRecord {
+                cell.configure(homeWins: "\(r.firstTeamWins)",
+                               draws:    "\(r.draws)",
+                               awayWins: "\(r.secondTeamWins)")
+            }
             return cell
+
         default:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "upcomingEventsCell", for: indexPath) as! UpcomingCollectionViewCell
-            return cell
+            return UICollectionViewCell()
         }
-        
-    }
-    
-    func setUpCollectionViewLayout() -> UICollectionViewLayout{
-        let layout = UICollectionViewCompositionalLayout{index , environment in
-            return self.getSectionFor(index : index)
-        }
-
-            layout.configuration = globalHeaderConfiguration()
-        return layout
-    }
-    private func globalHeaderConfiguration() -> UICollectionViewCompositionalLayoutConfiguration {
-         let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                 heightDimension: .absolute(100))
-         let globalHeader = NSCollectionLayoutBoundarySupplementaryItem(
-             layoutSize: headerSize,elementKind: "GlobalHeaderKind",alignment: .top)
-         let config = UICollectionViewCompositionalLayoutConfiguration()
-         config.boundarySupplementaryItems = [globalHeader]
-         return config
-     }
-    private func sectionHeaderConfiguration() -> NSCollectionLayoutBoundarySupplementaryItem {
-         let size = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                           heightDimension: .absolute(44))
-         return NSCollectionLayoutBoundarySupplementaryItem(
-             layoutSize: size,elementKind: UICollectionView.elementKindSectionHeader,alignment: .top)
-     }
-    func getSectionFor(index : Int) -> NSCollectionLayoutSection{
-        switch index {
-          case 0: return cardSection(height: 200)
-          case 1: return cardSection(height: 200)
-          case 2: return cardSection(height: 150, interGroupSpacing: 10)
-          case 3: return cardSection(height: 200)
-          default: return cardSection(height: 200)
-          }
-        
     }
 
-
-     func collectionView(_ collectionView: UICollectionView,
-                                 viewForSupplementaryElementOfKind kind: String,
-                                 at indexPath: IndexPath) -> UICollectionReusableView {
-
+    func collectionView(_ collectionView: UICollectionView,
+                        viewForSupplementaryElementOfKind kind: String,
+                        at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == "GlobalHeaderKind" {
             let header = collectionView.dequeueReusableSupplementaryView(
-                ofKind: kind,
-                withReuseIdentifier: "leagueDetailsHeader",
-                for: indexPath) as! LeagueDetailsHeader
-            header.configure(title: "Head to Head", country: "")
+                ofKind: kind, withReuseIdentifier: "leagueDetailsHeader", for: indexPath) as! LeagueDetailsHeader
+            header.configure(
+                title: headerTitle.isEmpty ? NSLocalizedString("h2h_title", comment: "") : headerTitle,
+                country: "",
+                showBackButton: true
+            )
+            header.delegate = self
             return header
         }
-
         let header = collectionView.dequeueReusableSupplementaryView(
-            ofKind: kind,
-            withReuseIdentifier: "customHeader",
-            for: indexPath) as! CustomSectionHeader
-
+            ofKind: kind, withReuseIdentifier: "customHeader", for: indexPath) as! CustomSectionHeader
         if let info = sectionHeaders[indexPath.section] {
             header.configure(title: info.title, iconName: info.iconName)
         }
-
         return header
     }
-   
-    private  func cardSection(height: CGFloat, interGroupSpacing: CGFloat = 0) -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                              heightDimension: .fractionalHeight(1))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+
+    
+
+    func setUpCollectionViewLayout() -> UICollectionViewLayout {
+        let layout = UICollectionViewCompositionalLayout { index, _ in
+            self.getSectionFor(index: index)
+        }
+        layout.configuration = globalHeaderConfiguration()
+        return layout
+    }
+
+    private func globalHeaderConfiguration() -> UICollectionViewCompositionalLayoutConfiguration {
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                               heightDimension: .absolute(100))
+        let globalHeader = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerSize, elementKind: "GlobalHeaderKind", alignment: .top)
+        let config = UICollectionViewCompositionalLayoutConfiguration()
+        config.boundarySupplementaryItems = [globalHeader]
+        return config
+    }
+
+    private func getSectionFor(index: Int) -> NSCollectionLayoutSection {
+        switch index {
+        case 0: return cardSection(height: 200)
+        case 1: return cardSection(height: 200)
+        case 2: return cardSection(height: previousMatches.isEmpty ? 150 : 120,
+                                   interGroupSpacing: previousMatches.isEmpty ? 0 : 10)
+        case 3: return cardSection(height: 120)
+        default: return cardSection(height: 150)
+        }
+    }
+
+    private func cardSection(height: CGFloat, interGroupSpacing: CGFloat = 0) -> NSCollectionLayoutSection {
+        let item = NSCollectionLayoutItem(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                               heightDimension: .fractionalHeight(1)))
         item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 5, bottom: 0, trailing: 5)
 
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .absolute(height))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        let group = NSCollectionLayoutGroup.horizontal(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                               heightDimension: .absolute(height)),
+            subitems: [item])
 
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
         section.interGroupSpacing = interGroupSpacing
-        section.boundarySupplementaryItems = [sectionHeaderConfiguration()]
+        section.boundarySupplementaryItems = [sectionHeaderConfig()]
         return section
     }
+
+    private func sectionHeaderConfig() -> NSCollectionLayoutBoundarySupplementaryItem {
+        NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                               heightDimension: .absolute(44)),
+            elementKind: UICollectionView.elementKindSectionHeader,
+            alignment: .top)
+    }
+}
+
+
+
+extension HeadToHeadViewController: LeagueDetailsHeaderDelegate {
+    func didSelectTab(index: Int) { }
+    func didTapThemeButton() { }
+    func didSelectLanguage(_ code: String) { }
+    func didTapBackButton() { presenter.didTapBack() }
+}
+
+
+
+extension HeadToHeadViewController: SkeletonCollectionViewDataSource {
+    func collectionSkeletonView(_ skeletonView: UICollectionView,
+                                cellIdentifierForItemAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        switch indexPath.section {
+        case 0: return "upcomingEventsCell"
+        case 1: return "recentFormCell"
+        case 2: return "latestEventCell"
+        case 3: return "overallH2HCell"
+        default: return "upcomingEventsCell"
+        }
+    }
+    func collectionSkeletonView(_ skeletonView: UICollectionView,
+                                numberOfItemsInSection section: Int) -> Int {
+        switch section {
+        case 0: return 1
+        case 1: return 1
+        case 2: return 3
+        case 3: return 1
+        default: return 1
+        }
+    }
+    func numSections(in collectionSkeletonView: UICollectionView) -> Int { 4 }
 }

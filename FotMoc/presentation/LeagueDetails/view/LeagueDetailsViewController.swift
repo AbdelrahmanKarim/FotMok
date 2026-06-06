@@ -16,6 +16,8 @@ class LeagueDetailsViewController: UIViewController {
     private var leagueCountry: String = ""
     private var activeLeagueId: String = ""
     private var isLeagueFavourite: Bool = false
+
+   
     
     private weak var globalHeader: LeagueDetailsHeader?
 
@@ -135,11 +137,9 @@ extension LeagueDetailsViewController: UICollectionViewDataSource, UICollectionV
             let header = collectionView.dequeueReusableSupplementaryView(
                 ofKind: kind, withReuseIdentifier: "leagueDetailsHeader", for: indexPath
             ) as! LeagueDetailsHeader
-            
             self.globalHeader = header
-            
-            header.configure(title: leagueName, country: leagueCountry, showTabs: true, showFavBtn: true)
             header.updateFavouriteState(isFavourite: self.isLeagueFavourite)
+            header.configure(title: leagueName, country: leagueCountry, showTabs: true, showFavBtn: true , showActionBtnStackView: true)
             header.delegate = self
             return header
         }
@@ -150,6 +150,14 @@ extension LeagueDetailsViewController: UICollectionViewDataSource, UICollectionV
         
         return UICollectionReusableView()
     }
+    func collectionView(_ collectionView: UICollectionView,
+                        didSelectItemAt indexPath: IndexPath) {
+        guard let match = getActiveTab().getMatch(at: indexPath) else { return }
+        presenter.didSelectMatch(match, leagueId: activeLeagueId)
+    }
+
+    
+   
 }
 
 extension LeagueDetailsViewController: LeagueDetailsView {
@@ -183,6 +191,16 @@ extension LeagueDetailsViewController: LeagueDetailsView {
         }
     }
     
+            }
+    func navigateToH2H(teamId1: String, teamId2: String, leagueId: String, title: String) {
+        guard let h2hVC = storyboard?.instantiateViewController(
+            withIdentifier: "headToHeadScreen") as? HeadToHeadViewController else { return }
+        h2hVC.teamId1     = teamId1
+        h2hVC.teamId2     = teamId2
+        h2hVC.leagueId    = leagueId
+        h2hVC.headerTitle = title
+        navigationController?.pushViewController(h2hVC, animated: true)
+    }
     func showLoading() {
         collectionView.dataSource = self
         collectionView.showAnimatedGradientSkeleton(transition: .crossDissolve(0.25))
@@ -207,6 +225,9 @@ extension LeagueDetailsViewController: LeagueDetailsView {
             guard self.currentTab == .table else { return }
             self.hideLoading()
             self.collectionView.setCollectionViewLayout(self.setUpCollectionViewLayout(), animated: false)
+            self.collectionView.setCollectionViewLayout(
+                self.setUpCollectionViewLayout(), animated: false
+            )
             self.collectionView.reloadData()
         }
     }
@@ -225,7 +246,16 @@ extension LeagueDetailsViewController: LeagueDetailsView {
     }
 }
 
-extension LeagueDetailsViewController: LeagueDetailsHeaderDelegate {
+
+extension LeagueDetailsViewController: LeagueDetailsHeaderDelegate{
+
+        func didSelectLanguage(_ code: String) {}
+
+    
+    func didTapThemeButton() {
+        	
+    }
+    
     func didTapBackButton() {
         presenter.didTapBack()
     }

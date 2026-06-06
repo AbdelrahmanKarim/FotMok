@@ -8,4 +8,9 @@
 import Foundation
 
 protocol LiveMatchesView: AnyObject {
+    func showLoading()
+    func hideLoading(then completion: (() -> Void)?)
+    func displayMatches(_ matches: [Match])
+    func displayEmptyState()
+    func displayError(message: String)
 }

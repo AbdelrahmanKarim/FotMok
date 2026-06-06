@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="UIMenu" message="Requires Xcode 11 or later." minToolsVersion="11.0" requiredIntegratedClassName="UICommandDiff"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -36,33 +37,56 @@
                                             </connections>
                                         </button>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="gGg-lk-lGh">
-                                            <rect key="frame" x="46" y="1.3333333333333321" width="300" height="34.333333333333343"/>
+                                            <rect key="frame" x="46" y="1.3333333333333321" width="250" height="34.333333333333343"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Egypt" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="grh-9w-Xaf">
-                                                    <rect key="frame" x="0.0" y="0.0" width="300" height="12"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="250" height="12"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Egypt Premier League" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jb5-ar-l3i">
-                                                    <rect key="frame" x="0.0" y="13.999999999999998" width="300" height="20.333333333333329"/>
+                                                    <rect key="frame" x="0.0" y="13.999999999999998" width="250" height="20.333333333333329"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </stackView>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7P3-oF-ytg">
-                                            <rect key="frame" x="358" y="1.3333333333333321" width="50" height="34.333333333333343"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="81X-c6-Jlo">
+                                            <rect key="frame" x="308" y="1.3333333333333321" width="100" height="34.333333333333343"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cKL-sK-5wD">
+                                                    <rect key="frame" x="0.0" y="0.0" width="33.333333333333336" height="34.333333333333336"/>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain" image="moon" catalog="system" title=""/>
+                                                    <connections>
+                                                        <action selector="themeBtn:" destination="XvZ-c9-Fry" eventType="touchUpInside" id="zNc-R8-3fR"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" changesSelectionAsPrimaryAction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9OI-fE-gh1">
+                                                    <rect key="frame" x="33.333333333333314" y="0.0" width="33.333333333333343" height="34.333333333333336"/>
+                                                    <menu key="menu" id="Khq-hd-n7F">
+                                                        <children>
+                                                            <command title="EN" id="iz4-DH-C1m"/>
+                                                            <command title="AR" id="8pf-Se-yxQ"/>
+                                                        </children>
+                                                    </menu>
+                                                    <state key="normal" title="Eng"/>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7P3-oF-ytg">
+                                                    <rect key="frame" x="66.666666666666686" y="0.0" width="33.333333333333343" height="34.333333333333336"/>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain" image="heart" catalog="system" title=""/>
+                                                    <connections>
+                                                        <action selector="favBtn:" destination="XvZ-c9-Fry" eventType="touchUpInside" id="an3-Zi-3Ss"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="50" id="b1t-P4-Bak"/>
+                                                <constraint firstAttribute="width" constant="100" id="OzY-bs-uj5"/>
                                             </constraints>
-                                            <state key="normal" title="Button"/>
-                                            <buttonConfiguration key="configuration" style="plain" image="heart" catalog="system" title=""/>
-                                            <connections>
-                                                <action selector="favBtn:" destination="XvZ-c9-Fry" eventType="touchUpInside" id="an3-Zi-3Ss"/>
-                                            </connections>
-                                        </button>
+                                        </stackView>
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="Pp6-4m-8Ah">
@@ -133,6 +157,7 @@
                 <constraint firstItem="UQN-gn-Dvs" firstAttribute="leading" secondItem="5a9-gD-VBq" secondAttribute="leading" id="fsp-7x-dia"/>
             </constraints>
             <connections>
+                <outlet property="actionBtnsStackview" destination="81X-c6-Jlo" id="WJq-G5-lm3"/>
                 <outlet property="backBtn" destination="MsC-Mb-Bro" id="DvK-NT-SNr"/>
                 <outlet property="contentUiView" destination="UQN-gn-Dvs" id="8Up-X2-Flu"/>
                 <outlet property="favBtn" destination="7P3-oF-ytg" id="cHr-pZ-99o"/>
@@ -141,7 +166,9 @@
                 <outlet property="indicatorView" destination="hFX-Ri-hwo" id="AqC-nO-pec"/>
                 <outlet property="leagueCountry" destination="grh-9w-Xaf" id="MIQ-Qk-saE"/>
                 <outlet property="leagueTitle" destination="Jb5-ar-l3i" id="Buf-wR-KxU"/>
+                <outlet property="localMenuBtn" destination="9OI-fE-gh1" id="nPt-WR-Bqc"/>
                 <outlet property="tabsStackView" destination="Pp6-4m-8Ah" id="Ycy-r9-kTz"/>
+                <outlet property="themeBtn" destination="cKL-sK-5wD" id="nfQ-fO-dBc"/>
                 <outletCollection property="tabButtons" destination="xSX-Hl-Jsl" collectionClass="NSMutableArray" id="dIG-i6-yhf"/>
                 <outletCollection property="tabButtons" destination="rgo-Xz-SEa" collectionClass="NSMutableArray" id="58x-eb-LpW"/>
                 <outletCollection property="tabButtons" destination="Shd-Nh-SwF" collectionClass="NSMutableArray" id="Lf1-bk-rta"/>
@@ -152,6 +179,7 @@
     <resources>
         <image name="arrow.backward" catalog="system" width="128" height="95"/>
         <image name="heart" catalog="system" width="128" height="107"/>
+        <image name="moon" catalog="system" width="128" height="123"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

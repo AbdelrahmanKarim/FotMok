@@ -22,13 +22,23 @@ class OverviewTab: LeagueTabManager {
         self.teamsOrPlayers = teamsOrPlayers
         
     }
-  
+    func getMatch(at indexPath: IndexPath) -> Match? {
+        switch indexPath.section {
+        case 0:
+            guard !upcomingMatches.isEmpty, indexPath.item < upcomingMatches.count else { return nil }
+            return upcomingMatches[indexPath.item]
+        case 1:
+            guard !latestMatches.isEmpty, indexPath.item < latestMatches.count else { return nil }
+            return latestMatches[indexPath.item]
+        default:
+            return nil  // section 2 is teams/players, no match to return
+        }
+    }
     let sectionHeaders: [Int: SectionHeader] = [
-        0: SectionHeader(title: "Upcoming Events", iconName: "clock.arrow.trianglehead.2.counterclockwise.rotate.90"),
-        1: SectionHeader(title: "Latest Events", iconName: "trophy"),
-        2: SectionHeader(title: "Teams", iconName: "person.2")
+        0: SectionHeader(title: NSLocalizedString("upcoming_title", comment: ""), iconName: "clock.arrow.trianglehead.2.counterclockwise.rotate.90"),
+        1: SectionHeader(title: NSLocalizedString("latest_title", comment: ""),   iconName: "trophy"),
+        2: SectionHeader(title: NSLocalizedString("teams_title", comment: ""),    iconName: "person.2")
     ]
-    
 
     func numberOfSections() -> Int {
         return 3
@@ -69,18 +79,21 @@ class OverviewTab: LeagueTabManager {
         case 0:
             if upcomingMatches.isEmpty {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "emptyState", for: indexPath) as! EmptyStateCollectionViewCell
-                cell.configure(message: "No upcoming matches scheduled.", iconName: "calendar.badge.minus")
+                
+                cell.configure( message: NSLocalizedString("empty_no_upcoming", comment: ""), iconName: "calendar.badge.minus")
+               
                 return cell
             }
             
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "upcomingEvents", for: indexPath) as! UpcomingCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "upcomingEventsCell", for: indexPath) as! UpcomingCollectionViewCell
             cell.configure(with: upcomingMatches[indexPath.item])
             return cell
                 
         case 1:
             if latestMatches.isEmpty {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "emptyState", for: indexPath) as! EmptyStateCollectionViewCell
-                cell.configure(message: "No Latest Matches", iconName: "sportscourt")
+                cell.configure( message: NSLocalizedString("empty_no_latest", comment: ""), iconName: "sportscourt")
+            
                 return cell
             }
                 
@@ -91,6 +104,7 @@ class OverviewTab: LeagueTabManager {
         case 2:
             if teamsOrPlayers.isEmpty {
                         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "emptyState", for: indexPath) as! EmptyStateCollectionViewCell
+                cell.configure( message: NSLocalizedString("empty_no_result", comment: ""), iconName: "calendar.badge.minus")
                         cell.configure(message: "No teams/players found.", iconName: "person.2.slash")
                         return cell
                     }
