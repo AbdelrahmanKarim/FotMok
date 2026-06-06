@@ -104,6 +104,9 @@ extension HomeCollectionViewController: HomeView {
 
 
 extension HomeCollectionViewController: LeagueDetailsHeaderDelegate {
+    func didTapFavourite() {
+    }
+    
 
     func didSelectTab(index: Int) { }
 

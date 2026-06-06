@@ -159,6 +159,10 @@ extension LiveMatchesViewController: UICollectionViewDelegate, UICollectionViewD
 // MARK: - LeagueDetailsHeaderDelegate
 
 extension LiveMatchesViewController: LeagueDetailsHeaderDelegate {
+    func didTapFavourite() {
+    
+    }
+    
     func didSelectTab(index: Int) { }
     func didTapBackButton() { }
     func didTapThemeButton() { }

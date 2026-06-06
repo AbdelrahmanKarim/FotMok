@@ -276,6 +276,9 @@ extension HeadToHeadViewController: UICollectionViewDelegate, UICollectionViewDa
 
 
 extension HeadToHeadViewController: LeagueDetailsHeaderDelegate {
+    func didTapFavourite() {
+    }
+    
     func didSelectTab(index: Int) { }
     func didTapThemeButton() { }
     func didSelectLanguage(_ code: String) { }

@@ -180,7 +180,7 @@ extension LeagueDetailsViewController: LeagueDetailsView {
             self.globalHeader?.updateFavouriteState(isFavourite: isFavourite)
         }
     }
-        
+    
     func displayLeagueInfo(name: String, country: String) {
         leagueName = name
         leagueCountry = country
@@ -191,7 +191,7 @@ extension LeagueDetailsViewController: LeagueDetailsView {
         }
     }
     
-            }
+    
     func navigateToH2H(teamId1: String, teamId2: String, leagueId: String, title: String) {
         guard let h2hVC = storyboard?.instantiateViewController(
             withIdentifier: "headToHeadScreen") as? HeadToHeadViewController else { return }
@@ -231,7 +231,7 @@ extension LeagueDetailsViewController: LeagueDetailsView {
             self.collectionView.reloadData()
         }
     }
-
+    
     func displayTopScorers(scorers: [TopScorer]) {
         topScorersTab.updateData(topScorers: scorers)
         DispatchQueue.main.async {
@@ -246,14 +246,10 @@ extension LeagueDetailsViewController: LeagueDetailsView {
     }
 }
 
-
 extension LeagueDetailsViewController: LeagueDetailsHeaderDelegate{
 
-        func didSelectLanguage(_ code: String) {}
-
-    
+    func didSelectLanguage(_ code: String) {}
     func didTapThemeButton() {
-        	
     }
     
     func didTapBackButton() {
@@ -301,3 +297,4 @@ extension LeagueDetailsViewController: SkeletonCollectionViewDataSource {
          return getActiveTab().numberOfSections()
      }
 }
+

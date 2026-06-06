@@ -223,7 +223,7 @@ class LeagueDetailsHeader: UICollectionReusableView {
         delegate?.didTapThemeButton()
     }
 
-    @IBAction func favBtn(_ sender: Any) { }
+    
 
     @IBAction func backButtonTapped(_ sender: UIButton) {
         delegate?.didTapBackButton()

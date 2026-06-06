@@ -26,7 +26,12 @@ extension Container {
     var favouritesPresenter: Factory<FavouritesPresenter> {
         self { FavouritesPresenterImpl() }
     }
-    
+    var liveMatchesPresenter: Factory<LiveMatchesPresenter> {
+        self { LiveMatchesPresenterImpl(sportProvider: self.currentSportProvider()) }
+     }
+    var headToHeadPresenter: Factory<HeadToHeadPresenter> {
+        self { HeadToHeadPresenterImpl() }
+     }
     
 
     
