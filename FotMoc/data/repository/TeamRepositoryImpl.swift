@@ -38,16 +38,33 @@ class TeamRepositoryImpl: TeamRepository {
     func getTeamSeasonStats(teamId: String, leagueId: String) async throws -> TeamSeasonStats {
         let sport = sportProvider.selectedSport
         let standings = try await remoteDataSource.getLeagueTableStandings(sport: sport.rawValue, leagueId: leagueId)
-        
+
         guard let teamRow = standings.first(where: { String($0.teamKey ?? 0) == teamId }) else {
             throw AppException.notFound
         }
-        
+
         return TeamSeasonStats(
-            points: teamRow.standingPTS ?? 0,
             matchesPlayed: teamRow.standingP ?? 0,
+            points: teamRow.standingPTS ?? 0,
+            wins: teamRow.standingW ?? 0,
+            draws: teamRow.standingD ?? 0,
+            losses: teamRow.standingL ?? 0,
+            goalsFor: teamRow.standingF ?? 0,
+            goalsAgainst: teamRow.standingA ?? 0,
             goalDifference: teamRow.standingGD ?? 0,
-            wins: teamRow.standingW ?? 0
+            cleanSheets: 0,
+            fieldGoalsMade: 0,
+            fieldGoalsAttempted: 0,
+            threePointersMade: 0,
+            avgPointsPerGame: 0,
+            avgReboundsPerGame: 0,
+            avgAssistsPerGame: 0,
+            runsScored: 0,
+            wicketsTaken: 0,
+            highestScore: 0,
+            nrr: 0,
+            centuries: 0,
+            halfCenturies: 0
         )
     }
     

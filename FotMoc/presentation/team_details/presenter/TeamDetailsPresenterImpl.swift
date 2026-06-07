@@ -11,31 +11,61 @@ class TeamDetailsPresenterImpl: TeamDetailsPresenter {
     @Injected(\.getTeamPlayersUseCase) private var teamPlayersUseCase
     
     private var players: [Player] = []
-    private let monitor = NWPathMonitor()
-    private var isOnline = true
     
-    init() {
-        monitor.pathUpdateHandler = { [weak self] path in
-            self?.isOnline = (path.status == .satisfied)
-        }
-        monitor.start(queue: DispatchQueue.global(qos: .background))
-    }
+    private var monitor: NWPathMonitor?
+    private var isConnected: Bool = true
+    private var pendingTeamId: String?
+    private var pendingLeagueId: String?
     
     func attachView(_ view: TeamDetailsView) {
         self.view = view
+        startMonitoring()
     }
     
     func detachView() {
         self.view = nil
+        monitor?.cancel()
+        monitor = nil
+    }
+    
+    func retryLoading() {
+        guard let tId = pendingTeamId, let lId = pendingLeagueId else { return }
+        loadTeamData(teamId: tId, leagueId: lId)
+    }
+    
+    private func startMonitoring() {
+        monitor = NWPathMonitor()
+        monitor?.pathUpdateHandler = { [weak self] path in
+            guard let self = self else { return }
+            let wasConnected = self.isConnected
+            self.isConnected = path.status == .satisfied
+
+            DispatchQueue.main.async {
+                if self.isConnected && !wasConnected {
+                    if let tId = self.pendingTeamId, let lId = self.pendingLeagueId {
+                        self.view?.hideNoInternet()
+                        self.loadTeamData(teamId: tId, leagueId: lId)
+                    }
+                } else if !self.isConnected {
+                    self.view?.showNoInternet()
+                }
+            }
+        }
+        monitor?.start(queue: DispatchQueue(label: "TeamNetworkMonitor"))
+    }
+    
+    private func guardConnectivity(teamId: String, leagueId: String) -> Bool {
+        pendingTeamId = teamId
+        pendingLeagueId = leagueId
+        if !isConnected {
+            view?.showNoInternet()
+            return false
+        }
+        return true
     }
     
     func loadTeamData(teamId: String, leagueId: String) {
-        guard isOnline else {
-            DispatchQueue.main.async { [weak self] in
-                self?.view?.displayError(message: "No internet connection. Please check your settings.")
-            }
-            return
-        }
+        guard guardConnectivity(teamId: teamId, leagueId: leagueId) else { return }
         
         view?.showLoading()
         
@@ -52,9 +82,6 @@ class TeamDetailsPresenterImpl: TeamDetailsPresenter {
                 view?.hideLoading()
                 view?.displayTeamDetails(team: team, stats: stats, players: fetchedPlayers)
                 
-            } catch let error as AppException {
-                view?.hideLoading()
-                view?.displayError(message: error.localizedDescription)
             } catch {
                 view?.hideLoading()
                 view?.displayError(message: error.localizedDescription)

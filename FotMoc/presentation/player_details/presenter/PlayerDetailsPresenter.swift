@@ -11,4 +11,6 @@ protocol PlayerProfilePresenter: AnyObject {
     func detachView()
     func loadPlayerData(playerId: String)
     func didTapBack()
+    func retryLoading()
+
 }

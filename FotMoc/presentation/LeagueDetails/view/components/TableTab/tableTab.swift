@@ -11,7 +11,7 @@ import Kingfisher
 
 class TableTab: LeagueTabManager {
     
-    private var standings: [StandingRow] = []
+     var standings: [StandingRow] = []
     var isLoading: Bool = true
     
     func updateData(standings: [StandingRow]) {

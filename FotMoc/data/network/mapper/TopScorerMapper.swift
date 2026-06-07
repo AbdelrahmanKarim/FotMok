@@ -13,7 +13,7 @@ extension TopScorerDTO {
             id: String(playerKey ?? 0),
             name: playerName ?? "Unknown",
             imageUrl: nil, nationality: nil, age: nil,
-            sportDetails: .teamSport(teamId: String(teamKey ?? 0), position: "Attacker")
+            sportDetails: .football(teamId: String(teamKey ?? 0), position: "Attacker")
         )
         return TopScorer(
             rank: playerPlace ?? 0,
