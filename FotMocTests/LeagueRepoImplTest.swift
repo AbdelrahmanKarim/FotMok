@@ -48,10 +48,10 @@ final class LeagueRepositoryImplTests: XCTestCase {
         let testDTO = LeagueDTO(
             leagueKey: 152,
             leagueName: "Premier League",
-            countryKey: nil,       // Added parameter
-            countryName: nil,      // Added parameter
-            leagueLogo: nil,       // Added parameter
-            countryLogo: nil       // Added parameter
+            countryKey: nil,
+            countryName: nil,
+            leagueLogo: nil,
+            countryLogo: nil
         )
         mockRemote.mockLeagues = [testDTO]
 
@@ -70,19 +70,19 @@ final class LeagueRepositoryImplTests: XCTestCase {
         let nonMatchingDTO = LeagueDTO(
             leagueKey: 99,
             leagueName: "Other League",
-            countryKey: nil,       // Added parameter
-            countryName: nil,      // Added parameter
-            leagueLogo: nil,       // Added parameter
-            countryLogo: nil       // Added parameter
+            countryKey: nil,
+            countryName: nil,
+            leagueLogo: nil,
+            countryLogo: nil
         )
         mockRemote.mockLeagues = [nonMatchingDTO]
 
-        // Act & Assert
+       
         do {
             _ = try await sut.getLeagueDetails(leagueId: "152")
             XCTFail("Expected AppException.noData error to be thrown")
         } catch AppException.noData {
-            // Success path
+          
         } catch {
             XCTFail("Unexpected error thrown: \(error)")
         }

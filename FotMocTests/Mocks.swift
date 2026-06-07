@@ -2,7 +2,7 @@ import Foundation
 import RxSwift
 @testable import FotMoc
 
-// MARK: - Mock Repositories
+
 
 class MockPlayerRepository: PlayerRepository {
     func getLeaguePlayers(leagueId: String) async throws -> [FotMoc.Player] { return [] }
@@ -56,7 +56,7 @@ class MockLeagueRepository: LeagueRepository {
     func removeFavouriteLeague(id: String) async throws { }
 }
 
-// MARK: - Mock Views
+
 
 class MockLiveMatchesView: LiveMatchesView {
     var displayMatchesCalled = false
@@ -100,12 +100,8 @@ class MockTeamDetailsView: TeamDetailsView {
     func navigateToPlayerProfile(playerId: String) {}
 }
 
-// MARK: - App Globals
-class MockCurrentSportProvider: CurrentSportProvider {
-    // Inherits selectedSport automatically from the parent class
-}
 
-// MARK: - Mock Use Cases
+
 
 class MockGetLiveMatchesUseCase: GetLiveMatchesUseCase {
     var matchesToReturn: [Match] = []

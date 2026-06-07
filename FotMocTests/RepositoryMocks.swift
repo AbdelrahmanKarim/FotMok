@@ -10,19 +10,18 @@ import Foundation
 import RxSwift
 @testable import FotMoc
 
-// MARK: - CurrentSportProvider Mock
+
 class MockCurrentSportProvider: CurrentSportProvider {
-    // 1. Create a separate backing variable to hold the test state
+  
     var mockSelectedSport: SportType = .football
     
-    // 2. Override the base class property explicitly
+   
     override var selectedSport: SportType {
         get { return mockSelectedSport }
         set { mockSelectedSport = newValue }
     }
 }
 
-// MARK: - League Mocks
 class MockLeagueRemoteDataSource: LeagueRemoteDataSource {
     var mockLeagues: [LeagueDTO] = []
     var mockStandings: [Total] = []
@@ -66,7 +65,7 @@ class MockLeagueLocalDataSource: LeagueLocalDataSource {
     }
 }
 
-// MARK: - Player Mocks
+
 class MockPlayerRemoteDataSource: PlayerRemoteDataSource {
     var mockPlayers: [PlayerDTO] = []
     var mockPlayerDetails: PlayerDTO?
@@ -90,7 +89,6 @@ class MockPlayerRemoteDataSource: PlayerRemoteDataSource {
     }
 }
 
-// MARK: - Team Mocks
 class MockTeamRemoteDataSource: TeamRemoteDataSource {
     var mockTeams: [TeamDTO] = []
     var mockTeamDetails: TeamDTO?
@@ -98,18 +96,17 @@ class MockTeamRemoteDataSource: TeamRemoteDataSource {
     var mockStandings: [Total] = []
     var mockRecentFixtures: [MatchDTO] = []
     var errorToThrow: Error?
-    
-    // Add a specific mock property to satisfy getTeamSeasonStats
+
     var mockSingleStanding: StandingDTO?
 
-    // Fixed Placeholder 1: Maps your single standing return requirement
+  
     func getTeamSeasonStats(sport: FotMoc.SportType, leagueId: String) async throws -> FotMoc.StandingDTO {
         if let error = errorToThrow { throw error }
         guard let standing = mockSingleStanding else { throw AppException.notFound }
         return standing
     }
     
-    // Fixed Placeholder 2: Fallback signature option if your protocol takes String or returns an array variant
+    
     func getTeamDetails(sport: String, teamId: String) async throws -> [FotMoc.TeamDTO] {
         if let error = errorToThrow { throw error }
         if let singleDetail = mockTeamDetails {
@@ -146,7 +143,7 @@ class MockTeamRemoteDataSource: TeamRemoteDataSource {
     }
 }
 
-// MARK: - Match Mocks
+
 class MockMatchRemoteDataSource: MatchRemoteDataSource {
     var mockH2H: H2HResponseDTO?
     var mockFixtures: [MatchDTO] = []
@@ -154,7 +151,7 @@ class MockMatchRemoteDataSource: MatchRemoteDataSource {
     var mockMatchDetails: MatchDTO?
     var errorToThrow: Error?
 
-    // Fixed Placeholder 3: Standardizes the optional leagueId parameter variant method
+   
     func getFixtures(sport: String, leagueId: String?, from: String, to: String) async throws -> [FotMoc.MatchDTO] {
         if let error = errorToThrow { throw error }
         return mockFixtures

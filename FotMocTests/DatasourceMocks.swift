@@ -7,17 +7,17 @@
 import Foundation
 @testable import FotMoc
 
-// If NetworkManager is a class or protocol, create a simple dummy instance to satisfy the initializer
+
 class DummyNetworkManager: NetworkManager {}
 
 class MockLeagueService: LeagueService {
-    // Variables to control mock results
+  
     var mockLeaguesResult: ResultDTO<[LeagueDTO]>?
     var mockStandingsResult: ResultDTO<StandingDTO>?
     var errorToThrow: Error?
     
     init() {
-        // Pass dummy networking reference to avoid making real API connections
+       
         super.init(network: DummyNetworkManager())
     }
 

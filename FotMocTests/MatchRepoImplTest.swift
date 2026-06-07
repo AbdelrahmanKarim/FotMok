@@ -28,11 +28,10 @@ final class MatchRepositoryImplTests: XCTestCase {
     }
 
     func test_getLeagueLatestMatches_whenTennis_usesSevenYearLookbackWindow() async throws {
-        // Arrange
+     
         mockSportProvider.mockSelectedSport = .tennis
         
-        // We capture what values our mock gets to ensure from/to logic calculation is correct
-        // (You can add spy variables to MockMatchRemoteDataSource to capture these arguments if needed)
+    
         let mockMatch = MatchDTO(
             eventKey: 301, eventDate: "2025-05-10", eventTime: nil,
             eventHalftimeResult: nil, eventFinalResult: "6-4 6-2",
@@ -50,16 +49,16 @@ final class MatchRepositoryImplTests: XCTestCase {
         )
         mockRemote.mockFixtures = [mockMatch]
 
-        // Act
+     
         let matches = try await sut.getLeagueLatestMatches(leagueId: "44")
 
-        // Assert
+  
         XCTAssertEqual(matches.count, 1)
         XCTAssertEqual(matches.first?.id, "301")
     }
 
     func test_getLeagueLatestMatches_whenFootball_usesSixtyDayLookbackWindow() async throws {
-        // Arrange
+     
         mockSportProvider.mockSelectedSport = .football
         let mockMatch = MatchDTO(
             eventKey: 302, eventDate: "2026-06-01", eventTime: nil,
@@ -78,10 +77,10 @@ final class MatchRepositoryImplTests: XCTestCase {
         )
         mockRemote.mockFixtures = [mockMatch]
 
-        // Act
+    
         let matches = try await sut.getLeagueLatestMatches(leagueId: "152")
 
-        // Assert
+    
         XCTAssertEqual(matches.count, 1)
     }
 }

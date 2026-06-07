@@ -4,13 +4,13 @@ import Factory
 
 final class PresenterTests: XCTestCase {
     
-    // Safety check: Isolate the Factory container before each test
+  
     override func setUp() {
         super.setUp()
         Container.shared.manager.push()
     }
     
-    // Clear out the overrides after each test
+
     override func tearDown() {
         Container.shared.manager.pop()
         super.tearDown()
@@ -45,7 +45,7 @@ final class PresenterTests: XCTestCase {
         let testPlayer = Player(id: "p1", name: "Salah", imageUrl: nil, nationality: "Egypt", age: 32, sportDetails: .teamSport(teamId: "t1", position: "RW"))
         mockDetailsUseCase.playerToReturn = testPlayer
         
-        // Registering BOTH use cases to prevent network hangs
+       
         Container.shared.getPlayerDetailsUseCase.register { mockDetailsUseCase }
         Container.shared.getPlayerProfileStatsUseCase.register { MockGetPlayerProfileStatsUseCase(repository: MockPlayerRepository()) }
         
@@ -66,7 +66,7 @@ final class PresenterTests: XCTestCase {
     
 }
 
-// MARK: - Test-Specific Subclass Overrides
+
 class MockTeamDetailsUseCase: GetTeamDetailsUseCase {
     var teamToReturn: Team!
     override func execute(teamId: String) async throws -> Team { return teamToReturn }

@@ -46,7 +46,7 @@ final class UseCaseTests: XCTestCase {
     
     func testGetLiveMatchesUseCase_ReturnsMatches() async throws {
         let mockRepo = MockMatchRepository()
-        mockRepo.matchesToReturn = [] // Setup expected data
+        mockRepo.matchesToReturn = [] 
         let useCase = GetLiveMatchesUseCase(repository: mockRepo)
         
         let result = try await useCase.execute(sport: .football)
