@@ -52,3 +52,36 @@
 "h2h_overall"  = "السجل العام";
 
 "empty_no_form" =  "غير متاح";
+"show_more" = "عرض المزيد";
+"leagues" = "الدوريات";
+"no_leagues_found" = "لا توجد دوريات.";
+"no_internet" = "لا يوجد اتصال بالإنترنت.\nيرجى التحقق من الإعدادات.";
+"error" = "خطأ";
+"latest_matches" = "أحدث المباريات";
+"global" = "عالمي";
+"ok" = "OK";
+
+
+"ok" = "حسناً";
+"goals" = "الأهداف";
+"assists" = "التمريرات الحاسمة";
+"matches_played" = "المباريات الملعوبة";
+"total_cards" = "إجمالي البطاقات";
+"yellow_cards" = "البطاقات الصفراء";
+"red_cards" = "البطاقات الحمراء";
+"season_stats_25_26" = "إحصائيات موسم 2025/26";
+"disciplinary" = "السجل التأديبي";
+"points" = "النقاط";
+"goal_difference" = "فارق الأهداف";
+"wins" = "الانتصارات";
+"no_description" = "لا يوجد وصف متاح.";
+"season_stats" = "إحصائيات الموسم";
+"key_players" = "أبرز اللاعبين";
+"about" = "حول";
+"loading_profile" = "جاري تحميل الملف...";
+"loading_team" = "جاري تحميل الفريق...";
+"player_profile" = "تفاصيل اللاعب";
+"team_profile" = "تفاصيل الفريق";
+"home_wins" = "انتصارات المضيف";
+"draws" = "تعادلات";
+"away_wins" = "انتصارات الضيف";

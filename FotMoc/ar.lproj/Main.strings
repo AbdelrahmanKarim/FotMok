@@ -79,6 +79,12 @@
 
 /* Class = "UITabBarItem"; title = "Item"; ObjectID = "wr7-Kx-DWy"; */
 "wr7-Kx-DWy.title" = "Item";
-
+"AS8-KM-xlo.title" = "المفضلة";
+"IyQ-6O-miI.title" = "الرياضة";
 /* Class = "UILabel"; text = "Get real-time updates, live scores, and breaking news from the top leagues around the world."; ObjectID = "xMj-cn-QNh"; */
 "xMj-cn-QNh.text" = "Get real-time updates, live scores, and breaking news from the top leagues around the world.";
+/* Class = "UIButton"; configuration.title = "Explore Live Matches"; ObjectID = "goY-70-g3x"; */
+"goY-70-g3x.configuration.title" = "تصفح المباريات المباشرة";
+
+/* Class = "UIButton"; normalTitle = "Explore Live Matches"; ObjectID = "goY-70-g3x"; */
+"goY-70-g3x.normalTitle" = "تصفح المباريات المباشرة";

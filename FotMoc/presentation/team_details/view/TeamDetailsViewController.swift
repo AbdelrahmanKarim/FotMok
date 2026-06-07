@@ -12,6 +12,8 @@ class TeamDetailsViewController: UIViewController, TeamDetailsView {
     private var players: [Player] = []
 
     private weak var globalHeader: LeagueDetailsHeader?
+    private var headerTitle: String = NSLocalizedString("loading_profile", comment: "")
+    
     private var headerTitle: String = ""
 
     private lazy var noInternetView: NoInternetOverlayView = {
@@ -172,7 +174,15 @@ class TeamDetailsViewController: UIViewController, TeamDetailsView {
         buildSections(for: team.sport, stats: stats)
 
         DispatchQueue.main.async {
-            self.globalHeader?.configure(title: self.headerTitle, country: "", showTabs: false, showBackButton: true, showHeader: true, showFavBtn: false)
+            
+            self.globalHeader?.configure(
+                title: self.headerTitle,
+                country: NSLocalizedString("team_profile", comment: ""),
+                showTabs: false,
+                showBackButton: true,
+                showHeader: true,
+                showFavBtn: false
+            )
             self.collectionView.reloadData()
         }
     }
@@ -378,9 +388,9 @@ extension TeamDetailsViewController: UICollectionViewDataSource, UICollectionVie
             return cell
 
         case .about:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AboutTeamCell", for: indexPath) as! AboutTeamCell
-            cell.configure(text: team?.description ?? "No description available.")
-            return cell
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AboutTeamCell", for: indexPath) as! AboutTeamCell
+                    cell.configure(text: team?.description ?? NSLocalizedString("no_description", comment: ""))
+                    return cell
         }
     }
 

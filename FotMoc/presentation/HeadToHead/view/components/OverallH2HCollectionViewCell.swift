@@ -9,7 +9,10 @@ import UIKit
 
 class OverallH2HCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var homeWinsValue: UILabel!
+    @IBOutlet weak var homeWinsHeader: UILabel!
     
+    @IBOutlet weak var awayWinsHeader: UILabel!
+    @IBOutlet weak var drawsHeader: UILabel!
     @IBOutlet weak var drawsValue: UILabel!
     
     @IBOutlet weak var awayWinsValue: UILabel!
@@ -49,6 +52,9 @@ class OverallH2HCollectionViewCell: UICollectionViewCell {
 
         awayWinsLabel.font  = subtitleFont
         awayWinsLabel.textColor = subtitleColor
+        homeWinsLabel.text = NSLocalizedString("home_wins", comment: "")
+                drawsLabel.text = NSLocalizedString("draws", comment: "")
+                awayWinsLabel.text = NSLocalizedString("away_wins", comment: "")
     }
     func configure(homeWins: String, draws: String, awayWins: String) {
             homeWinsValue.text = homeWins

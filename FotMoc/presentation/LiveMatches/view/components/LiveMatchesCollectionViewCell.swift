@@ -54,7 +54,7 @@ class LiveMatchesCollectionViewCell: UICollectionViewCell {
         secondTeamLabel.font = AppFont.bodyMedium
         secondTeamLabel.textColor = AppColor.textPrimary
 
-        scoreLabel.font = AppFont.h1
+        scoreLabel.font = AppFont.h3
         scoreLabel.textColor = AppColor.textPrimary
         scoreLabel.textAlignment = .center
 

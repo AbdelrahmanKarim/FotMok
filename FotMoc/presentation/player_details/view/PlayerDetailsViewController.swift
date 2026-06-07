@@ -10,6 +10,8 @@ class PlayerDetailsViewController: UIViewController, PlayerProfileView {
     private var stats: PlayerProfileStats?
 
     private weak var globalHeader: LeagueDetailsHeader?
+    private var headerTitle: String = NSLocalizedString("loading_profile", comment: "")
+    
     private var headerTitle: String = ""
 
     private lazy var noInternetView: NoInternetOverlayView = {
@@ -189,15 +191,25 @@ class PlayerDetailsViewController: UIViewController, PlayerProfileView {
         }
 
         DispatchQueue.main.async {
-            self.globalHeader?.configure(title: self.headerTitle, country: "", showTabs: false, showBackButton: true, showHeader: true, showFavBtn: false)
+            
+            self.globalHeader?.configure(
+                title: self.headerTitle,
+                country: NSLocalizedString("player_profile", comment: ""),
+                showTabs: false,
+                showBackButton: true,
+                showHeader: true,
+                showFavBtn: false
+            )
             self.collectionView.reloadData()
         }
     }
 
     func displayError(message: String) {
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
+  
+        let alert = UIAlertController(title: NSLocalizedString("error", comment: ""), message: message, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default))
+                present(alert, animated: true)
+        
     }
 
     func navigateBack() {
@@ -422,6 +434,7 @@ extension PlayerDetailsViewController: UICollectionViewDataSource {
         default:                    header.titleLabel.text = ""
         }
         return header
+        
     }
 }
 
