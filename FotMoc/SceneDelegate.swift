@@ -13,23 +13,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        UserDefaults.standard.set(true, forKey: "hasSeenOnboarding")
-            
-            // 2. Transition to the main app (Code from previous step)
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let _ = (scene as? UIWindowScene) else { return }
+        
+        let hasSeenOnboarding = UserDefaults.standard.bool(forKey: "hasSeenOnboarding")
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        if hasSeenOnboarding {
             guard let mainTabBarVC = storyboard.instantiateViewController(withIdentifier: "MainTabBarController") as? UITabBarController else { return }
-            
-            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                  let sceneDelegate = windowScene.delegate as? SceneDelegate,
-                  let window = sceneDelegate.window else { return }
-            
             mainTabBarVC.selectedIndex = 0
-            window.rootViewController = mainTabBarVC
-            UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: nil, completion: nil)
-      //  guard let _ = (scene as? UIWindowScene) else { return }
+            window?.rootViewController = mainTabBarVC
+        } else {
+            // New user → show onboarding
+            guard let onboardingVC = storyboard.instantiateViewController(withIdentifier: "pageViewController") as? PageViewController else { return }
+            window?.rootViewController = onboardingVC
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
