@@ -103,10 +103,13 @@
             </constraints>
             <size key="customSize" width="467" height="127"/>
             <connections>
+                <outlet property="awayWinsHeader" destination="2K6-uH-zlA" id="Zy9-xz-vEr"/>
                 <outlet property="awayWinsLabel" destination="2K6-uH-zlA" id="kkk-tx-PKi"/>
                 <outlet property="awayWinsValue" destination="5Rx-L4-cpZ" id="1KD-tI-YbA"/>
+                <outlet property="drawsHeader" destination="pSA-bE-7YL" id="bQe-Gz-PfH"/>
                 <outlet property="drawsLabel" destination="pSA-bE-7YL" id="D3o-Vv-lZZ"/>
                 <outlet property="drawsValue" destination="d51-MA-KRN" id="6FM-cI-Mej"/>
+                <outlet property="homeWinsHeader" destination="6Og-Z7-CsE" id="c8i-kT-QjV"/>
                 <outlet property="homeWinsLabel" destination="6Og-Z7-CsE" id="4o4-4k-UWN"/>
                 <outlet property="homeWinsValue" destination="eyn-MA-hln" id="PNY-85-sRh"/>
             </connections>

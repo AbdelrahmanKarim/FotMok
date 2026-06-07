@@ -45,7 +45,7 @@
 "live_label"         = "LIVE";
 "empty_no_live"      = "No live matches right now";
 
-// en
+
 "h2h_title"    = "Head to Head";
 "h2h_upcoming" = "Upcoming Match";
 "h2h_form"     = "Recent Form";
@@ -54,5 +54,33 @@
 
 
 "empty_no_form" = "Recent form not available";
+"show_more" = "Show more";
+"leagues" = "Leagues";
+"no_leagues_found" = "No leagues found.";
+"no_internet" = "No internet connection.\nPlease check your settings.";
+"error" = "Error";
+"latest_matches" = "Latest Matches";
+"global" = "Global";
 
-
+"goals" = "Goals";
+"assists" = "Assists";
+"matches_played" = "Matches Played";
+"total_cards" = "Total Cards";
+"yellow_cards" = "Yellow Cards";
+"red_cards" = "Red Cards";
+"season_stats_25_26" = "2025/26 SEASON STATS";
+"disciplinary" = "DISCIPLINARY";
+"points" = "Points";
+"goal_difference" = "Goal Difference";
+"wins" = "Wins";
+"no_description" = "No description available.";
+"season_stats" = "SEASON STATS";
+"key_players" = "KEY PLAYERS";
+"about" = "ABOUT";
+"loading_profile" = "Loading Profile...";
+"loading_team" = "Loading Team...";
+"player_profile" = "Player Profile";
+"team_profile" = "Team Profile";
+"home_wins" = "Home wins";
+"draws" = "Draws";
+"away_wins" = "Away wins";

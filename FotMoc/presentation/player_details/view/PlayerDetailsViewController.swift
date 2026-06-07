@@ -10,7 +10,7 @@ class PlayerDetailsViewController: UIViewController, PlayerProfileView {
     private var stats: PlayerProfileStats?
     
     private weak var globalHeader: LeagueDetailsHeader?
-    private var headerTitle: String = ""
+    private var headerTitle: String = NSLocalizedString("loading_profile", comment: "")
     
     @Injected(\.playerDetailsPresenter) private var presenter: PlayerProfilePresenter
     
@@ -106,15 +106,25 @@ class PlayerDetailsViewController: UIViewController, PlayerProfileView {
         self.headerTitle = player.name
         
         DispatchQueue.main.async {
-            self.globalHeader?.configure(title: self.headerTitle, country: "", showTabs: false, showBackButton: true, showHeader: true, showFavBtn: false)
+            
+            self.globalHeader?.configure(
+                title: self.headerTitle,
+                country: NSLocalizedString("player_profile", comment: ""),
+                showTabs: false,
+                showBackButton: true,
+                showHeader: true,
+                showFavBtn: false
+            )
             self.collectionView.reloadData()
         }
     }
     
     func displayError(message: String) {
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
+  
+        let alert = UIAlertController(title: NSLocalizedString("error", comment: ""), message: message, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default))
+                present(alert, animated: true)
+        
     }
     
     func navigateBack() {
@@ -148,17 +158,25 @@ extension PlayerDetailsViewController: UICollectionViewDataSource {
             return cell
             
         case .seasonStats, .disciplinary:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StatsGridCell", for: indexPath) as! statsGridCollectionViewCell
-            if section == .seasonStats {
-                let titles = ["Goals", "Assists", "Matches Played", "Total Cards"]
-                let values = ["\(stats?.season.goals ?? 0)", "\(stats?.season.assists ?? 0)", "\(stats?.season.matchesPlayed ?? 0)", "\(stats?.season.totalCards ?? 0)"]
-                cell.configure(title: titles[indexPath.item], value: values[indexPath.item], valueColor: indexPath.item == 0 ? .systemGreen : AppColor.textPrimary)
-            } else {
-                let titles = ["Yellow Cards", "Red Cards"]
-                let values = ["\(stats?.disciplinary.yellowCards ?? 0)", "\(stats?.disciplinary.redCards ?? 0)"]
-                cell.configure(title: titles[indexPath.item], value: values[indexPath.item], valueColor: indexPath.item == 0 ? .systemYellow : .systemRed)
-            }
-            return cell
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StatsGridCell", for: indexPath) as! statsGridCollectionViewCell
+                    if section == .seasonStats {
+                        let titles = [
+                            NSLocalizedString("goals", comment: ""),
+                            NSLocalizedString("assists", comment: ""),
+                            NSLocalizedString("matches_played", comment: ""),
+                            NSLocalizedString("total_cards", comment: "")
+                        ]
+                        let values = ["\(stats?.season.goals ?? 0)", "\(stats?.season.assists ?? 0)", "\(stats?.season.matchesPlayed ?? 0)", "\(stats?.season.totalCards ?? 0)"]
+                        cell.configure(title: titles[indexPath.item], value: values[indexPath.item], valueColor: indexPath.item == 0 ? .systemGreen : AppColor.textPrimary)
+                    } else {
+                        let titles = [
+                            NSLocalizedString("yellow_cards", comment: ""),
+                            NSLocalizedString("red_cards", comment: "")
+                        ]
+                        let values = ["\(stats?.disciplinary.yellowCards ?? 0)", "\(stats?.disciplinary.redCards ?? 0)"]
+                        cell.configure(title: titles[indexPath.item], value: values[indexPath.item], valueColor: indexPath.item == 0 ? .systemYellow : .systemRed)
+                    }
+                    return cell
         }
     }
     
@@ -173,11 +191,12 @@ extension PlayerDetailsViewController: UICollectionViewDataSource {
         
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "SectionHeader", for: indexPath) as! SectionTitleHeaderView
         switch Section(rawValue: indexPath.section)! {
-        case .seasonStats: header.titleLabel.text = "2025/26 SEASON STATS"
-        case .disciplinary: header.titleLabel.text = "DISCIPLINARY"
-        default: header.titleLabel.text = ""
-        }
+                case .seasonStats: header.titleLabel.text = NSLocalizedString("season_stats_25_26", comment: "")
+                case .disciplinary: header.titleLabel.text = NSLocalizedString("disciplinary", comment: "")
+                default: header.titleLabel.text = ""
+                }
         return header
+        
     }
 }
 

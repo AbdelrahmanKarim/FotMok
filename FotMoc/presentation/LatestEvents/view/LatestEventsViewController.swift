@@ -134,7 +134,8 @@ extension LatestEventsViewController: UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "leagueDetailsHeader", for: indexPath) as! LeagueDetailsHeader
         header.delegate = self
-        header.configure(title: "Latest Matches", country: "Global")
+        header.configure(title: NSLocalizedString("latest_matches", comment: ""), country: NSLocalizedString("global", comment: ""))
+       
         return header
     }
     

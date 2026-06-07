@@ -12,7 +12,7 @@ class TeamDetailsViewController: UIViewController, TeamDetailsView {
     private var players: [Player] = []
     
     private weak var globalHeader: LeagueDetailsHeader?
-    private var headerTitle: String = ""
+    private var headerTitle: String = NSLocalizedString("loading_profile", comment: "")
     
     @Injected(\.teamDetailsPresenter) private var presenter: TeamDetailsPresenter
     
@@ -130,17 +130,24 @@ class TeamDetailsViewController: UIViewController, TeamDetailsView {
         self.headerTitle = team.name
         
         DispatchQueue.main.async {
-            self.globalHeader?.configure(title: self.headerTitle, country: "", showTabs: false, showBackButton: true, showHeader: true, showFavBtn: false)
+            
+            self.globalHeader?.configure(
+                title: self.headerTitle,
+                country: NSLocalizedString("team_profile", comment: ""),
+                showTabs: false,
+                showBackButton: true,
+                showHeader: true,
+                showFavBtn: false
+            )
             self.collectionView.reloadData()
         }
     }
     
     func displayError(message: String) {
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
-    }
-    
+            let alert = UIAlertController(title: NSLocalizedString("error", comment: ""), message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default))
+            present(alert, animated: true)
+        }
     func navigateBack() {
         navigationController?.popViewController(animated: true)
     }
@@ -179,11 +186,16 @@ extension TeamDetailsViewController: UICollectionViewDataSource, UICollectionVie
             return cell
             
         case .seasonStats:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StatsGridCell", for: indexPath) as! statsGridCollectionViewCell
-            let titles = ["Points", "Matches Played", "Goal Difference", "Wins"]
-            let values = ["\(stats?.points ?? 0)", "\(stats?.matchesPlayed ?? 0)", "\(stats?.goalDifference ?? 0)", "\(stats?.wins ?? 0)"]
-            cell.configure(title: titles[indexPath.item], value: values[indexPath.item], valueColor: indexPath.item == 0 ? .systemGreen : AppColor.textPrimary)
-            return cell
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StatsGridCell", for: indexPath) as! statsGridCollectionViewCell
+                    let titles = [
+                        NSLocalizedString("points", comment: ""),
+                        NSLocalizedString("matches_played", comment: ""),
+                        NSLocalizedString("goal_difference", comment: ""),
+                        NSLocalizedString("wins", comment: "")
+                    ]
+                    let values = ["\(stats?.points ?? 0)", "\(stats?.matchesPlayed ?? 0)", "\(stats?.goalDifference ?? 0)", "\(stats?.wins ?? 0)"]
+                    cell.configure(title: titles[indexPath.item], value: values[indexPath.item], valueColor: indexPath.item == 0 ? .systemGreen : AppColor.textPrimary)
+                    return cell
             
         case .keyPlayers:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "KeyPlayerCell", for: indexPath) as! KeyPlayerCell
@@ -191,9 +203,9 @@ extension TeamDetailsViewController: UICollectionViewDataSource, UICollectionVie
             return cell
             
         case .about:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AboutTeamCell", for: indexPath) as! AboutTeamCell
-            cell.configure(text: team?.description ?? "No description available.")
-            return cell
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AboutTeamCell", for: indexPath) as! AboutTeamCell
+                    cell.configure(text: team?.description ?? NSLocalizedString("no_description", comment: ""))
+                    return cell
         }
     }
     
@@ -208,11 +220,11 @@ extension TeamDetailsViewController: UICollectionViewDataSource, UICollectionVie
         
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "SectionHeader", for: indexPath) as! SectionTitleHeaderView
         switch Section(rawValue: indexPath.section)! {
-        case .seasonStats: header.titleLabel.text = "SEASON STATS"
-        case .keyPlayers: header.titleLabel.text = "KEY PLAYERS"
-        case .about: header.titleLabel.text = "ABOUT"
-        default: header.titleLabel.text = ""
-        }
+                case .seasonStats: header.titleLabel.text = NSLocalizedString("season_stats", comment: "")
+                case .keyPlayers: header.titleLabel.text = NSLocalizedString("key_players", comment: "")
+                case .about: header.titleLabel.text = NSLocalizedString("about", comment: "")
+                default: header.titleLabel.text = ""
+                }
         return header
     }
     
