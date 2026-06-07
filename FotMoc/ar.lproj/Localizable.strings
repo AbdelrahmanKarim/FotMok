@@ -85,3 +85,82 @@
 "home_wins" = "انتصارات المضيف";
 "draws" = "تعادلات";
 "away_wins" = "انتصارات الضيف";
+/* --- General / Shared --- */
+"matches" = "المباريات";
+"rating" = "التقييم";
+"points" = "النقاط";
+"wins" = "الانتصارات";
+"losses" = "الخسائر";
+"draws" = "التعادلات";
+"minutes" = "الدقائق";
+"win_rate" = "معدل الفوز";
+
+/* --- Football --- */
+"goals" = "الأهداف";
+"assists" = "التمريرات الحاسمة";
+"shots" = "التسديدات";
+"dribbles" = "المراوغات";
+"key_passes" = "التمريرات المفتاحية";
+"pen_scored" = "ركلات الجزاء";
+"tackles" = "الافتكاكات";
+"blocks" = "الاعتراضات";
+"interceptions" = "قطع الكرة";
+"clearances" = "التشتيت";
+"passes" = "التمريرات";
+"pass_acc" = "دقة التمرير %";
+"crosses" = "العرضيات";
+"duels_won" = "الالتحامات الناجحة";
+"goal_diff" = "فارق الأهداف";
+"goals_for" = "أهداف له";
+"goals_against" = "أهداف عليه";
+"clean_sheets" = "شباك نظيفة";
+"goals_conceded" = "أهداف مستقبلة";
+
+/* --- Basketball --- */
+"field_goals" = "الأهداف الميدانية";
+"duels_total" = "إجمالي الالتحامات";
+"steals" = "السرقات";
+"avg_pts" = "متوسط النقاط";
+"avg_reb" = "متوسط المتابعات";
+"avg_ast" = "متوسط التمريرات الحاسمة";
+"fg_made" = "أهداف ميدانية مسجلة";
+"fg_attempts" = "محاولات ميدانية";
+"3_pointers" = "الرميات الثلاثية";
+"total_pts" = "إجمالي النقاط";
+
+/* --- Cricket --- */
+"runs" = "الركضات";
+"innings" = "الأشواط";
+"avg" = "المتوسط";
+"boundaries" = "الحدود";
+"sixes" = "الستات";
+"strike_rate" = "معدل الضرب";
+"50s" = "الخمسينات";
+"wickets" = "الويكيت";
+"economy" = "الاقتصاد";
+"maidens" = "الأشواط العذراء";
+"best" = "الأفضل";
+"nrr" = "معدل الركض الصافي";
+"runs_scored" = "الركضات المسجلة";
+"highest_score" = "أعلى نتيجة";
+"centuries" = "المئات";
+"half_cents" = "الخمسينات";
+
+/* --- Tennis --- */
+"rank" = "التصنيف";
+"plays" = "يلعب";
+
+/* --- Headers --- */
+"season_stats" = "إحصائيات الموسم";
+"attacking" = "الهجوم";
+"defending" = "الدفاع";
+"passing" = "التمرير";
+"disciplinary" = "السجل التأديبي";
+"offense" = "الهجوم";
+"defense" = "الدفاع";
+"batting" = "الضرب";
+"bowling" = "الرمي";
+"player_info" = "معلومات اللاعب";
+"overview" = "نظرة عامة";
+"attack" = "الهجوم";
+"defence" = "الدفاع";

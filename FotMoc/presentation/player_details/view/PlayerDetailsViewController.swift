@@ -1,3 +1,10 @@
+//
+//  PlayerDetailsViewController.swift
+//  FotMoc
+//
+//  Created by Alaa Ayman on 30/05/2026.
+//
+
 import UIKit
 import Factory
 
@@ -11,8 +18,6 @@ class PlayerDetailsViewController: UIViewController, PlayerProfileView {
 
     private weak var globalHeader: LeagueDetailsHeader?
     private var headerTitle: String = NSLocalizedString("loading_profile", comment: "")
-    
-    private var headerTitle: String = ""
 
     private lazy var noInternetView: NoInternetOverlayView = {
         let v = NoInternetOverlayView()
@@ -191,7 +196,6 @@ class PlayerDetailsViewController: UIViewController, PlayerProfileView {
         }
 
         DispatchQueue.main.async {
-            
             self.globalHeader?.configure(
                 title: self.headerTitle,
                 country: NSLocalizedString("player_profile", comment: ""),
@@ -205,11 +209,9 @@ class PlayerDetailsViewController: UIViewController, PlayerProfileView {
     }
 
     func displayError(message: String) {
-  
         let alert = UIAlertController(title: NSLocalizedString("error", comment: ""), message: message, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default))
-                present(alert, animated: true)
-        
+        alert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default))
+        present(alert, animated: true)
     }
 
     func navigateBack() {
@@ -226,20 +228,20 @@ extension PlayerDetailsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard player != nil else { return 0 }
         switch sections[section] {
-        case .profileHeader:                            return 1
-        case .footballSeason:                           return 4
-        case .footballAttacking:                        return 4
-        case .footballDefending:                        return 4
-        case .footballPassing:                          return 4
-        case .footballDisciplinary:                     return 2
-        case .basketballSeason:                         return 4
-        case .basketballOffense:                        return 4
-        case .basketballDefense:                        return 2
-        case .cricketSeason:                            return 4
-        case .cricketBatting:                           return 4
-        case .cricketBowling:                           return 4
-        case .tennisSeason:                             return 4
-        case .tennisInfo:                               return 2
+        case .profileHeader:            return 1
+        case .footballSeason:           return 4
+        case .footballAttacking:        return 4
+        case .footballDefending:        return 4
+        case .footballPassing:          return 4
+        case .footballDisciplinary:     return 2
+        case .basketballSeason:         return 4
+        case .basketballOffense:        return 4
+        case .basketballDefense:        return 2
+        case .cricketSeason:            return 4
+        case .cricketBatting:           return 4
+        case .cricketBowling:           return 4
+        case .tennisSeason:             return 4
+        case .tennisInfo:               return 2
         }
     }
 
@@ -256,7 +258,7 @@ extension PlayerDetailsViewController: UICollectionViewDataSource {
 
         case .footballSeason:
             let cell = dequeueStatsCell(collectionView, indexPath)
-            let titles = ["Goals", "Assists", "Matches", "Rating"]
+            let titles = [NSLocalizedString("goals", comment: ""), NSLocalizedString("assists", comment: ""), NSLocalizedString("matches", comment: ""), NSLocalizedString("rating", comment: "")]
             let values = [
                 "\(stats?.season.goals ?? 0)",
                 "\(stats?.season.assists ?? 0)",
@@ -269,7 +271,7 @@ extension PlayerDetailsViewController: UICollectionViewDataSource {
 
         case .footballAttacking:
             let cell = dequeueStatsCell(collectionView, indexPath)
-            let titles = ["Shots", "Dribbles", "Key Passes", "Pen Scored"]
+            let titles = [NSLocalizedString("shots", comment: ""), NSLocalizedString("dribbles", comment: ""), NSLocalizedString("key_passes", comment: ""), NSLocalizedString("pen_scored", comment: "")]
             let values = [
                 "\(stats?.shots ?? 0)",
                 "\(stats?.dribbles ?? 0)",
@@ -281,7 +283,7 @@ extension PlayerDetailsViewController: UICollectionViewDataSource {
 
         case .footballDefending:
             let cell = dequeueStatsCell(collectionView, indexPath)
-            let titles = ["Tackles", "Blocks", "Interceptions", "Clearances"]
+            let titles = [NSLocalizedString("tackles", comment: ""), NSLocalizedString("blocks", comment: ""), NSLocalizedString("interceptions", comment: ""), NSLocalizedString("clearances", comment: "")]
             let values = [
                 "\(stats?.tackles ?? 0)",
                 "\(stats?.blocks ?? 0)",
@@ -293,7 +295,7 @@ extension PlayerDetailsViewController: UICollectionViewDataSource {
 
         case .footballPassing:
             let cell = dequeueStatsCell(collectionView, indexPath)
-            let titles = ["Passes", "Pass Acc %", "Crosses", "Duels Won"]
+            let titles = [NSLocalizedString("passes", comment: ""), NSLocalizedString("pass_acc", comment: ""), NSLocalizedString("crosses", comment: ""), NSLocalizedString("duels_won", comment: "")]
             let values = [
                 "\(stats?.passes ?? 0)",
                 stats?.passAccuracy ?? "N/A",
@@ -305,7 +307,7 @@ extension PlayerDetailsViewController: UICollectionViewDataSource {
 
         case .footballDisciplinary:
             let cell = dequeueStatsCell(collectionView, indexPath)
-            let titles = ["Yellow Cards", "Red Cards"]
+            let titles = [NSLocalizedString("yellow_cards", comment: ""), NSLocalizedString("red_cards", comment: "")]
             let values = ["\(stats?.disciplinary.yellowCards ?? 0)", "\(stats?.disciplinary.redCards ?? 0)"]
             let colors: [UIColor] = [.systemYellow, .systemRed]
             cell.configure(title: titles[i], value: values[i], valueColor: colors[i])
@@ -313,7 +315,7 @@ extension PlayerDetailsViewController: UICollectionViewDataSource {
 
         case .basketballSeason:
             let cell = dequeueStatsCell(collectionView, indexPath)
-            let titles = ["Points", "Assists", "Matches", "Minutes"]
+            let titles = [NSLocalizedString("points", comment: ""), NSLocalizedString("assists", comment: ""), NSLocalizedString("matches", comment: ""), NSLocalizedString("minutes", comment: "")]
             let values = [
                 "\(stats?.season.goals ?? 0)",
                 "\(stats?.season.assists ?? 0)",
@@ -326,7 +328,7 @@ extension PlayerDetailsViewController: UICollectionViewDataSource {
 
         case .basketballOffense:
             let cell = dequeueStatsCell(collectionView, indexPath)
-            let titles = ["Field Goals", "Dribbles", "Duels Won", "Duels Total"]
+            let titles = [NSLocalizedString("field_goals", comment: ""), NSLocalizedString("dribbles", comment: ""), NSLocalizedString("duels_won", comment: ""), NSLocalizedString("duels_total", comment: "")]
             let values = [
                 "\(stats?.shots ?? 0)",
                 "\(stats?.dribbles ?? 0)",
@@ -338,14 +340,14 @@ extension PlayerDetailsViewController: UICollectionViewDataSource {
 
         case .basketballDefense:
             let cell = dequeueStatsCell(collectionView, indexPath)
-            let titles = ["Blocks", "Steals"]
+            let titles = [NSLocalizedString("blocks", comment: ""), NSLocalizedString("steals", comment: "")]
             let values = ["\(stats?.blocks ?? 0)", "\(stats?.tackles ?? 0)"]
             cell.configure(title: titles[i], value: values[i], valueColor: AppColor.textPrimary)
             return cell
 
         case .cricketSeason:
             let cell = dequeueStatsCell(collectionView, indexPath)
-            let titles = ["Runs", "Innings", "Matches", "Avg"]
+            let titles = [NSLocalizedString("runs", comment: ""), NSLocalizedString("innings", comment: ""), NSLocalizedString("matches", comment: ""), NSLocalizedString("avg", comment: "")]
             let innings = stats?.season.matchesPlayed ?? 1
             let runs = stats?.season.goals ?? 0
             let avg = innings > 0 ? String(format: "%.1f", Double(runs) / Double(innings)) : "N/A"
@@ -356,7 +358,7 @@ extension PlayerDetailsViewController: UICollectionViewDataSource {
 
         case .cricketBatting:
             let cell = dequeueStatsCell(collectionView, indexPath)
-            let titles = ["Boundaries", "Sixes", "Strike Rate", "50s"]
+            let titles = [NSLocalizedString("boundaries", comment: ""), NSLocalizedString("sixes", comment: ""), NSLocalizedString("strike_rate", comment: ""), NSLocalizedString("50s", comment: "")]
             let values = [
                 "\(stats?.shots ?? 0)",
                 "\(stats?.dribbles ?? 0)",
@@ -368,7 +370,7 @@ extension PlayerDetailsViewController: UICollectionViewDataSource {
 
         case .cricketBowling:
             let cell = dequeueStatsCell(collectionView, indexPath)
-            let titles = ["Wickets", "Economy", "Maidens", "Best"]
+            let titles = [NSLocalizedString("wickets", comment: ""), NSLocalizedString("economy", comment: ""), NSLocalizedString("maidens", comment: ""), NSLocalizedString("best", comment: "")]
             let values = [
                 "\(stats?.blocks ?? 0)",
                 stats?.season.rating ?? "N/A",
@@ -381,7 +383,7 @@ extension PlayerDetailsViewController: UICollectionViewDataSource {
 
         case .tennisSeason:
             let cell = dequeueStatsCell(collectionView, indexPath)
-            let titles = ["Matches", "Wins", "Losses", "Win Rate"]
+            let titles = [NSLocalizedString("matches", comment: ""), NSLocalizedString("wins", comment: ""), NSLocalizedString("losses", comment: ""), NSLocalizedString("win_rate", comment: "")]
             let matches = stats?.season.matchesPlayed ?? 0
             let wins = stats?.season.goals ?? 0
             let losses = matches - wins
@@ -394,7 +396,7 @@ extension PlayerDetailsViewController: UICollectionViewDataSource {
         case .tennisInfo:
             let cell = dequeueStatsCell(collectionView, indexPath)
             if case .tennis(let rank, let plays) = player?.sportDetails {
-                let titles = ["Rank", "Plays"]
+                let titles = [NSLocalizedString("rank", comment: ""), NSLocalizedString("plays", comment: "")]
                 let values = [rank != nil ? "\(rank!)" : "N/A", plays ?? "N/A"]
                 let colors: [UIColor] = [.systemBlue, AppColor.textPrimary]
                 cell.configure(title: titles[i], value: values[i], valueColor: colors[i])
@@ -417,21 +419,20 @@ extension PlayerDetailsViewController: UICollectionViewDataSource {
         }
 
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "SectionHeader", for: indexPath) as! SectionTitleHeaderView
+        
         switch sections[indexPath.section] {
-        case .footballSeason:       header.titleLabel.text = "SEASON STATS"
-        case .footballAttacking:    header.titleLabel.text = "ATTACKING"
-        case .footballDefending:    header.titleLabel.text = "DEFENDING"
-        case .footballPassing:      header.titleLabel.text = "PASSING"
-        case .footballDisciplinary: header.titleLabel.text = "DISCIPLINARY"
-        case .basketballSeason:     header.titleLabel.text = "SEASON STATS"
-        case .basketballOffense:    header.titleLabel.text = "OFFENSE"
-        case .basketballDefense:    header.titleLabel.text = "DEFENSE"
-        case .cricketSeason:        header.titleLabel.text = "SEASON STATS"
-        case .cricketBatting:       header.titleLabel.text = "BATTING"
-        case .cricketBowling:       header.titleLabel.text = "BOWLING"
-        case .tennisSeason:         header.titleLabel.text = "SEASON STATS"
-        case .tennisInfo:           header.titleLabel.text = "PLAYER INFO"
-        default:                    header.titleLabel.text = ""
+        case .footballSeason, .basketballSeason, .cricketSeason, .tennisSeason:
+            header.titleLabel.text = NSLocalizedString("season_stats", comment: "")
+        case .footballAttacking: header.titleLabel.text = NSLocalizedString("attacking", comment: "")
+        case .footballDefending: header.titleLabel.text = NSLocalizedString("defending", comment: "")
+        case .footballPassing:   header.titleLabel.text = NSLocalizedString("passing", comment: "")
+        case .footballDisciplinary: header.titleLabel.text = NSLocalizedString("disciplinary", comment: "")
+        case .basketballOffense: header.titleLabel.text = NSLocalizedString("offense", comment: "")
+        case .basketballDefense: header.titleLabel.text = NSLocalizedString("defense", comment: "")
+        case .cricketBatting:    header.titleLabel.text = NSLocalizedString("batting", comment: "")
+        case .cricketBowling:    header.titleLabel.text = NSLocalizedString("bowling", comment: "")
+        case .tennisInfo:        header.titleLabel.text = NSLocalizedString("player_info", comment: "")
+        default:                 header.titleLabel.text = ""
         }
         return header
         
