@@ -13,4 +13,8 @@ protocol PlayerProfileView: AnyObject {
     func displayPlayerProfile(player: Player, stats: PlayerProfileStats?)
     func displayError(message: String)
     func navigateBack()
+    func showNoInternet()
+    func hideNoInternet()
+        
+  
 }

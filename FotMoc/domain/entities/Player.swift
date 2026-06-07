@@ -11,12 +11,12 @@ struct Player {
     let imageUrl: URL?
     let nationality: String?
     let age: Int?
-    
- 
     let sportDetails: PlayerSportContext
 }
-
+ 
 enum PlayerSportContext {
-    case teamSport(teamId: String, position: String)
+    case football(teamId: String, position: String)
+    case basketball(teamId: String, position: String)
+    case cricket(teamId: String, role: String)
     case tennis(rank: Int?, plays: String?)
 }

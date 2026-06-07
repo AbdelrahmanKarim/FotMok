@@ -33,10 +33,27 @@ extension Total {
     
     func toSeasonStats() -> TeamSeasonStats {
         return TeamSeasonStats(
-            points: standingPTS ?? 0,
             matchesPlayed: standingP ?? 0,
+            points: standingPTS ?? 0,
+            wins: standingW ?? 0,
+            draws: standingD ?? 0,
+            losses: standingL ?? 0,
+            goalsFor: standingF ?? 0,
+            goalsAgainst: standingA ?? 0,
             goalDifference: standingGD ?? 0,
-            wins: standingW ?? 0
+            cleanSheets: 0,
+            fieldGoalsMade: 0,
+            fieldGoalsAttempted: 0,
+            threePointersMade: 0,
+            avgPointsPerGame: 0,
+            avgReboundsPerGame: 0,
+            avgAssistsPerGame: 0,
+            runsScored: 0,
+            wicketsTaken: 0,
+            highestScore: 0,
+            nrr: 0,
+            centuries: 0,
+            halfCenturies: 0
         )
     }
 }
