@@ -27,7 +27,6 @@ class LeagueDetailsViewController: UIViewController {
         return v
     }()
 
-    
     private weak var globalHeader: LeagueDetailsHeader?
 
     @Injected(\.leagueDetailsPresenter) private var presenter: LeagueDetailsPresenter
@@ -51,13 +50,14 @@ class LeagueDetailsViewController: UIViewController {
         activeLeagueId = leagueIdPassed
         presenter.loadLeagueDetails(leagueId: activeLeagueId)
         presenter.loadLeagueContent(leagueId: activeLeagueId)
+        
         view.addSubview(noInternetView)
-         NSLayoutConstraint.activate([
-             noInternetView.topAnchor.constraint(equalTo: collectionView.topAnchor, constant: 150), // below global header
+        NSLayoutConstraint.activate([
+             noInternetView.topAnchor.constraint(equalTo: collectionView.topAnchor, constant: 150),
              noInternetView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
              noInternetView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
              noInternetView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-         ])
+        ])
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -104,31 +104,28 @@ class LeagueDetailsViewController: UIViewController {
             self?.presenter.didTapShowMoreLatest()
         }
     }
+    
     func navigateToTeamDetails(teamId: String, leagueId: String) {
-            guard let teamVC = storyboard?.instantiateViewController(withIdentifier: "teamDetailsScreen") as? TeamDetailsViewController else { return }
-            teamVC.teamIdPassed = teamId
-            teamVC.leagueIdPassed = leagueId
-            navigationController?.pushViewController(teamVC, animated: true)
-        }
+        guard let teamVC = storyboard?.instantiateViewController(withIdentifier: "teamDetailsScreen") as? TeamDetailsViewController else { return }
+        teamVC.teamIdPassed = teamId
+        teamVC.leagueIdPassed = leagueId
+        navigationController?.pushViewController(teamVC, animated: true)
+    }
         
-        func navigateToPlayerProfile(playerId: String) {
-            guard let playerVC = storyboard?.instantiateViewController(withIdentifier: "playerDetailsScreen") as? PlayerDetailsViewController else { return }
-            playerVC.playerIdPassed = playerId
-            navigationController?.pushViewController(playerVC, animated: true)
-        }
+    func navigateToPlayerProfile(playerId: String) {
+        guard let playerVC = storyboard?.instantiateViewController(withIdentifier: "playerDetailsScreen") as? PlayerDetailsViewController else { return }
+        playerVC.playerIdPassed = playerId
+        navigationController?.pushViewController(playerVC, animated: true)
+    }
 }
 
 extension LeagueDetailsViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func getActiveTab() -> LeagueTabManager {
         switch currentTab {
-        case .overview:
-            return overviewTab
-        case .table:
-            return tableTab
-        case .topScorers:
-            return topScorersTab
-        default:
-            return overviewTab
+        case .overview:  return overviewTab
+        case .table:     return tableTab
+        case .topScorers: return topScorersTab
+        default:         return overviewTab
         }
     }
     
@@ -137,15 +134,37 @@ extension LeagueDetailsViewController: UICollectionViewDataSource, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return getActiveTab().numberOfItems(in: section)
+        let count = getActiveTab().numberOfItems(in: section)
+        
+        if count == 0 && (currentTab == .table || currentTab == .topScorers) {
+            return 1
+        }
+        return count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let count = getActiveTab().numberOfItems(in: indexPath.section)
+        
+        if count == 0 && (currentTab == .table || currentTab == .topScorers) {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "emptyState", for: indexPath) as! EmptyStateCollectionViewCell
+            let msg = currentTab == .table ? "No standings available for this league." : "No top scorers available for this league."
+            cell.configure(message: msg, iconName: "xmark.bin")
+            return cell
+        }
+        
         return getActiveTab().cell(for: collectionView, at: indexPath)
     }
     
     func setUpCollectionViewLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { index, environment in
+            let count = self.getActiveTab().numberOfItems(in: index)
+            
+            if count == 0 && (self.currentTab == .table || self.currentTab == .topScorers) {
+                let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)))
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(350)), subitems: [item])
+                return NSCollectionLayoutSection(group: group)
+            }
+            
             return self.getActiveTab().getSectionFor(index: index)
         }
         layout.configuration = globalHeaderConfiguration()
@@ -167,47 +186,72 @@ extension LeagueDetailsViewController: UICollectionViewDataSource, UICollectionV
             ) as! LeagueDetailsHeader
             self.globalHeader = header
             header.updateFavouriteState(isFavourite: self.isLeagueFavourite)
-            header.configure(title: leagueName, country: leagueCountry, showTabs: true, showFavBtn: true , showActionBtnStackView: true)
+            header.configure(title: leagueName, country: leagueCountry, showTabs: true, showFavBtn: true, showActionBtnStackView: true)
             header.delegate = self
             return header
         }
         
         if let customSupplementaryView = getActiveTab().supplementaryView(for: collectionView, kind: kind, at: indexPath) {
+            if currentTab == .overview && indexPath.section == 2 && kind == UICollectionView.elementKindSectionHeader {
+                if sport == .tennis {
+                    for subview in customSupplementaryView.subviews {
+                        if let label = subview as? UILabel {
+                            label.text = "PLAYERS"
+                        } else {
+                            for deeper in subview.subviews {
+                                if let label = deeper as? UILabel {
+                                    label.text = "PLAYERS"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
             return customSupplementaryView
         }
         
         return UICollectionReusableView()
     }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-            switch currentTab {
-            case .overview:
-                if let match = getActiveTab().getMatch(at: indexPath) {
-                    presenter.didSelectMatch(match, leagueId: activeLeagueId)
-                }
-                else if indexPath.section == 2 {
-                    if indexPath.item < overviewTab.teamsOrPlayers.count,
-                       let team = overviewTab.teamsOrPlayers[indexPath.item] as? Team {
+        let count = getActiveTab().numberOfItems(in: indexPath.section)
+        if count == 0 { return }
+        
+        switch currentTab {
+        case .overview:
+            if let match = getActiveTab().getMatch(at: indexPath) {
+                presenter.didSelectMatch(match, leagueId: activeLeagueId)
+            } else if indexPath.section == 2 {
+                if indexPath.item < overviewTab.teamsOrPlayers.count {
+                    let item = overviewTab.teamsOrPlayers[indexPath.item]
+                    if let team = item as? Team {
                         presenter.didSelectTeam(teamId: team.id)
+                    } else if let player = item as? Player {
+                        presenter.didSelectPlayer(playerId: player.id)
                     }
                 }
-            case .topScorers:
-                if indexPath.item < topScorersTab.topScorers.count {
-                    let scorer = topScorersTab.topScorers[indexPath.item]
-                    presenter.didSelectPlayer(playerId: scorer.player.id)
-                }
-                
-            case .table:
-                break
             }
+        case .topScorers:
+            if indexPath.item < topScorersTab.topScorers.count {
+                let scorer = topScorersTab.topScorers[indexPath.item]
+                presenter.didSelectPlayer(playerId: scorer.player.id)
+            }
+        case .table:
+                    if indexPath.item < tableTab.standings.count {
+                        let standing = tableTab.standings[indexPath.item]
+                        switch standing.competitor {
+                        case .team(let team):
+                            presenter.didSelectTeam(teamId: team.id)
+                        case .player(let player):
+                            presenter.didSelectPlayer(playerId: player.id)
+                        }
+                    }
         }
-
-    
-   
+    }
 }
 
 extension LeagueDetailsViewController: LeagueDetailsView {
   
-    
     func navigateToLatestMatches() {
         guard let latestMatchVC = storyboard?.instantiateViewController(withIdentifier: "latestMatchScreen") as? LatestEventsViewController else { return }
         navigationController?.pushViewController(latestMatchVC, animated: true)
@@ -238,7 +282,6 @@ extension LeagueDetailsViewController: LeagueDetailsView {
         }
     }
     
-    
     func navigateToH2H(teamId1: String, teamId2: String, leagueId: String, title: String) {
         guard let h2hVC = storyboard?.instantiateViewController(
             withIdentifier: "headToHeadScreen") as? HeadToHeadViewController else { return }
@@ -248,12 +291,12 @@ extension LeagueDetailsViewController: LeagueDetailsView {
         h2hVC.headerTitle = title
         navigationController?.pushViewController(h2hVC, animated: true)
     }
+    
     func showLoading() {
         collectionView.dataSource = self
         collectionView.showAnimatedGradientSkeleton(transition: .crossDissolve(0.25))
     }
     
-   
     func hideLoading() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             self.collectionView.setCollectionViewLayout(
@@ -263,9 +306,9 @@ extension LeagueDetailsViewController: LeagueDetailsView {
                                              transition: .crossDissolve(0.25))
         }
     }
+    
     func displayOverviewData(upcoming: [Match], latest: [Match], teamsOrPlayers: [Any]) {
         overviewTab.updateData(upcoming: upcoming, latest: latest, teamsOrPlayers: teamsOrPlayers)
-        
     }
  
     func displayTableData(standings: [StandingRow]) {
@@ -274,9 +317,6 @@ extension LeagueDetailsViewController: LeagueDetailsView {
             guard self.currentTab == .table else { return }
             self.hideLoading()
             self.collectionView.setCollectionViewLayout(self.setUpCollectionViewLayout(), animated: false)
-            self.collectionView.setCollectionViewLayout(
-                self.setUpCollectionViewLayout(), animated: false
-            )
             self.collectionView.reloadData()
         }
     }
@@ -293,6 +333,7 @@ extension LeagueDetailsViewController: LeagueDetailsView {
     
     func displayError(message: String) {
     }
+    
     func showNoInternet() {
         DispatchQueue.main.async {
             self.collectionView.hideSkeleton()
@@ -310,8 +351,7 @@ extension LeagueDetailsViewController: LeagueDetailsView {
 extension LeagueDetailsViewController: LeagueDetailsHeaderDelegate{
 
     func didSelectLanguage(_ code: String) {}
-    func didTapThemeButton() {
-    }
+    func didTapThemeButton() {}
     
     func didTapBackButton() {
         presenter.didTapBack()
@@ -358,5 +398,3 @@ extension LeagueDetailsViewController: SkeletonCollectionViewDataSource {
          return getActiveTab().numberOfSections()
      }
 }
-
-

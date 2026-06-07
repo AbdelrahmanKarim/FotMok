@@ -13,4 +13,5 @@ protocol TeamDetailsPresenter: AnyObject {
     func loadTeamData(teamId: String, leagueId: String)
     func didSelectPlayer(at index: Int)
     func didTapBack()
+    func retryLoading()
 }
