@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="leagueCell" rowHeight="85" id="KGk-i7-Jjw" customClass="LeagueTableViewCell" customModule="FotMoc" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="492" height="85"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="492" height="85"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Egypt Premier League" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="khE-yT-rmG">
+                        <rect key="frame" x="92" y="12.666666666666664" width="384" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.75686274509803919" green="0.76470588235294112" blue="0.74901960784313726" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="whA-j4-EDy">
+                        <rect key="frame" x="16" y="12.666666666666664" width="60" height="59.999999999999993"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="60" id="Ykl-Ef-be0"/>
+                            <constraint firstAttribute="width" constant="60" id="cgZ-rN-zHX"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="EG Egypt" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tXT-kb-BZw">
+                        <rect key="frame" x="92" y="36" width="45" height="12"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <color key="textColor" red="0.43137254901960786" green="0.44705882352941173" blue="0.43529411764705883" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="highlightedColor" red="0.42745098039215684" green="0.44313725490196076" blue="0.43137254901960786" alpha="1" colorSpace="calibratedRGB"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" red="0.082352941176470587" green="0.082352941176470587" blue="0.094117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <constraints>
+                    <constraint firstItem="khE-yT-rmG" firstAttribute="top" secondItem="whA-j4-EDy" secondAttribute="top" id="11b-F5-Inc"/>
+                    <constraint firstItem="tXT-kb-BZw" firstAttribute="top" secondItem="khE-yT-rmG" secondAttribute="bottom" constant="4" id="5NZ-el-6en"/>
+                    <constraint firstItem="tXT-kb-BZw" firstAttribute="leading" secondItem="khE-yT-rmG" secondAttribute="leading" id="FGf-E9-Gak"/>
+                    <constraint firstAttribute="trailing" secondItem="khE-yT-rmG" secondAttribute="trailing" constant="16" id="Mi3-af-UuL"/>
+                    <constraint firstItem="whA-j4-EDy" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="X58-50-SZE"/>
+                    <constraint firstAttribute="trailing" secondItem="tXT-kb-BZw" secondAttribute="trailing" constant="16" id="b9i-Rs-Hex"/>
+                    <constraint firstItem="khE-yT-rmG" firstAttribute="leading" secondItem="whA-j4-EDy" secondAttribute="trailing" constant="16" id="iXt-LG-2ax"/>
+                    <constraint firstItem="whA-j4-EDy" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="vux-wy-tlm"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="leagueCountry" destination="tXT-kb-BZw" id="1kw-ip-Xnx"/>
+                <outlet property="leagueIcon" destination="whA-j4-EDy" id="rVe-Gm-0cS"/>
+                <outlet property="leagueTitle" destination="khE-yT-rmG" id="bmX-i2-jOr"/>
+            </connections>
+            <point key="canvasLocation" x="-931.29770992366412" y="6.6901408450704229"/>
+        </tableViewCell>
+    </objects>
+</document>

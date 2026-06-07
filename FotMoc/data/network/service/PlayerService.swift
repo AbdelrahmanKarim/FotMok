@@ -1,0 +1,32 @@
+//
+//  PlayerService.swift
+//  FotMoc
+//
+//  Created by abdelrahman karim on 02/06/2026.
+//
+
+class PlayerService {
+    private let network: NetworkManager
+    
+    init(network: NetworkManager) {
+        self.network = network
+    }
+    
+    func fetchTopScorers(sport: String, leagueId: String) async throws -> ResultDTO<[TopScorerDTO]> {
+            return try await network.fetch(sport: sport, parameters: ["met": "Topscorers", "leagueId": leagueId])
+        }
+    func fetchPlayerDetails(sport: String, playerId: String) async throws -> ResultDTO<[PlayerDTO]> {
+        let parameters: [String: Any] = [
+                    "met": "Players",
+                    "playerId": playerId]
+                
+                return try await network.fetch(sport: sport, parameters: parameters)
+    }
+    func fetchPlayersByLeague(sport: String, leagueId: String) async throws -> ResultDTO<[PlayerDTO]> {
+        let parameters: [String: Any] = [
+            "met": "Players",
+            "leagueId": leagueId
+        ]
+        return try await network.fetch(sport: sport, parameters: parameters)
+    }
+}
