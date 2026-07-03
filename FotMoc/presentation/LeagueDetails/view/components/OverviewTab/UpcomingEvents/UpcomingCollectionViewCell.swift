@@ -25,8 +25,9 @@ class UpcomingCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        setupCardStyle()
         setupSkeleton()
+        setupCardStyle()
+       
         // Initialization code
     }
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -71,7 +72,7 @@ class UpcomingCollectionViewCell: UICollectionViewCell {
           
             self.isSkeletonable = true
         self.contentView.isSkeletonable = true
-        contentUiView.isSkeletonable = true
+       
         contentUiView.layer.cornerRadius = 20
         contentUiView.clipsToBounds = false
         contentUiView.layer.masksToBounds = false
@@ -102,11 +103,13 @@ class UpcomingCollectionViewCell: UICollectionViewCell {
         
         firstTeamImage.kf.setImage(
             with: extractLogoUrl(from: match.homeCompetitor),
-            placeholder: UIImage(systemName: "shield")
+            placeholder: UIImage(named: "league_placeholder"),
+            options: [.transition(.fade(0.3))]
         )
         secondTeamImage.kf.setImage(
             with: extractLogoUrl(from: match.awayCompetitor),
-            placeholder: UIImage(systemName: "shield")
+            placeholder: UIImage(named: "league_placeholder"),
+            options: [.transition(.fade(0.3))]
         )
     }
 
@@ -122,4 +125,9 @@ class UpcomingCollectionViewCell: UICollectionViewCell {
             case .player(let player): return player.name
             }
         }
+    override func didMoveToWindow() {
+        super.didMoveToWindow()
+        guard window != nil else { return }
+        applyColors()
+    }
 }

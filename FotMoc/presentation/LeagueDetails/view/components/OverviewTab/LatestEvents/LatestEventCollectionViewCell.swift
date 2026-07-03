@@ -74,7 +74,7 @@ class LatestEventCollectionViewCell: UICollectionViewCell {
         
             self.isSkeletonable = true
             self.contentView.isSkeletonable = true
-            contentUiView.isSkeletonable = true
+         
             contentUiView.layer.cornerRadius = 20
             contentUiView.clipsToBounds = false
             contentUiView.layer.masksToBounds = false
@@ -104,11 +104,13 @@ class LatestEventCollectionViewCell: UICollectionViewCell {
      
         firstTeamImage.kf.setImage(
             with: extractLogoUrl(from: match.homeCompetitor),
-            placeholder: UIImage(systemName: "shield")
+            placeholder: UIImage(named: "league_placeholder"),
+            options: [.transition(.fade(0.3))]
         )
         secondTeamImage.kf.setImage(
             with: extractLogoUrl(from: match.awayCompetitor),
-            placeholder: UIImage(systemName: "shield")
+            placeholder: UIImage(named: "league_placeholder"),
+            options: [.transition(.fade(0.3))]
         )
     }
 

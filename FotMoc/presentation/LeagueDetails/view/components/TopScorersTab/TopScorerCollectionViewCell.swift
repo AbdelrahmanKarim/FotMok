@@ -25,9 +25,10 @@ class TopScorerCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var goalsLabel: UILabel!
     override func awakeFromNib() {
+        setupSkeleton()
         super.awakeFromNib()
         setupCardStyle()
-        setupSkeleton()
+    
         // Initialization code
     }
     func setupCardStyle() {

@@ -5,11 +5,9 @@
 //  Created by abdelrahman karim on 03/06/2026.
 //
 
-
 import Foundation
-import Factory
 import Network
-
+import Factory
 class LeagueDetailsPresenterImpl: LeagueDetailsPresenter {
   
     
@@ -56,7 +54,6 @@ class LeagueDetailsPresenterImpl: LeagueDetailsPresenter {
 
             DispatchQueue.main.async {
                 if self.isConnected && !wasConnected {
-                    // just reconnected — auto retry
                     if let id = self.pendingLeagueId {
                         self.view?.hideNoInternet()
                         self.retryAll(leagueId: id)
@@ -156,18 +153,19 @@ class LeagueDetailsPresenterImpl: LeagueDetailsPresenter {
         }
     func loadTableContent(leagueId: String) {
         guard guardConnectivity(leagueId: leagueId) else { return }
-      
+       
             view?.showLoading()
             
             Task { @MainActor in
                 do {
                     
                     let standingsRows = try await standingsUseCase.execute(leagueId: leagueId)
-                    
-                    view?.hideLoading()
                     view?.displayTableData(standings: standingsRows)
+                    view?.hideLoading()
+                   
                     
                 } catch {
+                    view?.displayTableData(standings: [])
                     view?.hideLoading()
                     view?.displayError(message: error.localizedDescription)
                 }
@@ -181,12 +179,11 @@ class LeagueDetailsPresenterImpl: LeagueDetailsPresenter {
         Task { @MainActor in
             do {
                 let scorers = try await topScorersUseCase.execute(leagueId: leagueId)
-                view?.hideLoading()
                 view?.displayTopScorers(scorers: scorers)
-                
-            } catch {
                 view?.hideLoading()
-                view?.displayError(message: error.localizedDescription)
+            } catch {
+                view?.displayTopScorers(scorers: [])
+                view?.hideLoading()
             }
         }
     }

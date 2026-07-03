@@ -59,20 +59,22 @@ class Teams_Players_Cell: UICollectionViewCell {
             
         }
     func configure(with item: Any) {
-            if let team = item as? Team {
-                teamNameLabel.text = team.name
-                teamImage.kf.setImage(
-                    with: team.logoUrl,
-                    placeholder: UIImage(systemName: "shield")
-                )
-            } else if let player = item as? Player {
-                teamNameLabel.text = player.name
-                teamImage.kf.setImage(
-                    with: player.imageUrl,
-                    placeholder: UIImage(systemName: "person.fill")
-                )
-            }
+        if let team = item as? Team {
+            teamNameLabel.text = team.name
+            teamImage.kf.setImage(
+                with: team.logoUrl,
+                placeholder: UIImage(named: "league_placeholder"),
+                options: [.transition(.fade(0.3))]
+            )
+        } else if let player = item as? Player {
+            teamNameLabel.text = player.name
+            teamImage.kf.setImage(
+                with: player.imageUrl,
+                placeholder: UIImage(named: "player_placeholder"),
+                options: [.transition(.fade(0.3))]
+            )
         }
+    }
 }
 
 

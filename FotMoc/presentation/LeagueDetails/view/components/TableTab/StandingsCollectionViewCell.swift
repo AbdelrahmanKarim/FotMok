@@ -32,8 +32,9 @@ class StandingsCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        setupCardStyle()
         setupSkeleton()
+        setupCardStyle()
+       
         // Initialization code
     }
     func setupCardStyle(){

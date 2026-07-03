@@ -8,10 +8,9 @@
 import UIKit
 import SkeletonView
 import Kingfisher
-
 class TableTab: LeagueTabManager {
     
-    private var standings: [StandingRow] = []
+     var standings: [StandingRow] = []
     var isLoading: Bool = true
     
     func updateData(standings: [StandingRow]) {
@@ -25,58 +24,53 @@ class TableTab: LeagueTabManager {
     }
     
     func numberOfItems(in section: Int) -> Int {
-        if isLoading { return 0 }
-        return standings.isEmpty ? 1 : standings.count
-    }
-    
-    func cell(for collectionView: UICollectionView, at indexPath: IndexPath) -> UICollectionViewCell {
+            if isLoading { return 0 }
+            return standings.isEmpty ? 1 : standings.count
+        }
         
-        if standings.isEmpty {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "emptyState", for: indexPath) as! EmptyStateCollectionViewCell
-            cell.configure(message: "No standings available for this league.", iconName: "list.number")
+        func cell(for collectionView: UICollectionView, at indexPath: IndexPath) -> UICollectionViewCell {
+            
+            
+            if standings.isEmpty {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "emptyState", for: indexPath) as! EmptyStateCollectionViewCell
+                cell.configure(message: "No standings available for this league.", iconName: "list.number")
+                return cell
+            }
+            
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "standingsCell", for: indexPath) as! StandingsCollectionViewCell
+            let row = standings[indexPath.item]
+            
+            let teamName = extractName(from: row.competitor)
+            let logoUrl  = extractLogoUrl(from: row.competitor)
+            
+            var draws = 0
+            var goalDiff = 0
+            var goalsFor = 0
+            
+            switch row.sportMetrics {
+            case .football(let d, let gd, let gf, _):
+                draws = d
+                goalDiff = gd
+                goalsFor = gf
+            default:
+                break
+            }
+            
+            cell.configure(
+                rank: "\(row.rank)",
+                teamName: teamName,
+                logoUrl:  logoUrl,
+                PG: row.matchesPlayed,
+                W: row.wins,
+                D: draws,
+                L: row.losses,
+                goals: goalsFor,
+                GD: goalDiff,
+                PTS: row.points ?? 0
+            )
+            
             return cell
         }
-        
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "standingsCell", for: indexPath) as! StandingsCollectionViewCell
-        let row = standings[indexPath.item]
-        
-        
-        let teamName = extractName(from: row.competitor)
-        
-        let logoUrl  = extractLogoUrl(from: row.competitor)
-        
-        var draws = 0
-        var goalDiff = 0
-        var goalsFor = 0
-        
-        
-        switch row.sportMetrics {
-        case .football(let d, let gd, let gf, _):
-            draws = d
-            goalDiff = gd
-            goalsFor = gf
-        default:
-            break
-        }
-        
-        cell.configure(
-            rank: "\(row.rank)",
-            teamName: teamName,
-            logoUrl:  logoUrl,
-            PG: row.matchesPlayed,
-            W: row.wins,
-            D: draws,
-            L: row.losses,
-            goals: goalsFor,
-            GD: goalDiff,
-            PTS: row.points ?? 0
-        )
-        
-        
-        
-        return cell
-    }
     
     
     func getSkeletonCellIdentifier(for section: Int) -> String {
@@ -89,7 +83,8 @@ class TableTab: LeagueTabManager {
     
     
     func getSectionFor(index: Int) -> NSCollectionLayoutSection {
-        return self.setupTableSection(isEmpty: standings.isEmpty)
+       
+        return self.setupTableSection(isEmpty: standings.isEmpty && !isLoading)
     }
     
     func supplementaryView(for collectionView: UICollectionView, kind: String, at indexPath: IndexPath) -> UICollectionReusableView? {
@@ -140,8 +135,7 @@ class TableTab: LeagueTabManager {
     
     func setupTableSection(isEmpty: Bool) -> NSCollectionLayoutSection {
         return cardSection(
-            
-            groupHeight: isEmpty ? .absolute(200) : .absolute(80),
+            groupHeight: isEmpty ? .absolute(350) : .absolute(80),
             interGroupSpacing: 0,
             supplementaryItems: [sectionHeaderConfiguration()]
         )

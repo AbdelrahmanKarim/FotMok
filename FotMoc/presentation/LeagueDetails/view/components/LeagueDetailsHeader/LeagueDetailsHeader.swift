@@ -191,19 +191,21 @@ class LeagueDetailsHeader: UICollectionReusableView {
         localMenuBtn.isHidden    = !showLocalMenu
         actionBtnsStackview.isHidden = !showActionBtnStackView
     }
+    
     func updateFavouriteState(isFavourite: Bool) {
-        let imageName = isFavourite ? "heart.fill" : "heart"
-        let color: UIColor = isFavourite ? .red : .white
-        
-        if var config = favBtn.configuration {
-            config.image = UIImage(systemName: imageName)
-            config.baseForegroundColor = color
-            favBtn.configuration = config
-        } else {
-            favBtn.setImage(UIImage(systemName: imageName), for: .normal)
-            favBtn.tintColor = color
+            let imageName = isFavourite ? "heart.fill" : "heart"
+ 
+            let color: UIColor = isFavourite ? .red : .label
+            
+            if var config = favBtn.configuration {
+                config.image = UIImage(systemName: imageName)
+                config.baseForegroundColor = color
+                favBtn.configuration = config
+            } else {
+                favBtn.setImage(UIImage(systemName: imageName), for: .normal)
+                favBtn.tintColor = color
+            }
         }
-    }
 
     
 

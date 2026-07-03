@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import SkeletonView
+
 
 class OverviewTab: LeagueTabManager {
    
@@ -15,6 +15,7 @@ class OverviewTab: LeagueTabManager {
     private var latestMatches: [Match] = []
      var teamsOrPlayers: [Any] = []
     var onShowMoreTapped: (() -> Void)?
+    var isLoading: Bool = true
     
     func updateData(upcoming: [Match], latest: [Match], teamsOrPlayers : [Any]) {
         self.upcomingMatches = upcoming

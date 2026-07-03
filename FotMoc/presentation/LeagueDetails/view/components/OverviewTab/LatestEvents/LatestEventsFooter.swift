@@ -22,7 +22,7 @@ class LatestEventsFooter: UICollectionReusableView {
     }
     
     private func setupButton() {
-
+        showMoreButton.setTitle(NSLocalizedString("show_more", comment: ""), for: .normal)
         showMoreButton.setTitle("Show more", for: .normal)
         showMoreButton.titleLabel?.font = AppFont.bodyMedium
         showMoreButton.setTitleColor(AppColor.info, for: .normal)
@@ -41,7 +41,7 @@ class LatestEventsFooter: UICollectionReusableView {
     
         showMoreButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
     }
-    
+ 
     @objc private func buttonTapped() {
        
         showMoreAction?()
