@@ -14,4 +14,7 @@ protocol TeamDetailsView: AnyObject {
     func displayError(message: String)
     func navigateBack()
     func navigateToPlayerProfile(playerId: String)
+    func showNoInternet()
+    func hideNoInternet()
+ 
 }

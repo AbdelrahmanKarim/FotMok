@@ -42,10 +42,15 @@ class KeyPlayerCell: UICollectionViewCell {
         }
         
         switch player.sportDetails {
-        case .teamSport(_, let position):
-            playerRoleLabel.text = position
-        case .tennis(let rank, _):
-            playerRoleLabel.text = rank != nil ? "Rank \(rank!)" : "Player"
+        case .football(_, let position):
+                playerRoleLabel.text = position
+            case .basketball(_, let position):
+                playerRoleLabel.text = position
+            case .cricket(_, let role):
+                playerRoleLabel.text = role
+            case .tennis(let rank, _):
+                playerRoleLabel.text = rank != nil ? "Rank \(rank!)" : "Player"
+            
         }
     }
 }

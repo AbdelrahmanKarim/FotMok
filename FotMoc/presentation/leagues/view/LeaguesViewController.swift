@@ -83,7 +83,8 @@ class LeaguesViewController: UIViewController, UITableViewDelegate,SkeletonTable
             ])
             globalHeader = header
             globalHeader?.delegate = self
-            globalHeader?.configure(title: "Leagues", country: "", showTabs: false, showBackButton: true, showHeader: true, showFavBtn: false)
+            
+            globalHeader?.configure(title: NSLocalizedString("leagues", comment: ""), country: "", showTabs: false, showBackButton: true, showHeader: true, showFavBtn: false)
         }
         
         searchBar.backgroundImage = UIImage()
@@ -97,14 +98,16 @@ class LeaguesViewController: UIViewController, UITableViewDelegate,SkeletonTable
     }
     
     private func setupEmptyStates() {
-        noResultsLabel.text = "No leagues found."
+      
         noResultsLabel.textColor = AppColor.textSecondary
         noResultsLabel.font = AppFont.bodyMedium
         noResultsLabel.textAlignment = .center
         noResultsLabel.isHidden = true
         view.addSubview(noResultsLabel)
-        
-        noInternetLabel.text = "No internet connection.\nPlease check your settings."
+        noResultsLabel.text = NSLocalizedString("no_leagues_found", comment: "")
+    
+        noInternetLabel.text = NSLocalizedString("no_internet", comment: "")
+
         noInternetLabel.numberOfLines = 0
         noInternetLabel.textColor = AppColor.textSecondary
         noInternetLabel.font = AppFont.bodyMedium
@@ -154,7 +157,9 @@ class LeaguesViewController: UIViewController, UITableViewDelegate,SkeletonTable
     }
     
     func showError(_ message: String) {
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+       
+        let alert = UIAlertController(title: NSLocalizedString("error", comment: ""), message: message, preferredStyle: .alert)
+
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
     }
@@ -207,7 +212,9 @@ class LeaguesViewController: UIViewController, UITableViewDelegate,SkeletonTable
     }
     
     func setGameHeader(sportName: String) {
-        globalHeader?.configure(title: "Leagues", country: sportName, showTabs: false, showBackButton: true, showHeader: true, showFavBtn: false)
+     
+
+        globalHeader?.configure(title: NSLocalizedString("leagues", comment: ""), country: sportName, showTabs: false, showBackButton: true, showHeader: true, showFavBtn: false)
     }
 }
 

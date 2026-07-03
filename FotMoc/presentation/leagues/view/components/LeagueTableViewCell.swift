@@ -39,18 +39,23 @@ class LeagueTableViewCell: UITableViewCell {
             leagueIcon.layer.cornerRadius = leagueIcon.frame.height / 2
             leagueIcon.clipsToBounds = true
         }
+ 
     func configure(with league: League) {
-        leagueTitle.text = league.name
-        leagueCountry.text = league.country?.name ?? "Unknown"
-        
-        if let url = league.logoUrl {
-            leagueIcon.kf.setImage(
-                with: url,
-                placeholder: UIImage(systemName: "photo.circle.fill")?.withTintColor(.gray, renderingMode: .alwaysOriginal),
-                options: [.transition(.fade(0.3))]
-            )
-        } else {
-            leagueIcon.image = UIImage(systemName: "photo.circle.fill")?.withTintColor(.gray, renderingMode: .alwaysOriginal)
+            leagueTitle.text = league.name
+            leagueCountry.text = league.country?.name ?? "Unknown"
+            
+     
+            let placeholderImage = UIImage(named: "league_placeholder")
+            
+            if let url = league.logoUrl {
+                leagueIcon.kf.setImage(
+                    with: url,
+                    placeholder: placeholderImage,
+                    options: [.transition(.fade(0.3))]
+                )
+            } else {
+                
+                leagueIcon.image = placeholderImage
+            }
         }
-    }
 }
