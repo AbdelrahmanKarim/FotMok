@@ -21,15 +21,19 @@ class PlayerRepositoryImpl: PlayerRepository {
         let currentSport = sportProvider.selectedSport
 
         if currentSport == .tennis {
-            
             let dtos = try await remoteDataSource.getLeaguePlayersList(sport: currentSport, leagueId: leagueId)
             return dtos.map { dto in
-                Player(
+                // prefer player_logo, fall back to player_image
+                let imageUrl = [dto.playerLogo, dto.playerImage]
+                    .compactMap { $0 }
+                    .first { !$0.isEmpty }
+                    .flatMap { URL(string: $0) }
+                return Player(
                     id: String(dto.playerKey ?? 0),
                     name: dto.playerName ?? "Unknown",
-                    imageUrl: dto.playerImage.flatMap { URL(string: $0) },
+                    imageUrl: imageUrl,
                     nationality: dto.playerCountry,
-                    age: nil, 
+                    age: nil,
                     sportDetails: .tennis(rank: nil, plays: nil)
                 )
             }

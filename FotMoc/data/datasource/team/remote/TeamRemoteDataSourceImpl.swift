@@ -67,11 +67,13 @@ class TeamRemoteDataSourceImpl: TeamRemoteDataSource {
     }
 
     func getTeamRecentFixtures(sport: String, leagueId: String, teamId: String) async throws -> [MatchDTO] {
+       
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        let today = formatter.string(from: Date())
-        let pastDate = formatter.string(from: Calendar.current.date(byAdding: .day, value: -60, to: Date())!)
-        
+           formatter.dateFormat = "yyyy-MM-dd"
+           formatter.locale = Locale(identifier: "en_US_POSIX")
+           formatter.calendar = Calendar(identifier: .gregorian)
+           let today = formatter.string(from: Date())
+           let pastDate = formatter.string(from: Calendar.current.date(byAdding: .day, value: -60, to: Date())!)
         do {
             let res = try await matchService.fetchFixtures(sport: sport, leagueId: leagueId, from: pastDate, to: today)
             guard res.success == 1, let result = res.result else { throw AppException.noData }
