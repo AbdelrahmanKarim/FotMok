@@ -45,7 +45,7 @@
 "live_label"         = "LIVE";
 "empty_no_live"      = "No live matches right now";
 
-// en
+
 "h2h_title"    = "Head to Head";
 "h2h_upcoming" = "Upcoming Match";
 "h2h_form"     = "Recent Form";
@@ -54,5 +54,112 @@
 
 
 "empty_no_form" = "Recent form not available";
+"show_more" = "Show more";
+"leagues" = "Leagues";
+"no_leagues_found" = "No leagues found.";
+"no_internet" = "No internet connection.\nPlease check your settings.";
+"error" = "Error";
+"latest_matches" = "Latest Matches";
+"global" = "Global";
 
+"goals" = "Goals";
+"assists" = "Assists";
+"matches_played" = "Matches Played";
+"total_cards" = "Total Cards";
+"yellow_cards" = "Yellow Cards";
+"red_cards" = "Red Cards";
+"season_stats_25_26" = "2025/26 SEASON STATS";
+"disciplinary" = "DISCIPLINARY";
+"points" = "Points";
+"goal_difference" = "Goal Difference";
+"wins" = "Wins";
+"no_description" = "No description available.";
+"season_stats" = "SEASON STATS";
+"key_players" = "KEY PLAYERS";
+"about" = "ABOUT";
+"loading_profile" = "Loading Profile...";
+"loading_team" = "Loading Team...";
+"player_profile" = "Player Profile";
+"team_profile" = "Team Profile";
+"home_wins" = "Home wins";
+"draws" = "Draws";
+"away_wins" = "Away wins";
+/* --- General / Shared --- */
+"matches" = "Matches";
+"rating" = "Rating";
+"points" = "Points";
+"wins" = "Wins";
+"losses" = "Losses";
+"draws" = "Draws";
+"minutes" = "Minutes";
+"win_rate" = "Win Rate";
 
+/* --- Football --- */
+"goals" = "Goals";
+"assists" = "Assists";
+"shots" = "Shots";
+"dribbles" = "Dribbles";
+"key_passes" = "Key Passes";
+"pen_scored" = "Pen Scored";
+"tackles" = "Tackles";
+"blocks" = "Blocks";
+"interceptions" = "Interceptions";
+"clearances" = "Clearances";
+"passes" = "Passes";
+"pass_acc" = "Pass Acc %";
+"crosses" = "Crosses";
+"duels_won" = "Duels Won";
+"goal_diff" = "Goal Diff";
+"goals_for" = "Goals For";
+"goals_against" = "Goals Against";
+"clean_sheets" = "Clean Sheets";
+"goals_conceded" = "Goals Conceded";
+
+/* --- Basketball --- */
+"field_goals" = "Field Goals";
+"duels_total" = "Duels Total";
+"steals" = "Steals";
+"avg_pts" = "Avg Pts";
+"avg_reb" = "Avg Reb";
+"avg_ast" = "Avg Ast";
+"fg_made" = "FG Made";
+"fg_attempts" = "FG Attempts";
+"3_pointers" = "3-Pointers";
+"total_pts" = "Total Pts";
+
+/* --- Cricket --- */
+"runs" = "Runs";
+"innings" = "Innings";
+"avg" = "Avg";
+"boundaries" = "Boundaries";
+"sixes" = "Sixes";
+"strike_rate" = "Strike Rate";
+"50s" = "50s";
+"wickets" = "Wickets";
+"economy" = "Economy";
+"maidens" = "Maidens";
+"best" = "Best";
+"nrr" = "NRR";
+"runs_scored" = "Runs Scored";
+"highest_score" = "Highest Score";
+"centuries" = "Centuries";
+"half_cents" = "Half-Cents";
+
+/* --- Tennis --- */
+"rank" = "Rank";
+"plays" = "Plays";
+
+/* --- Headers --- */
+"season_stats" = "SEASON STATS";
+"attacking" = "ATTACKING";
+"defending" = "DEFENDING";
+"passing" = "PASSING";
+"disciplinary" = "DISCIPLINARY";
+"offense" = "OFFENSE";
+"defense" = "DEFENSE";
+"batting" = "BATTING";
+"bowling" = "BOWLING";
+"player_info" = "PLAYER INFO";
+"overview" = "OVERVIEW";
+"attack" = "ATTACK";
+"defence" = "DEFENCE";
