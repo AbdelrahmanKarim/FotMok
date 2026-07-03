@@ -49,6 +49,11 @@ struct PlayerDTO: Codable {
     let teamName: String?
     let teamKey: Int?
     let playerImage: String?
+    let playerLogo: String?
+   
+    let stats: [TennisSeasonStatsDTO]?
+  
+    // in CodingKeys:
 
     enum CodingKeys: String, CodingKey {
         case playerKey = "player_key"
@@ -94,5 +99,34 @@ struct PlayerDTO: Codable {
         case teamName = "team_name"
         case teamKey = "team_key"
         case playerImage = "player_image"
+        case playerLogo = "player_logo"
+        case stats = "stats"
+
+    }
+}
+struct TennisSeasonStatsDTO: Codable {
+    let season: String?
+    let type: String?
+    let rank: String?
+    let titles: String?
+    let matchesWon: String?
+    let matchesLost: String?
+    let hardWon: String?
+    let hardLost: String?
+    let clayWon: String?
+    let clayLost: String?
+    let grassWon: String?
+    let grassLost: String?
+
+    enum CodingKeys: String, CodingKey {
+        case season, type, rank, titles
+        case matchesWon  = "matches_won"
+        case matchesLost = "matches_lost"
+        case hardWon     = "hard_won"
+        case hardLost    = "hard_lost"
+        case clayWon     = "clay_won"
+        case clayLost    = "clay_lost"
+        case grassWon    = "grass_won"
+        case grassLost   = "grass_lost"
     }
 }

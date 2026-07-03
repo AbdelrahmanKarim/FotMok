@@ -52,3 +52,115 @@
 "h2h_overall"  = "السجل العام";
 
 "empty_no_form" =  "غير متاح";
+"show_more" = "عرض المزيد";
+"leagues" = "الدوريات";
+"no_leagues_found" = "لا توجد دوريات.";
+"no_internet" = "لا يوجد اتصال بالإنترنت.\nيرجى التحقق من الإعدادات.";
+"error" = "خطأ";
+"latest_matches" = "أحدث المباريات";
+"global" = "عالمي";
+"ok" = "OK";
+
+
+"ok" = "حسناً";
+"goals" = "الأهداف";
+"assists" = "التمريرات الحاسمة";
+"matches_played" = "المباريات الملعوبة";
+"total_cards" = "إجمالي البطاقات";
+"yellow_cards" = "البطاقات الصفراء";
+"red_cards" = "البطاقات الحمراء";
+"season_stats_25_26" = "إحصائيات موسم 2025/26";
+"disciplinary" = "السجل التأديبي";
+"points" = "النقاط";
+"goal_difference" = "فارق الأهداف";
+"wins" = "الانتصارات";
+"no_description" = "لا يوجد وصف متاح.";
+"season_stats" = "إحصائيات الموسم";
+"key_players" = "أبرز اللاعبين";
+"about" = "حول";
+"loading_profile" = "جاري تحميل الملف...";
+"loading_team" = "جاري تحميل الفريق...";
+"player_profile" = "تفاصيل اللاعب";
+"team_profile" = "تفاصيل الفريق";
+"home_wins" = "انتصارات المضيف";
+"draws" = "تعادلات";
+"away_wins" = "انتصارات الضيف";
+/* --- General / Shared --- */
+"matches" = "المباريات";
+"rating" = "التقييم";
+"points" = "النقاط";
+"wins" = "الانتصارات";
+"losses" = "الخسائر";
+"draws" = "التعادلات";
+"minutes" = "الدقائق";
+"win_rate" = "معدل الفوز";
+
+/* --- Football --- */
+"goals" = "الأهداف";
+"assists" = "التمريرات الحاسمة";
+"shots" = "التسديدات";
+"dribbles" = "المراوغات";
+"key_passes" = "التمريرات المفتاحية";
+"pen_scored" = "ركلات الجزاء";
+"tackles" = "الافتكاكات";
+"blocks" = "الاعتراضات";
+"interceptions" = "قطع الكرة";
+"clearances" = "التشتيت";
+"passes" = "التمريرات";
+"pass_acc" = "دقة التمرير %";
+"crosses" = "العرضيات";
+"duels_won" = "الالتحامات الناجحة";
+"goal_diff" = "فارق الأهداف";
+"goals_for" = "أهداف له";
+"goals_against" = "أهداف عليه";
+"clean_sheets" = "شباك نظيفة";
+"goals_conceded" = "أهداف مستقبلة";
+
+/* --- Basketball --- */
+"field_goals" = "الأهداف الميدانية";
+"duels_total" = "إجمالي الالتحامات";
+"steals" = "السرقات";
+"avg_pts" = "متوسط النقاط";
+"avg_reb" = "متوسط المتابعات";
+"avg_ast" = "متوسط التمريرات الحاسمة";
+"fg_made" = "أهداف ميدانية مسجلة";
+"fg_attempts" = "محاولات ميدانية";
+"3_pointers" = "الرميات الثلاثية";
+"total_pts" = "إجمالي النقاط";
+
+/* --- Cricket --- */
+"runs" = "الركضات";
+"innings" = "الأشواط";
+"avg" = "المتوسط";
+"boundaries" = "الحدود";
+"sixes" = "الستات";
+"strike_rate" = "معدل الضرب";
+"50s" = "الخمسينات";
+"wickets" = "الويكيت";
+"economy" = "الاقتصاد";
+"maidens" = "الأشواط العذراء";
+"best" = "الأفضل";
+"nrr" = "معدل الركض الصافي";
+"runs_scored" = "الركضات المسجلة";
+"highest_score" = "أعلى نتيجة";
+"centuries" = "المئات";
+"half_cents" = "الخمسينات";
+
+/* --- Tennis --- */
+"rank" = "التصنيف";
+"plays" = "يلعب";
+
+/* --- Headers --- */
+"season_stats" = "إحصائيات الموسم";
+"attacking" = "الهجوم";
+"defending" = "الدفاع";
+"passing" = "التمرير";
+"disciplinary" = "السجل التأديبي";
+"offense" = "الهجوم";
+"defense" = "الدفاع";
+"batting" = "الضرب";
+"bowling" = "الرمي";
+"player_info" = "معلومات اللاعب";
+"overview" = "نظرة عامة";
+"attack" = "الهجوم";
+"defence" = "الدفاع";
