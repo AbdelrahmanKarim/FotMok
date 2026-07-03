@@ -10,12 +10,14 @@ import Factory
 import Network
 
 class LatestPresenterImpl: LatestPresenter {
+ 
+    
     private weak var view: LatestView?
     private let sportProvider: CurrentSportProvider
-    
+    private var currentLeagueId: String = ""
     @Injected(\.getLeagueLatestMatchesUseCase) private var latestUseCase
     
-    // Core connectivity flags
+   
     private var monitor: NWPathMonitor?
     private var isConnected: Bool = true
     private var isMonitoringStarted = false
@@ -35,10 +37,14 @@ class LatestPresenterImpl: LatestPresenter {
         monitor = nil
         isMonitoringStarted = false
     }
+    func didTapBack() {
+        view?.navigateBack()
+    }
     
     func retryLoading() {
-        loadLatestMatches()
-    }
+            // 2. Use the cached ID on retry
+            loadLatestMatches(leagueId: currentLeagueId)
+        }
     
     private func startMonitoring() {
         guard !isMonitoringStarted else { return }
@@ -53,7 +59,7 @@ class LatestPresenterImpl: LatestPresenter {
             DispatchQueue.main.async {
                 if self.isConnected && !wasConnected {
                     self.view?.hideNoInternet()
-                    self.loadLatestMatches()
+                    self.loadLatestMatches(leagueId: self.currentLeagueId)
                 } else if !self.isConnected {
                     self.view?.hideLoading(then: nil)
                     self.view?.showNoInternet()
@@ -71,29 +77,34 @@ class LatestPresenterImpl: LatestPresenter {
         }
         return true
     }
-    
-    func loadLatestMatches() {
-        guard guardConnectivity() else { return }
-        
-        view?.hideNoInternet()
-        view?.showLoading()
-        let leagueId = sportProvider.selectedLeague
-        
-        Task { @MainActor in
-            do {
-                let matches = try await latestUseCase.execute(leagueId: leagueId)
-                if matches.isEmpty {
-                    view?.hideLoading(then: { self.view?.displayEmptyState() })
-                } else {
-                    view?.hideLoading(then: { self.view?.displayMatches(matches) })
+    func loadLatestMatches(leagueId: String) {
+            // 5. Cache the ID for later use
+            self.currentLeagueId = leagueId
+            
+            guard guardConnectivity() else { return }
+            
+            view?.hideNoInternet()
+            view?.showLoading()
+            
+            // REMOVE THIS LINE:
+            // let leagueId = sportProvider.selectedLeague
+            
+            Task { @MainActor in
+                do {
+                    // Now it uses the specific leagueId passed from the view
+                    let matches = try await latestUseCase.execute(leagueId: leagueId)
+                    if matches.isEmpty {
+                        view?.hideLoading(then: { self.view?.displayEmptyState() })
+                    } else {
+                        view?.hideLoading(then: { self.view?.displayMatches(matches) })
+                    }
+                } catch {
+                    view?.hideLoading(then: { self.view?.displayError(message: error.localizedDescription) })
                 }
-            } catch {
-                view?.hideLoading(then: { self.view?.displayError(message: error.localizedDescription) })
             }
         }
     }
     
-    func didTapBack() {
-        view?.navigateBack()
-    }
-}
+    
+
+

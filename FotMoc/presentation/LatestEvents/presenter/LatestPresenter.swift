@@ -10,7 +10,7 @@ import Foundation
 protocol LatestPresenter  {
     func attachView(_ view: LatestView)
     func detachView()
-    func loadLatestMatches()
+    func loadLatestMatches(leagueId : String)
     func didTapBack()
     func retryLoading()
 }

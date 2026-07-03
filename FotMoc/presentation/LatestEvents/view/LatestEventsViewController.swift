@@ -12,7 +12,7 @@ import SkeletonView
 class LatestEventsViewController: UIViewController, LatestView {
     
     private var matches: [Match] = []
-    
+    var leagueIdPassed: String = ""
     @Injected(\.latestEventsPresenter) private var presenter: LatestPresenter
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -39,7 +39,8 @@ class LatestEventsViewController: UIViewController, LatestView {
         setupNoInternetConstraints()
         
         presenter.attachView(self)
-        presenter.loadLatestMatches()
+        print("🏆 FotMoc Debug - League ID passed: '\(leagueIdPassed)'")
+        presenter.loadLatestMatches(leagueId: leagueIdPassed)
     }
     
     private func setupNoInternetConstraints() {
@@ -134,7 +135,8 @@ extension LatestEventsViewController: UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "leagueDetailsHeader", for: indexPath) as! LeagueDetailsHeader
         header.delegate = self
-        header.configure(title: "Latest Matches", country: "Global")
+        header.configure(title: NSLocalizedString("latest_matches", comment: ""), country: NSLocalizedString("global", comment: ""))
+       
         return header
     }
     
