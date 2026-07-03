@@ -135,10 +135,24 @@ extension LeagueDetailsViewController: UICollectionViewDataSource, UICollectionV
        return getActiveTab().numberOfSections()
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return getActiveTab().numberOfItems(in: section)
+        let count = getActiveTab().numberOfItems(in: section)
+        
+        if count == 0 && (currentTab == .table || currentTab == .topScorers) {
+            return 1
+        }
+        return count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let count = getActiveTab().numberOfItems(in: indexPath.section)
+        
+        if count == 0 && (currentTab == .table || currentTab == .topScorers) {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "emptyState", for: indexPath) as! EmptyStateCollectionViewCell
+            let msg = currentTab == .table ? "No standings available for this league." : "No top scorers available for this league."
+            cell.configure(message: msg, iconName: "xmark.bin")
+            return cell
+        }
+        
         return getActiveTab().cell(for: collectionView, at: indexPath)
     }
   
