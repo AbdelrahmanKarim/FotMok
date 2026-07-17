@@ -30,20 +30,7 @@ class UpcomingCollectionViewCell: UICollectionViewCell {
        
         // Initialization code
     }
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        guard traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) else { return }
-        applyColors()
-    }
-    private func applyColors() {
-        contentUiView.backgroundColor = AppColor.accentLight
-        firstTeamLabel.textColor  = AppColor.textPrimary
-        secondTeamLabel.textColor = AppColor.textPrimary
-
-        
-      
-        timeLabel.backgroundColor = AppColor.bgSurface3
-    }
+  
     private func setupCardStyle() {
          contentUiView.backgroundColor = AppColor.accentLight
           contentUiView.layer.cornerRadius = 20
@@ -68,26 +55,23 @@ class UpcomingCollectionViewCell: UICollectionViewCell {
           timeLabel.layer.cornerRadius = 8
         }
     private func setupSkeleton() {
-     
-          
-            self.isSkeletonable = true
-        self.contentView.isSkeletonable = true
-       
-        contentUiView.layer.cornerRadius = 20
-        contentUiView.clipsToBounds = false
-        contentUiView.layer.masksToBounds = false
-          
-            firstTeamImage.isSkeletonable = true
-            secondTeamImage.isSkeletonable = true
-            firstTeamLabel.isSkeletonable = true
-            secondTeamLabel.isSkeletonable = true
-            dateLabel.isSkeletonable = true
-            timeLabel.isSkeletonable = true
-            
-         
-            firstTeamImage.skeletonCornerRadius = 15
-            secondTeamImage.skeletonCornerRadius = 15
-        }
+        self.isSkeletonable = true
+        
+        // ❌ REMOVE THESE TWO:
+        // self.contentView.isSkeletonable = true
+        // contentUiView.isSkeletonable = true
+        
+        // ✅ KEEP ONLY THE CHILD ELEMENTS:
+        firstTeamImage.isSkeletonable = true
+        secondTeamImage.isSkeletonable = true
+        firstTeamLabel.isSkeletonable = true
+        secondTeamLabel.isSkeletonable = true
+        dateLabel.isSkeletonable = true
+        timeLabel.isSkeletonable = true
+        
+        firstTeamImage.skeletonCornerRadius = 15
+        secondTeamImage.skeletonCornerRadius = 15
+    }
     func configure(with match: Match) {
         firstTeamLabel.text = extractName(from: match.homeCompetitor)
         secondTeamLabel.text = extractName(from: match.awayCompetitor)
@@ -128,6 +112,6 @@ class UpcomingCollectionViewCell: UICollectionViewCell {
     override func didMoveToWindow() {
         super.didMoveToWindow()
         guard window != nil else { return }
-        applyColors()
+      
     }
 }

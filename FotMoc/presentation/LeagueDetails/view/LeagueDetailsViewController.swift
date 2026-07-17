@@ -289,13 +289,15 @@ extension LeagueDetailsViewController: LeagueDetailsView {
     }
     
     func showLoading() {
-        collectionView.alpha = 0
+        collectionView.dataSource = self
+        
+        // Inject a dynamic color from your AppColor palette
         let gradient = SkeletonGradient(baseColor: AppColor.bgSurface3)
-        collectionView.showAnimatedGradientSkeleton(usingGradient: gradient, transition: .none)
-        collectionView.layoutIfNeeded()
-        DispatchQueue.main.async {
-            self.collectionView.alpha = 1
-        }
+        
+        collectionView.showAnimatedGradientSkeleton(
+            usingGradient: gradient,
+            transition: .crossDissolve(0.25)
+        )
     }
     
     func hideLoading() {

@@ -29,20 +29,7 @@ class LatestEventCollectionViewCell: UICollectionViewCell {
         setupSkeleton()
         // Initialization code
     }
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        guard traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) else { return }
-        applyColors()
-    }
-    private func applyColors() {
-        contentUiView.backgroundColor = AppColor.accentLight
-        firstTeamLabel.textColor  = AppColor.textPrimary
-        secondTeamLabel.textColor = AppColor.textPrimary
-       
-        firstTagLabelBtn.backgroundColor  = AppColor.bgSurface3
-        secondTagLabelBtn.backgroundColor = AppColor.bgSurface3
-        
-    }
+  
     private func setupCardStyle() {
         contentUiView.backgroundColor = AppColor.accentLight
         contentUiView.layer.cornerRadius = 20
@@ -71,22 +58,21 @@ class LatestEventCollectionViewCell: UICollectionViewCell {
         
     }
     private func setupSkeleton() {
+        self.isSkeletonable = true
         
-            self.isSkeletonable = true
-            self.contentView.isSkeletonable = true
-         
-            contentUiView.layer.cornerRadius = 20
-            contentUiView.clipsToBounds = false
-            contentUiView.layer.masksToBounds = false
-      
-            firstTeamImage.isSkeletonable = true
-            secondTeamImage.isSkeletonable = true
-            firstTeamLabel.isSkeletonable = true
-            secondTeamLabel.isSkeletonable = true
-            scoreLabel.isSkeletonable = true
-            firstTagLabelBtn.isSkeletonable = true
-            secondTagLabelBtn.isSkeletonable = true
-        }
+        // ❌ REMOVE THESE TWO:
+        // self.contentView.isSkeletonable = true
+        // contentUiView.isSkeletonable = true
+        
+        // ✅ KEEP ONLY THE CHILD ELEMENTS:
+        firstTeamImage.isSkeletonable = true
+        secondTeamImage.isSkeletonable = true
+        firstTeamLabel.isSkeletonable = true
+        secondTeamLabel.isSkeletonable = true
+        scoreLabel.isSkeletonable = true
+        firstTagLabelBtn.isSkeletonable = true
+        secondTagLabelBtn.isSkeletonable = true
+    }
     func configure(with match: Match) {
             firstTeamLabel.text = extractName(from: match.homeCompetitor)
             secondTeamLabel.text = extractName(from: match.awayCompetitor)
